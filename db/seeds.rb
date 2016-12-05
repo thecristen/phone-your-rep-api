@@ -5,11 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-100000.times do |rep|
-  rep = Rep.new
-  rep.name    = Faker::Name.name
-  rep.phone   = Faker::PhoneNumber.phone_number
-  rep.zipcode = Faker::Address.zip
+require 'csv'
 
-  rep.save
-end
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'us_senators_20161205.csv')) # reads file into local variable
+puts csv_text # run rails db:seed to print data to terminal to test contents of the variable
