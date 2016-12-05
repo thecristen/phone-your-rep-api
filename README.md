@@ -11,3 +11,10 @@ gem install rails --no-ri --no-rdoc
 gem install bundler
 bundle install
 ```
+
+This is deployed on Heroku. Some useful commands.
+
+```
+heroku run rake db:migrate
+heroku run rake db:seed
+```

@@ -3,7 +3,12 @@ class RepsController < ApplicationController
 
   # GET /reps
   def index
-    @reps = Rep.all
+    # return the first result, or a random one
+    if params[:zipcode]
+      @reps = Rep.where("zipcode LIKE ?", "#{params[:zipcode]}%").first
+    else
+      @reps = Rep.order("RANDOM()").limit(1)
+    end
 
     render json: @reps
   end
@@ -42,10 +47,5 @@ class RepsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_rep
       @rep = Rep.find(params[:id])
-    end
-
-    # Only allow a trusted parameter "white list" through.
-    def rep_params
-      params.require(:rep).permit(:phone, :name)
     end
 end
