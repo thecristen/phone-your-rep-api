@@ -7,6 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'csv'
 
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'us_senators_20161205.csv')) # reads file into local variable
-csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1') # parse the CSV for ruby, ignoring first line (headers)
-puts csv # run rails db:seed to print data to terminal to test contents of the variable
+# reads file into local variable
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'us_senators_20161205.csv'))
+
+# parse the CSV for ruby, ignoring first line (headers)
+csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
+
+# loop through CSV file, convert each row to a hash. headers of file will be used as keys b/c of `headers: true` above
+csv.each do |row|
+  puts row.to_hash
+end
