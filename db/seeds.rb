@@ -8,13 +8,13 @@
 require 'csv'
 
 # reads file into local variable
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'us_senators_20161205.csv'))
+csv_senator_text = File.read(Rails.root.join('lib', 'seeds', 'us_senators_20161205.csv'))
 
 # parse the CSV for ruby, ignoring first line (headers)
-csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
+csv_senate = CSV.parse(csv_senator_text, headers: true, encoding: 'ISO-8859-1')
 
 # loop through CSV file, seed database with reps
-csv.each do |row|
+csv_senate.each do |row|
   r = Rep.new
   r.state = row.first.last # row['State'] returns nil for some reason. This is a hack.
   r.member_full = row['Member Full']
@@ -36,4 +36,16 @@ csv.each do |row|
   puts "#{r.member_full} saved in database."
 end
 
+# reads zipcode CSV file into local variable
+csv_zipcode_text = File.read(Rails.root.join('lib', 'seeds', 'zipcodes_20161205.csv'))
+csv_zipcode = CSV.parse(csv_zipcode_text, headers: true, encoding: 'ISO-8859-1')
+csv_zipcode.each do |row|
+  z = Zipcode.new
+  z.zip = row['Zipcode']
+  z.state = row['State']
+  z.save
+  puts "#{z.zip}, #{z.state} saved in database."
+end
+
 puts "There are now #{Rep.count} reps in the database."
+puts "There are now #{Zipcode.count} zipcodes in the database."
