@@ -16,7 +16,7 @@ csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
 # loop through CSV file, seed database with reps
 csv.each do |row|
   r = Rep.new
-  r.state = row['State']
+  r.state = row.first.last # row['State'] returns nil for some reason. This is a hack.
   r.member_full = row['Member Full']
   r.last_name = row['Last Name']
   r.first_name = row['First Name']
