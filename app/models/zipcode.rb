@@ -18,6 +18,7 @@ class Zipcode < ApplicationRecord
       district_telephone: "#{rep.district_tel}",
       district: "#{self.city}, #{self.state}",
       email: "#{rep.email}",
+      website: "#{rep.website}",
       address_1: "#{rep.district_office_address_line_1}",
       address_2: "#{rep.district_address_line_2}",
       address_3: "#{rep.district_address_line_3}"
