@@ -3,13 +3,11 @@ class RepsController < ApplicationController
 
   # GET /reps
   def index
-    # return a valid result, or a random one
-    if params[:zip]
-      @zipcode_full = Zipcode.find_by(zip: params[:zip])
-      @state = @zipcode_full.state
-      @reps = Rep.where(state: @state).sample
+    # return the first result, or a random one
+    if params[:zipcode]
+      @reps = Rep.where("zipcode LIKE ?", "#{params[:zipcode]}%").first
     else
-      @reps = Rep.order("RANDOM()").limit(1).first
+      @reps = Rep.order("RANDOM()").limit(1)
     end
 
     render json: @reps

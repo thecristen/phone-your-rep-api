@@ -16,7 +16,7 @@ class Zipcode < ApplicationRecord
     {
       name_and_party: "#{random_rep.first_name} #{random_rep.last_name}, #{random_rep.party}",
       dc_telephone: "#{random_rep.dc_tel}",
-      district: "#{self.state}"
+      district: "#{self.city}, #{self.state}"
     }
   end
 end

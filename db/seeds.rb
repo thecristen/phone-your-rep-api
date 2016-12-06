@@ -43,8 +43,9 @@ csv_zipcode.each do |row|
   z = Zipcode.new
   z.zip = row['Zipcode']
   z.state = row['State']
+  z.city = row['City']
   z.save
-  puts "#{z.zip}, #{z.state} saved in database."
+  puts "#{z.zip} #{z.city}, #{z.state} saved in database."
 end
 
 puts "There are now #{Rep.count} reps in the database."
