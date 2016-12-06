@@ -19,3 +19,12 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+
+# Ignore RubyMine IDE project settings
+.idea/
+
+# Ignore RVM ruby and gemset files
+.ruby*
+
+# Ignore local environment
+/vendor/bundle

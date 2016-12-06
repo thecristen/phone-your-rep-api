@@ -1,9 +1,37 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  phone: MyText
-  name: MyText
+  state: MyString
+  member_full: MyString
+  last_name: MyString
+  first_name: MyString
+  party: MyString
+  district_office_address_line_1: MyString
+  district_address_line_2: MyString
+  district_address_line_3: MyString
+  district_tel: MyString
+  dc_office_address: MyString
+  dc_tel: MyString
+  email: MyString
+  website: MyString
+  class: MyString
+  bioguide_id: MyString
+  photo: MyString
 
 two:
-  phone: MyText
-  name: MyText
+  state: MyString
+  member_full: MyString
+  last_name: MyString
+  first_name: MyString
+  party: MyString
+  district_office_address_line_1: MyString
+  district_address_line_2: MyString
+  district_address_line_3: MyString
+  district_tel: MyString
+  dc_office_address: MyString
+  dc_tel: MyString
+  email: MyString
+  website: MyString
+  class: MyString
+  bioguide_id: MyString
+  photo: MyString

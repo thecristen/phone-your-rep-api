@@ -10,17 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161205001714) do
+ActiveRecord::Schema.define(version: 20161206154518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "reps", force: :cascade do |t|
-    t.text     "phone"
-    t.text     "name"
+    t.string   "state"
+    t.string   "member_full"
+    t.string   "last_name"
+    t.string   "first_name"
+    t.string   "party"
+    t.string   "district_office_address_line_1"
+    t.string   "district_address_line_2"
+    t.string   "district_address_line_3"
+    t.string   "district_tel"
+    t.string   "dc_office_address"
+    t.string   "dc_tel"
+    t.string   "email"
+    t.string   "website"
+    t.string   "senate_class"
+    t.string   "bioguide_id"
+    t.string   "photo"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  create_table "zipcodes", force: :cascade do |t|
+    t.string   "zip"
+    t.string   "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "zipcode"
+    t.string   "city"
   end
 
 end
