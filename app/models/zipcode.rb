@@ -12,12 +12,15 @@ class Zipcode < ApplicationRecord
   end
 
   # extract Rep info and Zipcode location into
-  def rep_info(random_rep)
+  def rep_info(rep)
     {
-      name_and_party: "#{random_rep.first_name} #{random_rep.last_name}, #{random_rep.party}",
-      dc_telephone: "#{random_rep.dc_tel}",
+      name_and_party: "#{rep.first_name} #{rep.last_name}, #{rep.party}",
+      district_telephone: "#{rep.district_tel}",
       district: "#{self.city}, #{self.state}",
-      email: "#{random_rep.email}"
+      email: "#{rep.email}",
+      address_1: "#{rep.district_office_address_line_1}",
+      address_2: "#{rep.district_address_line_2}",
+      address_3: "#{rep.district_address_line_3}"
     }
   end
 end
