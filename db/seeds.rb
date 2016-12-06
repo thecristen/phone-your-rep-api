@@ -13,7 +13,7 @@ csv_senator_text = File.read(Rails.root.join('lib', 'seeds', 'us_senators_201612
 # parse the CSV for ruby, ignoring first line (headers)
 csv_senate = CSV.parse(csv_senator_text, headers: true, encoding: 'ISO-8859-1')
 
-# loop through CSV file, seed database with reps
+# loop through senators CSV file, seed database with reps
 csv_senate.each do |row|
   r = Rep.new
   r.state = row.first.last # row['State'] returns nil for some reason. This is a hack.
@@ -36,7 +36,7 @@ csv_senate.each do |row|
   puts "#{r.member_full} saved in database."
 end
 
-# reads zipcode CSV file into local variable
+# loop through zipcodes CSV file, seed database with zips
 csv_zipcode_text = File.read(Rails.root.join('lib', 'seeds', 'zipcodes_20161205.csv'))
 csv_zipcode = CSV.parse(csv_zipcode_text, headers: true, encoding: 'ISO-8859-1')
 csv_zipcode.each do |row|
