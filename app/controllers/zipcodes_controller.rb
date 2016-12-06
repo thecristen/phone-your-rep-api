@@ -10,9 +10,11 @@ class ZipcodesController < ApplicationController
       @zipcode = Zipcode.order("RANDOM()").limit(1).first
     end
 
-    @senator = @zipcode.senators.sample
+    # find a random rep who represents that zipcode and collect info in hash
+    @rep = @zipcode.random_rep
+    @rep_info = @zipcode.rep_info(@rep)
 
-    render json: @senator
+    render json: @rep_info
   end
 
   # GET /zipcodes/1
