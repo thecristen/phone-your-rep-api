@@ -23,6 +23,9 @@ gem 'rack-cors'
 # Mock data
 gem 'faker'
 
+# Use GetYourRep to get rep info for address from Google API
+gem 'get-your-rep', '~> 0.0.1'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
