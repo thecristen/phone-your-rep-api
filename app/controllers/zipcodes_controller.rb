@@ -5,14 +5,13 @@ class ZipcodesController < ApplicationController
   def index
     # return a valid result, or a random one
     if params[:zip]
-      @zipcode = params[:zip]
+      @zipcode = Zipcode.find_by(zip: params[:zip])
     else
       @zipcode = Zipcode.order("RANDOM()").limit(1).first
     end
 
     # find a random rep who represents that zipcode and collect info in hash
-    @rep = GetYourRep.now @zipcode, 'national', 'senator'
-    # byebug
+    @rep = @zipcode.random_rep
     @rep_info = @zipcode.rep_info(@rep)
 
     render json: @rep_info
