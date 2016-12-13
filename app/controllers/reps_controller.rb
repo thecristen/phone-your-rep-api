@@ -4,13 +4,13 @@ class RepsController < ApplicationController
   # GET /reps
   def index
     # return the first result, or a random one
-    if params[:zip]
-      @reps = Rep.get_all_reps(params[:zip])
+    if params[:address]
+      @reps = Rep.get_all_reps(params[:address])
     else
       @reps = Rep.order("RANDOM()").limit(1)
     end
 
-    render json: @reps
+    render json: @reps.second
   end
 
   # GET /reps/1

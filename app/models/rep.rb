@@ -18,6 +18,7 @@ class Rep < ApplicationRecord
         next
       end
       @reps[i][:phone]     = db_rep[0].district_tel
+      @reps[i][:email]     = db_rep[0].email
       @reps[i][:address_1] = db_rep[0].district_office_address_line_1
       @reps[i][:address_2] = db_rep[0].district_address_line_2
       @reps[i][:address_3] = db_rep[0].district_address_line_3
