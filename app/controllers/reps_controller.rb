@@ -7,7 +7,7 @@ class RepsController < ApplicationController
     if params[:address]
       @reps = Rep.get_all_reps(params[:address])
     else
-      @reps = Rep.order("RANDOM()").limit(1)
+      @reps = Rep.random_rep
     end
 
     render json: @reps

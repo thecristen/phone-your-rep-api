@@ -24,4 +24,8 @@ class Zipcode < ApplicationRecord
       address_3: "#{rep.district_address_line_3}"
     }
   end
+
+  def self.random_zip
+    Zipcode.order("RANDOM()").limit(1)[0]
+  end
 end
