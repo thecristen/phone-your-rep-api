@@ -5,7 +5,7 @@ The companion to [the Phone Your Rep frontend](https://github.com/Flaque/phone-y
 
 # Installation details
 
-#### For this development branch to work on your local machine, you will need to clone the latest development branch (v-2-0-0) of the [get-your-rep gem](https://github.com/msimonborg/get-your-rep/tree/v-2-0-0) and follow the development installation instructions. Then edit your Gemfile:
+#### To work with the latest development version of the [get-your-rep gem](https://github.com/msimonborg/get-your-rep/tree/v-2-0-0), you will need to clone branch v-2-0-0 and follow the development installation instructions. Then edit your Gemfile:
 ```
 # Use GetYourRep to get rep info for address from Google API
 gem 'get-your-rep', '~> 2.0', path: '~/<YOUR_PATH_TO_THE_GEM_DIRECTORY>/'

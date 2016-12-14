@@ -10,7 +10,7 @@ class RepsController < ApplicationController
       @reps = Rep.order("RANDOM()").limit(1)
     end
 
-    render json: @reps.second
+    render json: @reps
   end
 
   # GET /reps/1

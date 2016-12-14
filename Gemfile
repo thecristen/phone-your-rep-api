@@ -24,7 +24,7 @@ gem 'rack-cors'
 gem 'faker'
 
 # Use GetYourRep to get rep info for address from Google API
-gem 'get-your-rep', '~> 2.0', path: '~/developing/progcode/get-your-rep/'
+gem 'get-your-rep', '~> 2.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
