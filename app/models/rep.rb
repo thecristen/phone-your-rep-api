@@ -15,7 +15,7 @@ class Rep < ApplicationRecord
       rep.email.unshift(db_rep[0].email)
       rep.office_locations.unshift Hash[
         :type, 'district',
-        :line_1, db_rep[0].district_office_address_line_1,
+        :line_1, db_rep[0].district_address_line_1,
         :line_2, db_rep[0].district_address_line_2,
         :line_3, db_rep[0].district_address_line_3
       ]
@@ -23,18 +23,17 @@ class Rep < ApplicationRecord
   end
 
   def self.random_rep
-    random_zip = Zipcode.random_zip
-    random_rep = Rep.find_by(state: random_zip.state)
+    random_rep = Rep.order("RANDOM()").limit(1).first
     return Hash[:error, 'Something went wrong, try again.'].to_a if random_rep.nil?
     GetYourRep::Representative[
-      :name,      "#{random_rep.first_name} #{random_rep.last_name}",
+      :name,      random_rep.name,
       :office,    "United States Senate, #{random_rep.state}",
       :party,     party(random_rep.party),
       :phone,     [random_rep.district_tel, random_rep.dc_tel],
       :office_locations, [
         {
         type: 'district',
-        line_1: random_rep.district_office_address_line_1,
+        line_1: random_rep.district_address_line_1,
         line_2: random_rep.district_address_line_2,
         line_3: random_rep.district_address_line_3
         },
@@ -44,7 +43,7 @@ class Rep < ApplicationRecord
         }
       ],
       :email,     [random_rep.email],
-      :url,       random_rep.website,
+      :url,       random_rep.url,
       :photo,     random_rep.photo,
     ].to_del
   end
