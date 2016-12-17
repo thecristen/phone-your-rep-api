@@ -5,12 +5,6 @@ The companion to [the Phone Your Rep frontend](https://github.com/Flaque/phone-y
 
 # Installation details
 
-#### To work with the latest development version of the [get-your-rep gem](https://github.com/msimonborg/get-your-rep/tree/v-2-0-0), you will need to clone branch v-2-0-0 and follow the development installation instructions. Then edit your Gemfile:
-```
-# Use GetYourRep to get rep info for address from Google API
-gem 'get-your-rep', '~> 2.0', path: '~/<YOUR_PATH_TO_THE_GEM_DIRECTORY>/'
-```
-#### Then continue with normal installation
 ```
 rvm use 2.3.3
 gem install rails --no-ri --no-rdoc
