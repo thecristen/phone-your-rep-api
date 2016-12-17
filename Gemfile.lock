@@ -48,7 +48,7 @@ GEM
       i18n (~> 0.5)
     ffi (1.9.14)
     geocoder (1.4.1)
-    get_your_rep (0.1.0)
+    get_your_rep (0.1.1)
       geocoder (~> 1.4, >= 1.4.1)
       httparty (~> 0)
     globalid (0.3.7)
@@ -137,7 +137,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   faker
-  get_your_rep (~> 0.1.0)
+  get_your_rep (~> 0.1.1)
   listen (~> 3.0.5)
   pg
   pry
