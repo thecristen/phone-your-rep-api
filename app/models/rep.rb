@@ -1,7 +1,7 @@
 class Rep < ApplicationRecord
 
-  serialize :committees
-  serialize :email
+  serialize :committees, Array
+  serialize :email, Array
 
   def self.get_all_reps(address)
     @reps = GetYourRep.all(address)
@@ -19,8 +19,8 @@ class Rep < ApplicationRecord
         next
       end
 
-      rep.phone.unshift(db_rep.district_tel) if rep.phone.size < 2 && db_rep.district_tel
-      rep.email.unshift(db_rep.email).flatten if rep.email.size < 1 && db_rep.email
+      rep.phone.unshift(db_rep.district_tel)  if rep.phone.size < 2 && db_rep.district_tel
+      rep.email += (db_rep.email).flatten if rep.email.size < 1 && db_rep.email
 
       if rep.district_office.empty?
         rep.office_locations.unshift Hash[
@@ -53,14 +53,14 @@ class Rep < ApplicationRecord
     new_rep.capitol_address_line_2  = rep.capitol_office[:line_2]
     new_rep.capitol_address_line_3  = rep.capitol_office[:line_3]
     new_rep.capitol_tel             = rep.phone.last
-    new_rep.email                   = rep.email unless rep.email.blank?
+    new_rep.email                   = rep.email
     new_rep.url                     = rep.url
     new_rep.twitter                 = rep.twitter
     new_rep.facebook                = rep.facebook
     new_rep.youtube                 = rep.youtube
     new_rep.googleplus              = rep.googleplus
     new_rep.photo                   = rep.photo
-    new_rep.committees              = rep.committees if rep.committees
+    new_rep.committees              = rep.committees
     new_rep.save
     puts "Saved #{new_rep.name}, #{new_rep.office} in database."
   end
@@ -70,7 +70,7 @@ class Rep < ApplicationRecord
     if rep.office.downcase.match(/(united states house)/)
       office_suffix        = rep.office.split(' ').last
       @rep_data[:state]    = office_suffix.split('-').first
-      @rep_data[:district] = office_suffix
+      @rep_data[:district] = office_suffix.split('-').last
     elsif rep.office.downcase.match(/upper|lower|chamber/)
       office_array         = rep.office.split(' ')
       @rep_data[:state]    = office_array.first
@@ -82,9 +82,17 @@ class Rep < ApplicationRecord
     @update_params = {}
     @update_params[:office] = rep.office if db_rep.office != rep.office
     @update_params[:party]  = rep.party  if db_rep.party  != rep.party
+    update_email(rep, db_rep)
     update_social_handles(rep, db_rep)
     update_capitol_address(rep, db_rep)
+    update_committees(rep, db_rep)
     db_rep.update(@update_params) unless @update_params.blank?
+  end
+
+  def self.update_email(rep, db_rep)
+    unless (rep.email - db_rep.email).empty?
+      @update_params[:email] = (db_rep.email += rep.email)
+    end
   end
 
   def self.update_social_handles(rep, db_rep)
@@ -95,19 +103,24 @@ class Rep < ApplicationRecord
   end
 
   def self.update_capitol_address(rep, db_rep)
-    if rep.capitol_office
+    return unless rep.capitol_office
 
-      if db_rep.capitol_address_line_1 != rep.capitol_office[:line_1]
-        @update_params[:capitol_address_line_1] = rep.capitol_office[:line_1]
-      end
+    if db_rep.capitol_address_line_1 != rep.capitol_office[:line_1]
+      @update_params[:capitol_address_line_1] = rep.capitol_office[:line_1]
+    end
 
-      if db_rep.capitol_address_line_2 != rep.capitol_office[:line_2]
-        @update_params[:capitol_address_line_2] = rep.capitol_office[:line_2]
-      end
+    if db_rep.capitol_address_line_2 != rep.capitol_office[:line_2]
+      @update_params[:capitol_address_line_2] = rep.capitol_office[:line_2]
+    end
 
-      if db_rep.capitol_address_line_3 != rep.capitol_office[:line_3]
-        @update_params[:capitol_address_line_3] = rep.capitol_office[:line_3]
-      end
+    if db_rep.capitol_address_line_3 != rep.capitol_office[:line_3]
+      @update_params[:capitol_address_line_3] = rep.capitol_office[:line_3]
+    end
+  end
+
+  def self.update_committees(rep, db_rep)
+    unless rep.committees.nil? || (rep.committees - db_rep.committees).empty?
+      @update_params[:committees] = (db_rep.committees += rep.committees)
     end
   end
 
@@ -133,7 +146,7 @@ class Rep < ApplicationRecord
         line_3: random_rep.capitol_address_line_3
         }
       ],
-      :email,      [random_rep.email],
+      :email,      random_rep.email,
       :url,        random_rep.url,
       :photo,      random_rep.photo,
       :twitter,    random_rep.twitter,

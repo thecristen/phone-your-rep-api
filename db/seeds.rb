@@ -28,7 +28,7 @@ csv_senate.each do |row|
   r.district_tel = row['District Tel #']
   r.capitol_address_line_1 = row['DC Office Address']
   r.capitol_tel = row['DC Tel #']
-  r.email = row['Email']
+  r.email = [row['Email']]
   r.url = row['Website']
   r.senate_class = row['Class']
   r.bioguide_id = row['bioguide_id']
