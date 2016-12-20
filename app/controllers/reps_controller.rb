@@ -8,11 +8,12 @@ class RepsController < ApplicationController
       @reps  = Rep.get_top_reps(params[:address])
       @reps << Rep.get_state_reps(params[:address])
     else
-      request = Rack::Request.new Rails.env
-      result = request.location
-      @office = OfficeLocation.near(result.postal_code)
-      @reps = @office.rep
-      # @reps = Rep.random_rep
+      # Would like to find requesting IP address, geocode it and return the closest rep
+      # request = Rack::Request.new Rails.env
+      # result = request.location
+      # @office = OfficeLocation.near(result.postal_code)
+      # @reps = @office.rep
+      @reps = Rep.random_rep
     end
 
     render json: @reps
