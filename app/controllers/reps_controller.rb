@@ -5,7 +5,8 @@ class RepsController < ApplicationController
   def index
     # return the first result, or a random one
     if params[:address]
-      @reps = Rep.get_all_reps(params[:address])
+      @reps  = Rep.get_top_reps(params[:address])
+      @reps << Rep.get_state_reps(params[:address])
     else
       @reps = Rep.random_rep
     end

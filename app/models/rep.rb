@@ -7,11 +7,15 @@ class Rep < ApplicationRecord
     self.office_locations.map { |loc| loc.phone }
   end
 
-  def self.get_all_reps(address)
-    @reps = GetYourRep.all(address)
+  def self.get_top_reps(address)
+    @reps = GetYourRep::Google.top_level_reps(address)
     @db_reps = self.where(last_name: @reps.last_names, first_name: @reps.first_names)
     update_rep_info_from_db
     @reps
+  end
+
+  def self.get_state_reps(address)
+    GetYourRep::OpenStates.now(address)
   end
 
   def self.update_rep_info_from_db
@@ -50,8 +54,6 @@ class Rep < ApplicationRecord
   def self.add_rep_to_db(rep)
     parse_new_rep_office(rep)
     new_rep  = Rep.new
-    d_o      = new_rep.office_locations.build
-    c_o      = new_rep.office_locations.build
     new_rep.state                   = @rep_data[:state]
     new_rep.district                = @rep_data[:district]
     new_rep.office                  = rep.office
@@ -67,16 +69,22 @@ class Rep < ApplicationRecord
     new_rep.googleplus              = rep.googleplus
     new_rep.photo                   = rep.photo
     new_rep.committees              = rep.committees
-    d_o.office_type                 = 'district'
-    d_o.line1                       = rep.district_office[:line_1]
-    d_o.line2                       = rep.district_office[:line_2]
-    d_o.line3                       = rep.district_office[:line_3]
-    d_o.phone                       = rep.phone.first if rep.phone.size > 1
-    c_o.office_type                 = 'capitol'
-    c_o.line1                       = rep.district_office[:line_1]
-    c_o.line2                       = rep.district_office[:line_2]
-    c_o.line3                       = rep.district_office[:line_3]
-    c_o.phone                       = rep.phone.last
+    unless rep.district_office.blank?
+      @d_o                             = new_rep.office_locations.build
+      @d_o.office_type                 = 'district'
+      @d_o.line1                       = rep.district_office[:line_1]
+      @d_o.line2                       = rep.district_office[:line_2]
+      @d_o.line3                       = rep.district_office[:line_3]
+      @d_o.phone                       = rep.phone.first if rep.phone.size > 1
+    end
+    unless rep.capitol_office.blank?
+      @c_o                             = new_rep.office_locations.build
+      @c_o.office_type                 = 'capitol'
+      @c_o.line1                       = rep.capitol_office[:line_1]
+      @c_o.line2                       = rep.capitol_office[:line_2]
+      @c_o.line3                       = rep.capitol_office[:line_3]
+      @c_o.phone                       = rep.phone.last
+    end
     new_rep.save
     puts "Saved #{new_rep.name}, #{new_rep.office} in database."
   end
@@ -134,21 +142,21 @@ class Rep < ApplicationRecord
       )
     else
 
-      @capitol_office_update_params = {}
+      @cap_office_update_params = {}
 
       if capitol_office.line1 != rep.capitol_office[:line_1]
-        @capitol_office_update_params[:line1] = rep.capitol_office[:line_1]
+        @cap_office_update_params[:line1] = rep.capitol_office[:line_1]
       end
 
       if capitol_office.line2 != rep.capitol_office[:line_2]
-        @capitol_office_update_params[:line2] = rep.capitol_office[:line_2]
+        @cap_office_update_params[:line2] = rep.capitol_office[:line_2]
       end
 
       if capitol_office.line3 != rep.capitol_office[:line_3]
-        @capitol_office_update_params[:line3] = rep.capitol_office[:line_3]
+        @cap_office_update_params[:line3] = rep.capitol_office[:line_3]
       end
 
-      capitol_office.update(@capitol_office_update_params)
+      capitol_office.update(@cap_office_update_params) unless @cap_office_update_params.blank?
     end
   end
 
