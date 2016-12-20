@@ -8,9 +8,11 @@ class Rep < ApplicationRecord
   end
 
   def self.get_top_reps(address)
+    @new_reps = []
     @reps = GetYourRep::Google.top_level_reps(address)
     @db_reps = self.where(last_name: @reps.last_names, first_name: @reps.first_names)
     update_rep_info_from_db
+    @new_reps.each { |new_rep| new_rep.save } unless @new_reps.blank?
     @reps
   end
 
@@ -24,30 +26,30 @@ class Rep < ApplicationRecord
 
       if @db_rep.blank?
         add_rep_to_db(rep)
-        next
-      end
+      else
 
-      @db_rep_offices = @db_rep.office_locations
-      district_offices = @db_rep_offices.map { |office| office if office.office_type == 'district'}
-      district_offices -= [nil]
+        @db_rep_offices = @db_rep.office_locations
+        district_offices = @db_rep_offices.map { |office| office if office.office_type == 'district'}
+        district_offices -= [nil]
 
-      rep.phone = (rep.phone + @db_rep.phone).uniq - [nil]
-      (rep.email += (@db_rep.email).flatten).uniq
+        rep.phone = (rep.phone + @db_rep.phone).uniq - [nil]
+        (rep.email += (@db_rep.email).flatten).uniq
 
-      if rep.district_office.empty? && district_offices
-        district_offices.each do |district_office|
-          rep.office_locations.unshift Hash[
-            :type,   district_office.office_type,
-            :line_1, district_office.line1,
-            :line_2, district_office.line2,
-            :line_3, district_office.line3,
-            :line_4, district_office.line4,
-            :line_5, district_office.line5
-          ]
+        if rep.district_office.empty? && district_offices
+          district_offices.each do |district_office|
+            rep.office_locations.unshift Hash[
+              :type,   district_office.office_type,
+              :line_1, district_office.line1,
+              :line_2, district_office.line2,
+              :line_3, district_office.line3,
+              :line_4, district_office.line4,
+              :line_5, district_office.line5
+            ]
+          end
         end
-      end
 
       update_rep_info_to_db(rep)
+      end
     end
   end
 
@@ -85,8 +87,7 @@ class Rep < ApplicationRecord
       @c_o.line3                       = rep.capitol_office[:line_3]
       @c_o.phone                       = rep.phone.last
     end
-    new_rep.save
-    puts "Saved #{new_rep.name}, #{new_rep.office} in database."
+    @new_reps << new_rep
   end
 
   def self.parse_new_rep_office(rep)
