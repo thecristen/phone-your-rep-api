@@ -1,7 +1,11 @@
 class Rep < ApplicationRecord
-
+  has_many :office_locations
   serialize :committees, Array
   serialize :email, Array
+
+  def phone
+    self.office_locations.map { |loc| loc.phone }
+  end
 
   def self.get_all_reps(address)
     @reps = GetYourRep.all(address)

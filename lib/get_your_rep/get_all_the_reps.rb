@@ -1,6 +1,10 @@
 # require 'net/http'
 # require 'csv'
 
+##
+# extension for the get_your_rep gem/module, seeds the db by programmatically collecting and
+# saving data through external API callbacks
+
 module GetYourRep
   class GetAllTheReps
 
@@ -13,7 +17,7 @@ module GetYourRep
       @zips = []
     end
 
-    #read the csv file
+    #read the csv file containing zips by state
     def read_zip_csv
       CSV.foreach("lib/seeds/zipcode_tabulation_csv_files/#{@csv_file}") do |row|
         @zip_rows << row
@@ -31,7 +35,7 @@ module GetYourRep
       @zips
     end
 
-    # batch query API to save reps in DB
+    # iterate through zips and batch query API to save reps in DB
     def get_all_the_reps
       collect_zips
 
