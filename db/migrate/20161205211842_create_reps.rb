@@ -9,15 +9,7 @@ class CreateReps < ActiveRecord::Migration[5.0]
       t.string :last_name
       t.string :first_name
       t.string :party
-      t.string :district_address_line_1
-      t.string :district_address_line_2
-      t.string :district_address_line_3
-      t.string :district_tel
-      t.string :capitol_address_line_1
-      t.string :capitol_address_line_2
-      t.string :capitol_address_line_3
-      t.string :capitol_tel
-      t.text :email
+      t.text   :email
       t.string :url
       t.string :twitter
       t.string :facebook

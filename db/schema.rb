@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206154518) do
+ActiveRecord::Schema.define(version: 20161220031319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "office_locations", force: :cascade do |t|
+    t.integer  "rep_id"
+    t.string   "office_type"
+    t.string   "line1"
+    t.string   "line2"
+    t.string   "line3"
+    t.string   "line4"
+    t.string   "line5"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "phone"
+    t.index ["rep_id"], name: "index_office_locations_on_rep_id", using: :btree
+  end
 
   create_table "reps", force: :cascade do |t|
     t.string   "state"
@@ -24,14 +40,6 @@ ActiveRecord::Schema.define(version: 20161206154518) do
     t.string   "last_name"
     t.string   "first_name"
     t.string   "party"
-    t.string   "district_address_line_1"
-    t.string   "district_address_line_2"
-    t.string   "district_address_line_3"
-    t.string   "district_tel"
-    t.string   "capitol_address_line_1"
-    t.string   "capitol_address_line_2"
-    t.string   "capitol_address_line_3"
-    t.string   "capitol_tel"
     t.text     "email"
     t.string   "url"
     t.string   "twitter"
@@ -42,8 +50,8 @@ ActiveRecord::Schema.define(version: 20161206154518) do
     t.string   "senate_class"
     t.string   "bioguide_id"
     t.string   "photo"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "zipcodes", force: :cascade do |t|

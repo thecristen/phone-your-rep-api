@@ -2,7 +2,7 @@ class CreateOfficeLocations < ActiveRecord::Migration[5.0]
   def change
     create_table :office_locations do |t|
       t.belongs_to :rep, index: true
-      t.string :type
+      t.string :office_type
       t.string :line1
       t.string :line2
       t.string :line3

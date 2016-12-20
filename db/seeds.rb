@@ -22,19 +22,23 @@ csv_senate.each do |row|
   r.last_name = row['Last Name']
   r.first_name = row['First Name']
   r.party = row['Party']
-  r.district_address_line_1 = row['District Office Address Line 1']
-  r.district_address_line_2 = row['District Address Line 2']
-  r.district_address_line_3 = row['District Address Line 3']
-  r.district_tel = row['District Tel #']
-  r.capitol_address_line_1 = row['DC Office Address']
-  r.capitol_tel = row['DC Tel #']
   r.email = [row['Email']]
   r.url = row['Website']
   r.senate_class = row['Class']
   r.bioguide_id = row['bioguide_id']
   r.photo = row['Photo']
+  d_o = r.office_locations.build
+  d_o.office_type = 'district'
+  d_o.line1 = row['District Office Address Line 1']
+  d_o.line2 = row['District Address Line 2']
+  d_o.line3 = row['District Address Line 3']
+  d_o.phone = row['District Tel #']
+  c_o = r.office_locations.build
+  c_o.office_type = 'capitol'
+  c_o.line1 = row['DC Office Address']
+  c_o.phone = row['DC Tel #']
   r.save
-  puts "#{r.member_full} saved in database."
+  puts "#{r.member_full} saved in database.\nOffice locations:\n#{d_o.office_type}: #{d_o.line1}, #{d_o.line2}, #{d_o.line3}\n#{c_o.office_type}: #{c_o.line1}"
 end
 
 # loop through zipcodes CSV file, seed database with zips
@@ -49,5 +53,5 @@ end
 #   puts "#{z.zip} #{z.city}, #{z.state} saved in database."
 # end
 
-puts "There are now #{Rep.count} reps in the database."
+puts "There are now #{Rep.count} reps and #{OfficeLocation.count} office locations in the database."
 # puts "There are now #{Zipcode.count} zipcodes in the database."
