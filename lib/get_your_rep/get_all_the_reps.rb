@@ -15,7 +15,7 @@ module GetYourRep
 
     #read the csv file
     def read_zip_csv
-      CSV.foreach("../zipcode_tabulation_csv_files/#{@csv_file}") do |row|
+      CSV.foreach("lib/seeds/zipcode_tabulation_csv_files/#{@csv_file}") do |row|
         @zip_rows << row
       end
     end
