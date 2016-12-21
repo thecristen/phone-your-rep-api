@@ -1,5 +1,5 @@
 class Rep < ApplicationRecord
-  has_many :office_locations, dependent: :destroy
+  has_many  :office_locations, dependent: :destroy
   serialize :committees, Array
   serialize :email, Array
 
