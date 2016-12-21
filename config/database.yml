@@ -5,13 +5,14 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: postgresql
+  adapter: postgis
   pool: 5
   timeout: 5000
 
 development:
   <<: *default
   database: phonerep_dev
+  host: localhost
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -19,6 +20,7 @@ development:
 test:
   <<: *default
   database: phonerep_test
+  host: localhost
 
 production:
   <<: *default

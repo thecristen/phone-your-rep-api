@@ -33,6 +33,9 @@ GEM
       activemodel (= 5.0.0.1)
       activesupport (= 5.0.0.1)
       arel (~> 7.0)
+    activerecord-postgis-adapter (4.0.2)
+      activerecord (~> 5.0.0)
+      rgeo-activerecord (~> 5.0.0)
     activesupport (5.0.0.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (~> 0.7)
@@ -48,7 +51,7 @@ GEM
       i18n (~> 0.5)
     ffi (1.9.14)
     geocoder (1.4.1)
-    get_your_rep (0.1.7)
+    get_your_rep (0.1.8)
       geocoder (~> 1.4, >= 1.4.1)
       httparty (~> 0)
     globalid (0.3.7)
@@ -110,6 +113,10 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    rgeo (0.5.3)
+    rgeo-activerecord (5.0.0)
+      activerecord (~> 5.0.0)
+      rgeo (~> 0.3)
     slop (3.6.0)
     spring (2.0.0)
       activesupport (>= 4.2)
@@ -135,9 +142,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-postgis-adapter
   byebug
   faker
-  get_your_rep (~> 0.1.7)
+  get_your_rep (~> 0.1.8)
   listen (~> 3.0.5)
   pg
   pry
