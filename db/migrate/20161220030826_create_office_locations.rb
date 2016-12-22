@@ -10,6 +10,7 @@ class CreateOfficeLocations < ActiveRecord::Migration[5.0]
       t.string :line5
       t.float :latitude
       t.float :longitude
+      t.st_point :lonlat, geographic: true
 
       t.timestamps
     end

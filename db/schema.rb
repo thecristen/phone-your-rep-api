@@ -10,28 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161220031319) do
+ActiveRecord::Schema.define(version: 20161221232814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
+
+  create_table "districts", force: :cascade do |t|
+    t.integer  "state_id"
+    t.string   "code"
+    t.string   "state_code"
+    t.string   "full_code"
+    t.geometry "geom",       limit: {:srid=>0, :type=>"geometry"}
+    t.index ["state_id"], name: "index_districts_on_state_id", using: :btree
+  end
 
   create_table "office_locations", force: :cascade do |t|
-    t.integer  "rep_id"
-    t.string   "office_type"
-    t.string   "line1"
-    t.string   "line2"
-    t.string   "line3"
-    t.string   "line4"
-    t.string   "line5"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "phone"
+    t.integer   "rep_id"
+    t.string    "office_type"
+    t.string    "line1"
+    t.string    "line2"
+    t.string    "line3"
+    t.string    "line4"
+    t.string    "line5"
+    t.float     "latitude"
+    t.float     "longitude"
+    t.geography "lonlat",      limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.datetime  "created_at",                                                           null: false
+    t.datetime  "updated_at",                                                           null: false
+    t.string    "phone"
     t.index ["rep_id"], name: "index_office_locations_on_rep_id", using: :btree
   end
 
   create_table "reps", force: :cascade do |t|
+    t.integer  "district_id"
     t.string   "state"
     t.string   "district"
     t.string   "office"
@@ -52,6 +64,14 @@ ActiveRecord::Schema.define(version: 20161220031319) do
     t.string   "photo"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.index ["district_id"], name: "index_reps_on_district_id", using: :btree
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.string   "state_code"
+    t.string   "name"
+    t.string   "abbr"
+    t.geometry "geom",       limit: {:srid=>0, :type=>"geometry"}
   end
 
   create_table "zipcodes", force: :cascade do |t|

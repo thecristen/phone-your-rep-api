@@ -7,6 +7,7 @@ class RepsController < ApplicationController
     if params[:address]
       @reps  = Rep.get_top_reps(params[:address])
       @reps << Rep.get_state_reps(params[:address])
+      # @district = Rep.get_district(params[:address])
     else
       # Would like to find requesting IP address, geocode it and return the closest rep
       # request = Rack::Request.new Rails.env
@@ -17,6 +18,7 @@ class RepsController < ApplicationController
     end
 
     render json: @reps
+    # render json: @district
   end
 
   # GET /reps/1

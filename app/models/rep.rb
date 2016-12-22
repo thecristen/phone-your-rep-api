@@ -1,10 +1,22 @@
 class Rep < ApplicationRecord
+  belongs_to :district
   has_many :office_locations, dependent: :destroy
   serialize :committees, Array
   serialize :email, Array
 
   def phone
     self.office_locations.map { |loc| loc.phone }
+  end
+
+  def self.get_district(address)
+    coord = Geocoder.coordinates(address)
+    state_abbr = address.split.grep(/[A-Z]{2}/)
+    state = State.where(abbr: state_abbr).first
+    districts = District.where(state_code: state.state_code)
+    lat = coord.first
+    lon = coord.last
+    point = RGeo::Cartesian.factory.point(lon, lat)
+    district = districts.select { |district| point.within?(district.geom) }
   end
 
   def self.get_top_reps(address)
@@ -57,7 +69,7 @@ class Rep < ApplicationRecord
     parse_new_rep_office(rep)
     new_rep  = Rep.new
     new_rep.state                   = @rep_data[:state]
-    new_rep.district                = @rep_data[:district]
+    # new_rep.district                = @rep_data[:district]
     new_rep.office                  = rep.office
     new_rep.name                    = rep.name
     new_rep.last_name               = rep.last_name
