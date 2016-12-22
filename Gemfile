@@ -24,7 +24,7 @@ gem 'rack-cors', '~> 0.4.0'
 gem 'faker', '~> 1.6', '>= 1.6.6'
 
 # Use GetYourRep to get rep info for address from Google Civic Information API and openstates.org
-gem 'get_your_rep', '~> 0.1.8'
+gem 'get_your_rep', '~> 0.1.9'
 
 # PostGIS adapter for geospatial database modeling
 gem 'activerecord-postgis-adapter', '~> 4.0', '>= 4.0.2'

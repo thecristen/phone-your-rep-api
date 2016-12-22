@@ -51,7 +51,7 @@ GEM
       i18n (~> 0.5)
     ffi (1.9.14)
     geocoder (1.4.1)
-    get_your_rep (0.1.8)
+    get_your_rep (0.1.9)
       geocoder (~> 1.4, >= 1.4.1)
       httparty (~> 0)
     globalid (0.3.7)
@@ -146,7 +146,7 @@ DEPENDENCIES
   activerecord-postgis-adapter (~> 4.0, >= 4.0.2)
   byebug
   faker (~> 1.6, >= 1.6.6)
-  get_your_rep (~> 0.1.8)
+  get_your_rep (~> 0.1.9)
   listen (~> 3.0.5)
   pg (~> 0.19.0)
   pry (~> 0.10.4)

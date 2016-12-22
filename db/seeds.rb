@@ -22,7 +22,16 @@ csv_senate.each do |row|
   r.office = "United States Senate"
   r.last_name = row['Last Name']
   r.first_name = row['First Name']
-  r.party = row['Party']
+  r.party = case row['Party']
+  when 'R'
+    'Republican'
+  when 'D'
+    'Democratic'
+  when 'I'
+    'Independent'
+  else
+    row['Party']
+  end
   r.email = [row['Email']]
   r.url = row['Website']
   r.senate_class = row['Class']

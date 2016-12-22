@@ -36,18 +36,23 @@ module GetYourRep
     end
 
     # iterate through zips and batch query API to save reps in DB
-    def get_all_the_reps
+    def get_all_the_reps(random: false)
       collect_zips
+
+      tenth_of_zips = @zips.size / 10
+      @zips = @zips.sample(tenth_of_zips) if random
 
       i = 1
       @zips.each do |zip|
         # uri = URI("https://aqueous-anchorage-20771.herokuapp.com/reps?address=#{zip}")
         # Net::HTTP.get(uri)
-        Rep.get_all_reps(zip)
         puts "Request ##{i} sent for #{zip}"
+        Rep.get_top_reps(zip)
+        puts "Response ##{i} received for #{zip}"
         i += 1
         sleep(4)
       end
+
     end
   end
 end

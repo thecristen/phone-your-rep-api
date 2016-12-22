@@ -117,9 +117,9 @@ class Rep < ApplicationRecord
 
   def self.get_top_reps(address)
     @new_reps = []
-    @address = address
+    @address = Geocoder.address(address)
     self.get_state
-    @reps = GetYourRep::Google.top_level_reps(address)
+    @reps = GetYourRep::Google.top_level_reps(@address)
     @db_reps = self.where(last_name: @reps.last_names, first_name: @reps.first_names)
     self.update_rep_info_to_db
     @new_reps.each { |new_rep| new_rep.save } unless @new_reps.blank?
