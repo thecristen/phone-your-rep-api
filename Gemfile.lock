@@ -134,6 +134,7 @@ GEM
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    vcardigan (0.0.9)
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -142,19 +143,20 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-postgis-adapter
+  activerecord-postgis-adapter (~> 4.0, >= 4.0.2)
   byebug
-  faker
+  faker (~> 1.6, >= 1.6.6)
   get_your_rep (~> 0.1.8)
   listen (~> 3.0.5)
-  pg
-  pry
+  pg (~> 0.19.0)
+  pry (~> 0.10.4)
   puma (~> 3.0)
-  rack-cors
+  rack-cors (~> 0.4.0)
   rails (~> 5.0.0, >= 5.0.0.1)
-  spring
+  spring (~> 2.0)
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
+  vcardigan (~> 0.0.9)
 
 RUBY VERSION
    ruby 2.3.3p222

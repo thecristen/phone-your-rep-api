@@ -4,7 +4,7 @@ ruby '2.3.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 # Use postgres as the database for Active Record
-gem 'pg'
+gem 'pg', '~> 0.19.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -18,16 +18,19 @@ gem 'puma', '~> 3.0'
 # gem 'capistrano-rails', group: :development
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-gem 'rack-cors'
+gem 'rack-cors', '~> 0.4.0'
 
 # Mock data
-gem 'faker'
+gem 'faker', '~> 1.6', '>= 1.6.6'
 
-# Use GetYourRep to get rep info for address from Google API
+# Use GetYourRep to get rep info for address from Google Civic Information API and openstates.org
 gem 'get_your_rep', '~> 0.1.8'
 
 # PostGIS adapter for geospatial database modeling
-gem 'activerecord-postgis-adapter'
+gem 'activerecord-postgis-adapter', '~> 4.0', '>= 4.0.2'
+
+# VCardigan builds VCard ready text format for rep info
+gem 'vcardigan', '~> 0.0.9'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -37,9 +40,9 @@ end
 group :development do
   gem 'listen', '~> 3.0.5'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  gem 'spring', '~> 2.0'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'pry'
+  gem 'pry', '~> 0.10.4'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

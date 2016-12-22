@@ -48,8 +48,8 @@ class Rep < ApplicationRecord
   # Add the reps to a @raw_reps array.
   def self.get_raw_state_and_district_reps
     @raw_reps = []
-    @raw_reps += Rep.where(state: @state).map { |rep| rep }
-    @raw_reps += Rep.where(district: @district).map { |rep| rep }
+    @raw_reps += Rep.where(state: @state, district: @district).map { |rep| rep }
+    @raw_reps += Rep.where(state: @state, district: nil).map { |rep| rep }
     @raw_reps = @raw_reps.uniq
   end
 
@@ -89,7 +89,7 @@ class Rep < ApplicationRecord
   ##
   # Map the phones in order of the sorted offices
   def self.phones(rep)
-    @sorted_offices.map { |office| office.phone }
+    @sorted_offices.map { |office| office.phone } - [nil]
   end
 
   ##
@@ -167,7 +167,7 @@ class Rep < ApplicationRecord
       d_o.line1       = rep.district_office[:line_1]
       d_o.line2       = rep.district_office[:line_2]
       d_o.line3       = rep.district_office[:line_3]
-      d_o.phone       = rep.phone.first if rep.phone.size > 1
+      d_o.phone       = rep.phone.first
     end
   end
 
