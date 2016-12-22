@@ -16,9 +16,10 @@ csv_senate = CSV.parse(csv_senator_text, headers: true, encoding: 'ISO-8859-1')
 # loop through senators CSV file, seed database with reps
 csv_senate.each do |row|
   r = Rep.new
-  r.state = row.first.last # row['State'] returns nil for some reason. This is a hack.
+  r.state = State.where(abbr: row.first.last).first # row['State'] returns nil for some reason. This is a hack.
   r.member_full = row['Member Full']
   r.name = "#{row['First Name']} #{row['Last Name']}"
+  r.office = "United States Senate"
   r.last_name = row['Last Name']
   r.first_name = row['First Name']
   r.party = row['Party']
@@ -36,6 +37,7 @@ csv_senate.each do |row|
   c_o = r.office_locations.build
   c_o.office_type = 'capitol'
   c_o.line1 = row['DC Office Address']
+  c_o.line2 = "Washington, DC 20002"
   c_o.phone = row['DC Tel #']
   r.save
   puts "#{r.member_full} saved in database.\nOffice locations:\n#{d_o.office_type}: #{d_o.line1}, #{d_o.line2}, #{d_o.line3}\n#{c_o.office_type}: #{c_o.line1}"

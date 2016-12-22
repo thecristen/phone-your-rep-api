@@ -44,8 +44,7 @@ ActiveRecord::Schema.define(version: 20161221232814) do
 
   create_table "reps", force: :cascade do |t|
     t.integer  "district_id"
-    t.string   "state"
-    t.string   "district"
+    t.integer  "state_id"
     t.string   "office"
     t.string   "member_full"
     t.string   "name"
@@ -65,6 +64,7 @@ ActiveRecord::Schema.define(version: 20161221232814) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["district_id"], name: "index_reps_on_district_id", using: :btree
+    t.index ["state_id"], name: "index_reps_on_state_id", using: :btree
   end
 
   create_table "states", force: :cascade do |t|

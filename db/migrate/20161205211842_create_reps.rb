@@ -2,8 +2,7 @@ class CreateReps < ActiveRecord::Migration[5.0]
   def change
     create_table :reps do |t|
       t.belongs_to :district, index: true
-      t.string :state
-      t.string :district
+      t.belongs_to :state, index: true
       t.string :office
       t.string :member_full
       t.string :name

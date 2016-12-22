@@ -1,23 +1,112 @@
 class Rep < ApplicationRecord
   belongs_to :district
-  has_many :office_locations, dependent: :destroy
-  serialize :committees, Array
-  serialize :email, Array
+  belongs_to :state
+  has_many   :office_locations, dependent: :destroy
+  serialize  :committees, Array
+  serialize  :email, Array
 
   def phone
     self.office_locations.map { |loc| loc.phone }
   end
 
-  def self.get_district(address)
-    coord = Geocoder.coordinates(address)
-    state_abbr = address.split.grep(/[A-Z]{2}/)
-    state = State.where(abbr: state_abbr).first
-    districts = District.where(state_code: state.state_code)
-    lat = coord.first
-    lon = coord.last
-    point = RGeo::Cartesian.factory.point(lon, lat)
-    district = districts.select { |district| point.within?(district.geom) }
+  def self.get_em(address)
+    @address = address
+    self.get_coordinates
+    self.get_state
+    self.get_district
+    self.get_raw_state_and_district_reps
+    self.cook_the_reps
   end
+
+  ##
+  # Geocode address into [lat, lon] coordinates.
+  def self.get_coordinates
+    @coordinates = Geocoder.coordinates(@address)
+  end
+
+  ##
+  # Parse out the two letter state abbreviation from address and find the State by that attribute.
+  def self.get_state
+    state_abbr = @address.split.grep(/[A-Z]{2}/)
+    @state = State.where(abbr: state_abbr).first
+  end
+
+  ##
+  # Query all of the districts within that state by :state_code foreign key.
+  # Collect the lat and lon from the coordinates and create a new RGeo Point object.
+  # Select the district from the collection of state districts that contains the point.
+  def self.get_district
+    districts = District.where(state_code: @state.state_code)
+    lat = @coordinates.first
+    lon = @coordinates.last
+    point = RGeo::Cartesian.factory.point(lon, lat)
+    @district = districts.select { |district| point.within?(district.geom) }
+  end
+
+  ##
+  # Query for Reps that belong to either the state or the district.
+  # Add the reps to a @raw_reps array.
+  def self.get_raw_state_and_district_reps
+    @raw_reps = []
+    @raw_reps += Rep.where(state: @state).map { |rep| rep }
+    @raw_reps += Rep.where(district: @district).map { |rep| rep }
+  end
+
+  ##
+  # Instantiate a new Delegation. Iterate over @raw_reps and assemble their attributes into a new
+  # Representative. Structure the Representative to be used as a JSON blob.
+  def self.cook_the_reps
+    @cooked_reps = GetYourRep::Delegation.new
+    @raw_reps.each do |rep|
+      self.sort_offices(rep)
+      @cooked_reps << GetYourRep::Representative[
+        :name,             rep.name,
+        :state,            rep.state.abbr,
+        :district,         (rep.district.code if rep.district),
+        :office,           rep.office,
+        :party,            self.party(rep.party),
+        :phone,            self.phones(rep),
+        :office_locations, self.offices(rep),
+        :email,            rep.email,
+        :url,              rep.url,
+        :photo,            rep.photo,
+        :twitter,          rep.twitter,
+        :facebook,         rep.facebook,
+        :youtube,          rep.youtube,
+        :googleplus,       rep.googleplus
+      ]
+    end
+    @cooked_reps
+  end
+
+  ##
+  # Sort the offices by proximity to the request coordinates
+  def self.sort_offices(rep)
+    @sorted_offices = rep.office_locations.near(@coordinates, 4000)
+  end
+
+  ##
+  # Map the phones in order of the sorted offices
+  def self.phones(rep)
+    @sorted_offices.map { |office| office.phone }
+  end
+
+  ##
+  # Parse the rep's office locations into hashes and map them in the sorted order.
+  def self.offices(rep)
+    @sorted_offices.map do |office|
+      {
+        type:   office.office_type,
+        line_1: office.line1,
+        line_2: office.line2,
+        line_3: office.line3,
+        line_4: office.line4,
+        line_5: office.line5
+      }
+    end
+  end
+
+
 
   def self.get_top_reps(address)
     @new_reps = []
@@ -68,8 +157,8 @@ class Rep < ApplicationRecord
   def self.add_rep_to_db(rep)
     parse_new_rep_office(rep)
     new_rep  = Rep.new
-    new_rep.state                   = @rep_data[:state]
-    # new_rep.district                = @rep_data[:district]
+  #  new_rep.state                   = @rep_data[:state]
+  #  new_rep.district                = @rep_data[:district]
     new_rep.office                  = rep.office
     new_rep.name                    = rep.name
     new_rep.last_name               = rep.last_name
