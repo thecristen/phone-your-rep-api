@@ -50,6 +50,7 @@ class Rep < ApplicationRecord
     @raw_reps = []
     @raw_reps += Rep.where(state: @state).map { |rep| rep }
     @raw_reps += Rep.where(district: @district).map { |rep| rep }
+    @raw_reps = @raw_reps.uniq
   end
 
   ##
@@ -110,9 +111,11 @@ class Rep < ApplicationRecord
 
   def self.get_top_reps(address)
     @new_reps = []
+    @address = address
+    self.get_state
     @reps = GetYourRep::Google.top_level_reps(address)
     @db_reps = self.where(last_name: @reps.last_names, first_name: @reps.first_names)
-    update_rep_info_from_db
+    self.update_rep_info_to_db
     @new_reps.each { |new_rep| new_rep.save } unless @new_reps.blank?
     @reps
   end
@@ -121,97 +124,89 @@ class Rep < ApplicationRecord
     GetYourRep::OpenStates.now(address)
   end
 
-  def self.update_rep_info_from_db
+  def self.update_rep_info_to_db
     @reps.each do |rep|
       @db_rep = @db_reps.select { |db_rep| db_rep.last_name == rep.last_name }.first
-
       if @db_rep.blank?
-        add_rep_to_db(rep)
+        self.add_rep_to_db(rep)
       else
-
-        @db_rep_offices = @db_rep.office_locations
-        district_offices = @db_rep_offices.map { |office| office if office.office_type == 'district'}
-        district_offices -= [nil]
-
-        rep.phone = (rep.phone + @db_rep.phone).uniq - [nil]
-        (rep.email += (@db_rep.email).flatten).uniq
-
-        if rep.district_office.empty? && district_offices
-          district_offices.each do |district_office|
-            rep.office_locations.unshift Hash[
-              :type,   district_office.office_type,
-              :line_1, district_office.line1,
-              :line_2, district_office.line2,
-              :line_3, district_office.line3,
-              :line_4, district_office.line4,
-              :line_5, district_office.line5
-            ]
-          end
-        end
-
-      update_rep_info_to_db(rep)
+        self.update(rep)
       end
     end
   end
 
   def self.add_rep_to_db(rep)
-    parse_new_rep_office(rep)
+    self.parse_new_rep_district(rep)
+
     new_rep  = Rep.new
-  #  new_rep.state                   = @rep_data[:state]
-  #  new_rep.district                = @rep_data[:district]
-    new_rep.office                  = rep.office
-    new_rep.name                    = rep.name
-    new_rep.last_name               = rep.last_name
-    new_rep.first_name              = rep.first_name
-    new_rep.party                   = rep.party
-    new_rep.email                   = rep.email
-    new_rep.url                     = rep.url
-    new_rep.twitter                 = rep.twitter
-    new_rep.facebook                = rep.facebook
-    new_rep.youtube                 = rep.youtube
-    new_rep.googleplus              = rep.googleplus
-    new_rep.photo                   = rep.photo
-    new_rep.committees              = rep.committees
-    unless rep.district_office.blank?
-      @d_o                             = new_rep.office_locations.build
-      @d_o.office_type                 = 'district'
-      @d_o.line1                       = rep.district_office[:line_1]
-      @d_o.line2                       = rep.district_office[:line_2]
-      @d_o.line3                       = rep.district_office[:line_3]
-      @d_o.phone                       = rep.phone.first if rep.phone.size > 1
-    end
-    unless rep.capitol_office.blank?
-      @c_o                             = new_rep.office_locations.build
-      @c_o.office_type                 = 'capitol'
-      @c_o.line1                       = rep.capitol_office[:line_1]
-      @c_o.line2                       = rep.capitol_office[:line_2]
-      @c_o.line3                       = rep.capitol_office[:line_3]
-      @c_o.phone                       = rep.phone.last
-    end
+    new_rep.state      = @state
+    new_rep.district   = District.where(code: @rep_district, state_code: @state.state_code).first
+    new_rep.office     = rep.office
+    new_rep.name       = rep.name
+    new_rep.last_name  = rep.last_name
+    new_rep.first_name = rep.first_name
+    new_rep.party      = rep.party
+    new_rep.email      = rep.email
+    new_rep.url        = rep.url
+    new_rep.twitter    = rep.twitter
+    new_rep.facebook   = rep.facebook
+    new_rep.youtube    = rep.youtube
+    new_rep.googleplus = rep.googleplus
+    new_rep.photo      = rep.photo
+    new_rep.committees = rep.committees
+
+    self.build_district_office(new_rep, rep)
+    self.build_capitol_office(new_rep, rep)
     @new_reps << new_rep
   end
 
-  def self.parse_new_rep_office(rep)
-    @rep_data = {}
-    if rep.office.downcase.match(/(united states house)/)
-      office_suffix        = rep.office.split(' ').last
-      @rep_data[:state]    = office_suffix.split('-').first
-      @rep_data[:district] = office_suffix.split('-').last
-    elsif rep.office.downcase.match(/upper|lower|chamber/)
-      office_array         = rep.office.split(' ')
-      @rep_data[:state]    = office_array.first
-      @rep_data[:district] = office_array.last
+  def self.build_district_office(new_rep, rep)
+    unless rep.district_office.blank?
+      d_o             = new_rep.office_locations.build
+      d_o.office_type = 'district'
+      d_o.line1       = rep.district_office[:line_1]
+      d_o.line2       = rep.district_office[:line_2]
+      d_o.line3       = rep.district_office[:line_3]
+      d_o.phone       = rep.phone.first if rep.phone.size > 1
     end
   end
 
-  def self.update_rep_info_to_db(rep)
+  def self.build_capitol_office(new_rep, rep)
+    unless rep.capitol_office.blank?
+      c_o             = new_rep.office_locations.build
+      c_o.office_type = 'capitol'
+      c_o.line1       = rep.capitol_office[:line_1]
+      c_o.line2       = rep.capitol_office[:line_2]
+      c_o.line3       = rep.capitol_office[:line_3]
+      c_o.phone       = rep.phone.last
+    end
+  end
+
+  def self.parse_new_rep_district(rep)
+
+    if rep.office.downcase.match(/(united states house)/)
+      office_suffix = rep.office.split(' ').last
+      @rep_district = office_suffix.split('-').last
+
+    elsif rep.office.downcase.match(/(united states senate)|(governor)/)
+      @rep_district = nil
+
+    elsif rep.office.downcase.match(/upper|lower|chamber/)
+      office_array  = rep.office.split(' ')
+      @rep_district = office_array.last
+
+    end
+  end
+
+  def self.update(rep)
     @update_params = {}
+    @update_params[:state]  = @state     if @db_rep.state.nil?
     @update_params[:office] = rep.office if @db_rep.office != rep.office
     @update_params[:party]  = rep.party  if @db_rep.party  != rep.party
-    update_email(rep)
-    update_social_handles(rep)
-    update_capitol_address(rep)
-    update_committees(rep)
+    self.update_email(rep)
+    self.update_social_handles(rep)
+    self.update_or_create_capitol_address(rep)
+    self.update_committees(rep)
     @db_rep.update(@update_params) unless @update_params.blank?
   end
 
@@ -228,38 +223,48 @@ class Rep < ApplicationRecord
     @update_params[:googleplus] = rep.googleplus if @db_rep.googleplus != rep.googleplus
   end
 
-  def self.update_capitol_address(rep)
+  def self.update_or_create_capitol_address(rep)
     return unless rep.capitol_office
-
-    capitol_office = @db_rep_offices.map { |office| office if office.office_type == 'capitol' }[0]
-
-    if capitol_office.nil?
-      @db_rep.office_locations.build(
-        office_type: rep.capitol_office[:type],
-        line1:       rep.capitol_office[:line_1],
-        line2:       rep.capitol_office[:line_2],
-        line3:       rep.capitol_office[:line_3],
-        line4:       rep.capitol_office[:line_4],
-        line5:       rep.capitol_office[:line_5],
-      )
+    self.gather_office_locations
+    if @capitol_office.nil?
+      self.create_capitol_address(rep)
     else
-
-      @cap_office_update_params = {}
-
-      if capitol_office.line1 != rep.capitol_office[:line_1]
-        @cap_office_update_params[:line1] = rep.capitol_office[:line_1]
-      end
-
-      if capitol_office.line2 != rep.capitol_office[:line_2]
-        @cap_office_update_params[:line2] = rep.capitol_office[:line_2]
-      end
-
-      if capitol_office.line3 != rep.capitol_office[:line_3]
-        @cap_office_update_params[:line3] = rep.capitol_office[:line_3]
-      end
-
-      capitol_office.update(@cap_office_update_params) unless @cap_office_update_params.blank?
+      self.update_capitol_address(rep)
     end
+  end
+
+  def self.create_capitol_address(rep)
+    @db_rep.office_locations.build(
+      office_type: rep.capitol_office[:type],
+      line1:       rep.capitol_office[:line_1],
+      line2:       rep.capitol_office[:line_2],
+      line3:       rep.capitol_office[:line_3],
+      line4:       rep.capitol_office[:line_4],
+      line5:       rep.capitol_office[:line_5],
+    )
+  end
+
+  def self.update_capitol_address(rep)
+    @cap_office_update_params = {}
+
+    if @capitol_office.line1 != rep.capitol_office[:line_1]
+      @cap_office_update_params[:line1] = rep.capitol_office[:line_1]
+    end
+
+    if @capitol_office.line2 != rep.capitol_office[:line_2]
+      @cap_office_update_params[:line2] = rep.capitol_office[:line_2]
+    end
+
+    if @capitol_office.line3 != rep.capitol_office[:line_3]
+      @cap_office_update_params[:line3] = rep.capitol_office[:line_3]
+    end
+
+    @capitol_office.update(@cap_office_update_params) unless @cap_office_update_params.blank?
+  end
+
+  def self.gather_office_locations
+    @db_rep_offices = @db_rep.office_locations
+    @capitol_office = @db_rep_offices.map { |office| office if office.office_type == 'capitol' }[0]
   end
 
   def self.update_committees(rep)
@@ -305,6 +310,39 @@ class Rep < ApplicationRecord
       'Independent'
     else
       value
+    end
+  end
+
+  def self.update_rep_info_from_db
+    @reps.each do |rep|
+      @db_rep = @db_reps.select { |db_rep| db_rep.last_name == rep.last_name }.first
+
+      if @db_rep.blank?
+        add_rep_to_db(rep)
+      else
+
+        @db_rep_offices = @db_rep.office_locations
+        district_offices = @db_rep_offices.map { |office| office if office.office_type == 'district'}
+        district_offices -= [nil]
+
+        rep.phone = (rep.phone + @db_rep.phone).uniq - [nil]
+        (rep.email += (@db_rep.email).flatten).uniq
+
+        if rep.district_office.empty? && district_offices
+          district_offices.each do |district_office|
+            rep.office_locations.unshift Hash[
+              :type,   district_office.office_type,
+              :line_1, district_office.line1,
+              :line_2, district_office.line2,
+              :line_3, district_office.line3,
+              :line_4, district_office.line4,
+              :line_5, district_office.line5
+            ]
+          end
+        end
+
+      update_rep_info_to_db(rep)
+      end
     end
   end
 end
