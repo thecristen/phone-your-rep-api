@@ -5,10 +5,14 @@ class Rep < ApplicationRecord
   serialize  :committees, Array
   serialize  :email, Array
 
+  ##
+  # Map the phone number of every office location into one Array.
   def phone
     self.office_locations.map { |loc| loc.phone }
   end
 
+  ##
+  # Find the reps in the db associated to that address and assemble into JSON blob
   def self.get_em(address)
     @address = address
     self.get_coordinates
@@ -36,7 +40,7 @@ class Rep < ApplicationRecord
   # Collect the lat and lon from the coordinates and create a new RGeo Point object.
   # Select the district from the collection of state districts that contains the point.
   def self.get_district
-    districts = District.where(state_code: @state.state_code)
+    districts = @state.districts
     lat = @coordinates.first
     lon = @coordinates.last
     point = RGeo::Cartesian.factory.point(lon, lat)
@@ -107,7 +111,9 @@ class Rep < ApplicationRecord
     end
   end
 
-
+  ######
+  # The methods below are used to pull in rep data from the Google and Open States APIs and
+  # update the database
 
   def self.get_top_reps(address)
     @new_reps = []
