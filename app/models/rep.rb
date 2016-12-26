@@ -6,12 +6,6 @@ class Rep < ApplicationRecord
   serialize  :email, Array
 
   ##
-  # Map the phone number of every office location into one Array.
-  def phone
-    self.office_locations.map { |loc| loc.phone }
-  end
-
-  ##
   # Find the reps in the db associated to that address and assemble into JSON blob
   def self.get_em(address)
     @address = address
@@ -26,6 +20,9 @@ class Rep < ApplicationRecord
   # Geocode address into [lat, lon] coordinates.
   def self.get_coordinates
     @coordinates = Geocoder.coordinates(@address)
+    lat = @coordinates.first
+    lon = @coordinates.last
+    @point = RGeo::Cartesian.factory.point(lon, lat)
   end
 
   ##
@@ -41,10 +38,7 @@ class Rep < ApplicationRecord
   # Select the district from the collection of state districts that contains the point.
   def self.get_district
     districts = @state.districts
-    lat = @coordinates.first
-    lon = @coordinates.last
-    point = RGeo::Cartesian.factory.point(lon, lat)
-    @district = districts.select { |district| point.within?(district.geom) }
+    @district = districts.select { |district| @point.within?(district.geom) }
   end
 
   ##
@@ -52,7 +46,7 @@ class Rep < ApplicationRecord
   # Add the reps to a @raw_reps array.
   def self.get_raw_state_and_district_reps
     @raw_reps = []
-    @raw_reps += Rep.where(state: @state, district: @district).map { |rep| rep }
+    @raw_reps += Rep.where(district: @district).map { |rep| rep }
     @raw_reps += Rep.where(state: @state, district: nil).map { |rep| rep }
     @raw_reps = @raw_reps.uniq
   end
@@ -63,15 +57,15 @@ class Rep < ApplicationRecord
   def self.cook_the_reps
     @cooked_reps = GetYourRep::Delegation.new
     @raw_reps.each do |rep|
-      self.sort_offices(rep)
+      rep.sort_offices(@coordinates)
       @cooked_reps << GetYourRep::Representative[
         :name,             rep.name,
         :state,            rep.state.abbr,
         :district,         (rep.district.code if rep.district),
         :office,           rep.office,
-        :party,            self.party(rep.party),
-        :phone,            self.phones(rep),
-        :office_locations, self.offices(rep),
+        :party,            rep.party,
+        :phone,            rep.sorted_phones,
+        :office_locations, rep.sorted_offices,
         :email,            rep.email,
         :url,              rep.url,
         :photo,            rep.photo,
@@ -85,20 +79,46 @@ class Rep < ApplicationRecord
   end
 
   ##
+  # Pick a random rep and assemble into JSON blob.
+  def self.random_rep
+    random_rep = Rep.order("RANDOM()").limit(1).first
+    return Hash[:error, 'Something went wrong, try again.'].to_a if random_rep.nil?
+
+    GetYourRep::Representative[
+      :name,             random_rep.name,
+      :state,            random_rep.state.abbr,
+      :district,         (random_rep.district.code if random_rep.district),
+      :office,           random_rep.office,
+      :party,            random_rep.party,
+      :phone,            random_rep.phones,
+      :office_locations, random_rep.offices,
+      :email,            random_rep.email,
+      :url,              random_rep.url,
+      :photo,            random_rep.photo,
+      :twitter,          random_rep.twitter,
+      :facebook,         random_rep.facebook,
+      :youtube,          random_rep.youtube,
+      :googleplus,       random_rep.googleplus
+    ].to_del
+  end
+
+  ##
   # Sort the offices by proximity to the request coordinates
-  def self.sort_offices(rep)
-    @sorted_offices = rep.office_locations.near(@coordinates, 4000)
+  def sort_offices(coordinates)
+    @sorted_offices  = self.office_locations.near(coordinates, 4000)
+    @sorted_offices += self.office_locations
+    @sorted_offices.uniq!
   end
 
   ##
   # Map the phones in order of the sorted offices
-  def self.phones(rep)
+  def sorted_phones
     @sorted_offices.map { |office| office.phone } - [nil]
   end
 
   ##
   # Parse the rep's office locations into hashes and map them in the sorted order.
-  def self.offices(rep)
+  def sorted_offices
     @sorted_offices.map do |office|
       {
         type:   office.office_type,
@@ -111,9 +131,47 @@ class Rep < ApplicationRecord
     end
   end
 
-  ######
-  # The methods below are used to pull in rep data from the Google and Open States APIs and
-  # update the database
+  ##
+  # Map the phone number of every office location into one Array.
+  def phones
+    self.office_locations.map { |office| office.phone } - [nil]
+  end
+
+  ##
+  # Map the office locations into one Array.
+  def offices
+    self.office_locations.map do |office|
+      {
+        type:   office.office_type,
+        line_1: office.line1,
+        line_2: office.line2,
+        line_3: office.line3,
+        line_4: office.line4,
+        line_5: office.line5
+      }
+    end
+  end
+
+  ##
+  # Convert shorthand party to longform.
+  def party
+    case self[:party]
+    when 'D'
+      'Democratic'
+    when 'R'
+      'Republican'
+    when 'I'
+      'Independent'
+    else
+      self[:party]
+    end
+  end
+
+  ############
+  ############
+  ############
+  ## The methods below are used to pull in rep data from the Google and Open States APIs and
+  ## update the database
 
   def self.get_top_reps(address)
     @new_reps = []
@@ -192,7 +250,11 @@ class Rep < ApplicationRecord
 
     if rep.office.downcase.match(/(united states house)/)
       office_suffix = rep.office.split(' ').last
-      @rep_district = office_suffix.split('-').last
+      if office_suffix.match(/[A-Z]{2}-[0-9]{2}/)
+        @rep_district = office_suffix.split('-').last
+      else
+        @rep_district = '00'
+      end
 
     elsif rep.office.downcase.match(/(united states senate)|(governor)/)
       @rep_district = nil
@@ -276,46 +338,6 @@ class Rep < ApplicationRecord
   def self.update_committees(rep)
     unless rep.committees.nil? || (rep.committees - @db_rep.committees).empty?
       @update_params[:committees] = (@db_rep.committees += rep.committees)
-    end
-  end
-
-  def self.random_rep
-    random_rep = Rep.order("RANDOM()").limit(1).first
-    return Hash[:error, 'Something went wrong, try again.'].to_a if random_rep.nil?
-    offices = random_rep.office_locations.map do |office|
-      {
-        type:   office.office_type,
-        line_1: office.line1,
-        line_2: office.line2,
-        line_3: office.line3
-      }
-    end
-    GetYourRep::Representative[
-      :name,             random_rep.name,
-      :office,           random_rep.office,
-      :party,            party(random_rep.party),
-      :phone,            random_rep.phone,
-      :office_locations, offices,
-      :email,            random_rep.email,
-      :url,              random_rep.url,
-      :photo,            random_rep.photo,
-      :twitter,          random_rep.twitter,
-      :facebook,         random_rep.facebook,
-      :youtube,          random_rep.youtube,
-      :googleplus,       random_rep.googleplus
-    ].to_del
-  end
-
-  def self.party(value)
-    case value
-    when 'D'
-      'Democratic'
-    when 'R'
-      'Republican'
-    when 'I'
-      'Independent'
-    else
-      value
     end
   end
 
