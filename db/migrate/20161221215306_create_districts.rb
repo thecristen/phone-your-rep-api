@@ -4,7 +4,7 @@ class CreateDistricts < ActiveRecord::Migration[5.0]
       t.belongs_to :state, index: true
       t.string :code
       t.string :state_code
-      t.string :full_code
+      t.string :full_code, unique: true
       t.geometry :geom
     end
   end

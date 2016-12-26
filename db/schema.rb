@@ -26,19 +26,19 @@ ActiveRecord::Schema.define(version: 20161221232814) do
   end
 
   create_table "office_locations", force: :cascade do |t|
-    t.integer   "rep_id"
-    t.string    "office_type"
-    t.string    "line1"
-    t.string    "line2"
-    t.string    "line3"
-    t.string    "line4"
-    t.string    "line5"
-    t.float     "latitude"
-    t.float     "longitude"
-    t.geography "lonlat",      limit: {:srid=>4326, :type=>"point", :geographic=>true}
-    t.datetime  "created_at",                                                           null: false
-    t.datetime  "updated_at",                                                           null: false
-    t.string    "phone"
+    t.integer  "rep_id"
+    t.string   "office_type"
+    t.string   "line1"
+    t.string   "line2"
+    t.string   "line3"
+    t.string   "line4"
+    t.string   "line5"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.geometry "lonlat",      limit: {:srid=>0, :type=>"point"}
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.string   "phone"
     t.index ["rep_id"], name: "index_office_locations_on_rep_id", using: :btree
   end
 
