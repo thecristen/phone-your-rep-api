@@ -1,7 +1,7 @@
 class OfficeLocation < ApplicationRecord
-  belongs_to :rep
-  validates :office_type, :line1, presence: true
-  geocoded_by :full_address
+  belongs_to       :rep
+  validates        :office_type, :line1, presence: true
+  geocoded_by      :full_address
   after_validation :geocode, :set_lonlat
 
   def set_lonlat
