@@ -4,7 +4,6 @@ class CreateReps < ActiveRecord::Migration[5.0]
       t.belongs_to :district, index: true
       t.belongs_to :state, index: true
       t.string :office
-      t.string :member_full
       t.string :name
       t.string :last_name
       t.string :first_name

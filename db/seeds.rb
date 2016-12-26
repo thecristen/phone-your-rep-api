@@ -7,62 +7,56 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'csv'
 
-# reads file into local variable
-csv_senator_text = File.read(Rails.root.join('lib', 'seeds', 'us_senators_20161205.csv'))
-
-# parse the CSV for ruby, ignoring first line (headers)
-csv_senate = CSV.parse(csv_senator_text, headers: true, encoding: 'ISO-8859-1')
-
-# loop through senators CSV file, seed database with reps
-csv_senate.each do |row|
-  r = Rep.new
-  r.state = State.where(abbr: row.first.last).first # row['State'] returns nil for some reason. This is a hack.
-  r.member_full = row['Member Full']
-  r.name = "#{row['First Name']} #{row['Last Name']}"
-  r.office = "United States Senate"
-  r.last_name = row['Last Name']
-  r.first_name = row['First Name']
-  r.party = case row['Party']
-  when 'R'
-    'Republican'
-  when 'D'
-    'Democratic'
-  when 'I'
-    'Independent'
-  else
-    row['Party']
+def seed_reps
+  csv_rep_text = File.read(Rails.root.join('lib', 'seeds', 'reps_20161226.csv'))
+  csv_reps = CSV.parse(csv_rep_text, headers: true, encoding: 'ISO-8859-1')
+  csv_reps.each do |row|
+    r = Rep.new
+    r.id = row['id']
+    r.district_id = row['district_id']
+    r.state_id = row['state_id']
+    r.office = row['office']
+    r.name = row['name']
+    r.last_name = row['last_name']
+    r.first_name = row['first_name']
+    r.party = row['party']
+    r.email = [row['email']]
+    r.url = row['url']
+    r.twitter = row['twitter']
+    r.facebook = row['facebook']
+    r.youtube = row['youtube']
+    r.googleplus = row['googleplus']
+    r.committees = [row['committees']]
+    r.senate_class = row['senate_class']
+    r.bioguide_id = row['bioguide_id']
+    r.photo = row['Photo']
+    r.save
+    puts "#{r.name}, #{r.office}, #{r.state.name} saved in database."
   end
-  r.email = [row['Email']]
-  r.url = row['Website']
-  r.senate_class = row['Class']
-  r.bioguide_id = row['bioguide_id']
-  r.photo = row['Photo']
-  d_o = r.office_locations.build
-  d_o.office_type = 'district'
-  d_o.line1 = row['District Office Address Line 1']
-  d_o.line2 = row['District Address Line 2']
-  d_o.line3 = row['District Address Line 3']
-  d_o.phone = row['District Tel #']
-  c_o = r.office_locations.build
-  c_o.office_type = 'capitol'
-  c_o.line1 = row['DC Office Address']
-  c_o.line2 = "Washington, DC 20002"
-  c_o.phone = row['DC Tel #']
-  r.save
-  puts "#{r.member_full} saved in database.\nOffice locations:\n#{d_o.office_type}: #{d_o.line1}, #{d_o.line2}, #{d_o.line3}\n#{c_o.office_type}: #{c_o.line1}"
+  puts "There are now #{Rep.count} reps in the database."
 end
 
-# loop through zipcodes CSV file, seed database with zips
-# csv_zipcode_text = File.read(Rails.root.join('lib', 'seeds', 'zipcodes_20161205.csv'))
-# csv_zipcode = CSV.parse(csv_zipcode_text, headers: true, encoding: 'ISO-8859-1')
-# csv_zipcode.each do |row|
-#   z = Zipcode.new
-#   z.zip = row['Zipcode']
-#   z.state = row['State']
-#   z.city = row['City']
-#   z.save
-#   puts "#{z.zip} #{z.city}, #{z.state} saved in database."
-# end
+def seed_office_locations
+  csv_office_location_text = File.read(Rails.root.join('lib', 'seeds', 'office_locations_20161226.csv'))
+  csv_office_locations = CSV.parse(csv_office_location_text, headers: true, encoding: 'ISO-8859-1')
+  csv_office_locations.each do |row|
+    o = OfficeLocation.new
+    o.id = row['id']
+    o.rep_id = row['rep_id']
+    o.office_type = row['office_type']
+    o.line1 = row['line1']
+    o.line2 = row['line2']
+    o.line3 = row['line3']
+    o.line4 = row['line4']
+    o.line5 = row['line5']
+    o.latitude = row['latitude']
+    o.longitude = row['longitude']
+    o.phone = row['phone']
+    o.save
+    puts "#{o.rep.name}'s #{o.office_type} office saved in database."
+  end
+  puts "There are now #{OfficeLocation.count} office locations in the database."
+end
 
-puts "There are now #{Rep.count} reps and #{OfficeLocation.count} office locations in the database."
-# puts "There are now #{Zipcode.count} zipcodes in the database."
+# seed_reps
+seed_office_locations

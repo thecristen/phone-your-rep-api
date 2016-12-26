@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20161221232814) do
   create_table "office_locations", force: :cascade do |t|
     t.integer  "rep_id"
     t.string   "office_type"
+    t.string   "phone"
     t.string   "line1"
     t.string   "line2"
     t.string   "line3"
@@ -38,7 +39,6 @@ ActiveRecord::Schema.define(version: 20161221232814) do
     t.geometry "lonlat",      limit: {:srid=>0, :type=>"point"}
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
-    t.string   "phone"
     t.index ["rep_id"], name: "index_office_locations_on_rep_id", using: :btree
   end
 
@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(version: 20161221232814) do
     t.integer  "district_id"
     t.integer  "state_id"
     t.string   "office"
-    t.string   "member_full"
     t.string   "name"
     t.string   "last_name"
     t.string   "first_name"
@@ -72,14 +71,6 @@ ActiveRecord::Schema.define(version: 20161221232814) do
     t.string   "name"
     t.string   "abbr"
     t.geometry "geom",       limit: {:srid=>0, :type=>"geometry"}
-  end
-
-  create_table "zipcodes", force: :cascade do |t|
-    t.string   "zip"
-    t.string   "state"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "city"
   end
 
 end
