@@ -49,50 +49,47 @@ class Rep < ApplicationRecord
   # Instantiate a new Delegation. Iterate over @raw_reps and assemble their attributes into a new
   # Representative. Structure the Representative to be used as a JSON blob.
   def self.cook_the_reps
-    @cooked_reps = GetYourRep::Delegation.new
-    @raw_reps.each do |rep|
+    @raw_reps.map do |rep|
       rep.sort_offices(@coordinates)
-      @cooked_reps << GetYourRep::Representative[
-        :name,             rep.name,
-        :state,            rep.state.abbr,
-        :district,         (rep.district.code if rep.district),
-        :office,           rep.office,
-        :party,            rep.party,
-        :phone,            rep.sorted_phones,
-        :office_locations, rep.sorted_offices,
-        :email,            rep.email,
-        :url,              rep.url,
-        :photo,            rep.photo,
-        :twitter,          rep.twitter,
-        :facebook,         rep.facebook,
-        :youtube,          rep.youtube,
-        :googleplus,       rep.googleplus
-      ]
+      {
+        name:             rep.name,
+        state:            rep.state.abbr,
+        district:         (rep.district.code if rep.district),
+        office:           rep.office,
+        party:            rep.party,
+        phone:            rep.sorted_phones,
+        office_locations: rep.sorted_offices,
+        email:            rep.email,
+        url:              rep.url,
+        photo:            rep.photo,
+        twitter:          rep.twitter,
+        facebook:         rep.facebook,
+        youtube:          rep.youtube,
+        googleplus:       rep.googleplus
+      }
     end
-    @cooked_reps
   end
 
   # Pick a random rep and assemble into JSON blob.
   def self.random_rep
     random_rep = Rep.order("RANDOM()").limit(1).first
-    return Hash[:error, 'Something went wrong, try again.'].to_a if random_rep.nil?
-
-    GetYourRep::Representative[
-      :name,             random_rep.name,
-      :state,            random_rep.state.abbr,
-      :district,         (random_rep.district.code if random_rep.district),
-      :office,           random_rep.office,
-      :party,            random_rep.party,
-      :phone,            random_rep.phones,
-      :office_locations, random_rep.offices,
-      :email,            random_rep.email,
-      :url,              random_rep.url,
-      :photo,            random_rep.photo,
-      :twitter,          random_rep.twitter,
-      :facebook,         random_rep.facebook,
-      :youtube,          random_rep.youtube,
-      :googleplus,       random_rep.googleplus
-    ].to_del
+    return [] << { error: 'Something went wrong, try again.' } if random_rep.nil?
+    [] << {
+      name:             random_rep.name,
+      state:            random_rep.state.abbr,
+      district:         (random_rep.district.code if random_rep.district),
+      office:           random_rep.office,
+      party:            random_rep.party,
+      phone:            random_rep.phones,
+      office_locations: random_rep.offices,
+      email:            random_rep.email,
+      url:              random_rep.url,
+      photo:            random_rep.photo,
+      twitter:          random_rep.twitter,
+      facebook:         random_rep.facebook,
+      youtube:          random_rep.youtube,
+      googleplus:       random_rep.googleplus
+    }
   end
 
   # Sort the offices by proximity to the request coordinates
