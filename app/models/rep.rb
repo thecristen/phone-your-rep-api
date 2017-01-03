@@ -26,7 +26,7 @@ class Rep < ApplicationRecord
   # Parse out the two letter state abbreviation from address and find the State by that attribute.
   def self.get_state
     state_abbr = @address.split.grep(/[A-Z]{2}/)
-    @state = State.where(abbr: state_abbr).first
+    @state = State.where(abbr: state_abbr).includes(:districts).first
   end
 
   # Query all of the districts within that state by :state_code foreign key.
@@ -34,16 +34,17 @@ class Rep < ApplicationRecord
   # Select the district from the collection of state districts that contains the point.
   def self.get_district
     districts = @state.districts
-    @district = districts.select { |district| @point.within?(district.geom) }
+    @district = districts.select { |district| @point.within?(district.geom) }.first
   end
 
   # Query for Reps that belong to either the state or the district.
   # Add the reps to a @raw_reps array.
   def self.get_raw_state_and_district_reps
     @raw_reps = []
-    @raw_reps += Rep.where(district: @district).map { |rep| rep }
-    @raw_reps += Rep.where(state: @state, district: nil).map { |rep| rep }
-    @raw_reps = @raw_reps.uniq
+    @raw_reps += Rep.where(district: @district).
+                     or(Rep.where(state: @state, district: nil)).
+                     includes(:office_locations, :district).to_a
+    @raw_reps.uniq!
   end
 
   # Instantiate a new Delegation. Iterate over @raw_reps and assemble their attributes into a new
@@ -53,8 +54,8 @@ class Rep < ApplicationRecord
       rep.sort_offices(@coordinates)
       {
         name:             rep.name,
-        state:            rep.state.abbr,
-        district:         (rep.district.code if rep.district),
+        state:            @state.abbr,
+        district:         rep.district&.code,
         office:           rep.office,
         party:            rep.party,
         phone:            rep.sorted_phones,
