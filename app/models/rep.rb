@@ -11,11 +11,11 @@ class Rep < ApplicationRecord
   # Find the reps in the db associated to that address and assemble into JSON blob
   def self.get_em(address)
     @address = address
-    self.get_coordinates
-    self.get_state
-    self.get_district
-    self.get_raw_state_and_district_reps
-    self.cook_the_reps
+    get_coordinates
+    get_state
+    get_district
+    get_raw_state_and_district_reps
+    cook_the_reps
   end
 
   # Geocode address into [lat, lon] coordinates.
@@ -36,8 +36,7 @@ class Rep < ApplicationRecord
   # Collect the lat and lon from the coordinates and create a new RGeo Point object.
   # Select the district from the collection of state districts that contains the point.
   def self.get_district
-    districts = @state.districts
-    @district = districts.select { |district| @point.within?(district.geom) }.first
+    @district = @state.districts.detect { |district| @point.within?(district.geom) }
   end
 
   # Query for Reps that belong to either the state or the district.
@@ -81,7 +80,7 @@ class Rep < ApplicationRecord
     [] << {
       name:             random_rep.name,
       state:            random_rep.state.abbr,
-      district:         (random_rep.district.code if random_rep.district),
+      district:         random_rep.district&.code,
       office:           random_rep.office,
       party:            random_rep.party,
       phone:            random_rep.phones,
@@ -98,8 +97,8 @@ class Rep < ApplicationRecord
 
   # Sort the offices by proximity to the request coordinates
   def sort_offices(coordinates)
-    @sorted_offices  = self.office_locations.near(coordinates, 4000)
-    @sorted_offices += self.office_locations
+    @sorted_offices  = office_locations.near(coordinates, 4000)
+    @sorted_offices += office_locations
     @sorted_offices.uniq!
   end
 
@@ -124,12 +123,12 @@ class Rep < ApplicationRecord
 
   # Map the phone number of every office location into one Array.
   def phones
-    self.office_locations.map { |office| office.phone } - [nil]
+    office_locations.map { |office| office.phone } - [nil]
   end
 
   # Map the office locations into one Array.
   def offices
-    self.office_locations.map do |office|
+    office_locations.map do |office|
       {
         type:   office.office_type,
         line_1: office.line1,
