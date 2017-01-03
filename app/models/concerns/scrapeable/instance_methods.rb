@@ -46,10 +46,10 @@ module Scrapeable
 
     # Add rep social handles to update params.
     def update_social_handles(rep)
-      @update_params[:twitter]    = rep.twitter    if twitter    != rep.twitter
-      @update_params[:facebook]   = rep.facebook   if facebook   != rep.facebook
-      @update_params[:youtube]    = rep.youtube    if youtube    != rep.youtube
-      @update_params[:googleplus] = rep.googleplus if googleplus != rep.googleplus
+      @update_params[:twitter]    = rep.twitter    if twitter.nil?
+      @update_params[:facebook]   = rep.facebook   if facebook.nil?
+      @update_params[:youtube]    = rep.youtube    if youtube.nil?
+      @update_params[:googleplus] = rep.googleplus if googleplus.nil?
     end
 
     # Decide whether to add rep capitol address to update params, or create a new one.
