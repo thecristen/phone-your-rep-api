@@ -35,30 +35,34 @@ module Scrapeable
       end
     end
 
-    # Build a new Rep and add it to an array of new reps to be batch saved.
+    # Build a new Rep (and it's office locations) and add it to an array of new reps to be batch saved.
     def add_rep_to_db(rep)
-      self.parse_new_rep_district(rep)
-
-      new_rep            = new
-      new_rep.state      = @state
-      new_rep.district   = @state.districts.select { |d| d.code == @rep_district }.first
-      new_rep.office     = rep.office
-      new_rep.name       = rep.name
-      new_rep.last_name  = rep.last_name
-      new_rep.first_name = rep.first_name
-      new_rep.party      = rep.party
-      new_rep.email      = rep.email
-      new_rep.url        = rep.url
-      new_rep.twitter    = rep.twitter
-      new_rep.facebook   = rep.facebook
-      new_rep.youtube    = rep.youtube
-      new_rep.googleplus = rep.googleplus
-      new_rep.photo      = rep.photo
-      new_rep.committees = rep.committees
-
+      parse_new_rep_district(rep)
+      new_rep = build_rep(rep)
       new_rep.build_district_office(rep)
       new_rep.build_capitol_office(rep)
       @new_reps << new_rep
+    end
+
+    # Build the new rep.
+    def build_rep(rep)
+      r            = new
+      r.state      = @state
+      r.district   = @state.districts.detect { |d| d.code == @rep_district }
+      r.office     = rep.office
+      r.name       = rep.name
+      r.last_name  = rep.last_name
+      r.first_name = rep.first_name
+      r.party      = rep.party
+      r.email      = rep.email
+      r.url        = rep.url
+      r.twitter    = rep.twitter
+      r.facebook   = rep.facebook
+      r.youtube    = rep.youtube
+      r.googleplus = rep.googleplus
+      r.photo      = rep.photo
+      r.committees = rep.committees
+      r
     end
 
     # Parse out the congressional district info of a new Rep.

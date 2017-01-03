@@ -4,10 +4,8 @@
 ##
 # extension for the get_your_rep gem/module, seeds the db by programmatically collecting and
 # saving data through external API callbacks
-
 module GetYourRep
   class GetAllTheReps
-
     attr_accessor :csv_file
     attr_reader :zips, :zip_rows
 
@@ -17,7 +15,7 @@ module GetYourRep
       @zips = []
     end
 
-    #read the csv file containing zips by state
+    # read the csv file containing zips by state
     def read_zip_csv
       CSV.foreach("lib/seeds/zipcode_tabulation_csv_files/#{@csv_file}") do |row|
         @zip_rows << row
