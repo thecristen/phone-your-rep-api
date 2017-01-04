@@ -23,7 +23,7 @@ class Rep < ApplicationRecord
     attr_accessor :district
     # Raw Rep records from the database that need to be packaged for JSON response.
     attr_accessor :raw_reps
-  end # Class attributes ----------------------------------------------------------------------------------------------
+  end # Metaclass ----------------------------------------------------------------------------------------------------
 
   # Find the reps in the db associated to that address and assemble into JSON blob
   def self.find_em(address)
