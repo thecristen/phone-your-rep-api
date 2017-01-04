@@ -1,5 +1,5 @@
 class Rep < ApplicationRecord
-  extend Scrapeable::ClassMethods
+  extend  Scrapeable::ClassMethods
   include Scrapeable::InstanceMethods
 
   belongs_to :district
@@ -8,68 +8,68 @@ class Rep < ApplicationRecord
   serialize  :committees, Array
   serialize  :email, Array
 
+  # Open up Rep Metaclass to set Class attributes --------------------------------------------------------------------
+  class << self
+    # Address value from params.
+    attr_accessor :address
+    # Lat/lon coordinates geocoded from :address.
+    attr_accessor :coordinates
+    # Cartesian point object representing coordinates that can be used to find the :district by spatial geometry.
+    attr_accessor :point
+    # Address' State, found by parsing :address for the two-letter abbreviation.
+    attr_accessor :state
+    # Voting district found by a GIS database query to find the geometry that envelopes the :point.
+    attr_accessor :district
+    # Raw Rep records from the database that need to be packaged for JSON response.
+    attr_accessor :raw_reps
+  end # Class attributes ----------------------------------------------------------------------------------------------
+
   # Find the reps in the db associated to that address and assemble into JSON blob
   def self.find_em(address)
-    @address = address
+    self.address = address
     find_coordinates
     find_state
     find_district
     find_raw_reps
-    cook_the_reps
+    prep_the_reps
   end
 
   # Geocode address into [lat, lon] coordinates.
+  # Collect the lat and lon from the coordinates and create a new RGeo Point object.
   def self.find_coordinates
-    @coordinates = Geocoder.coordinates(@address)
-    lat = @coordinates.first
-    lon = @coordinates.last
-    @point = RGeo::Cartesian.factory.point(lon, lat)
+    self.coordinates = Geocoder.coordinates(address)
+    lat              = coordinates.first
+    lon              = coordinates.last
+    self.point       = RGeo::Cartesian.factory.point(lon, lat)
   end
 
   # Parse out the two letter state abbreviation from address and find the State by that attribute.
   def self.find_state
-    state_abbr = @address.split.grep(/[A-Z]{2}/)
-    @state = State.where(abbr: state_abbr).includes(:districts).first
+    state_abbr = address.split.grep(/[A-Z]{2}/)
+    self.state = State.where(abbr: state_abbr).includes(:districts).first
   end
 
-  # Query all of the districts within that state by :state_code foreign key.
-  # Collect the lat and lon from the coordinates and create a new RGeo Point object.
-  # Select the district from the collection of state districts that contains the point.
+  # Query all of the districts within that state.
+  # Select the district from the collection of state districts that contains the :point.
   def self.find_district
-    @district = @state.districts.detect { |district| @point.within?(district.geom) }
+    self.district = state.districts.detect { |district| point.within?(district.geom) }
   end
 
   # Query for Reps that belong to either the state or the district.
-  # Add the reps to a @raw_reps array.
+  # Add the reps to a :raw_reps array and eliminate any dupes.
   def self.find_raw_reps
-    @raw_reps = []
-    @raw_reps += Rep.where(district: @district).
-                     or(Rep.where(state: @state, district: nil)).
+    self.raw_reps  = []
+    self.raw_reps += Rep.where(district: district).
+                     or(Rep.where(state: state, district: nil)).
                      includes(:office_locations, :district).to_a
-    @raw_reps.uniq!
+    raw_reps.uniq!
   end
 
-  # Instantiate a new Delegation. Iterate over @raw_reps and assemble their attributes into a new
-  # Representative. Structure the Representative to be used as a JSON blob.
-  def self.cook_the_reps
-    @raw_reps.map do |rep|
-      rep.sort_offices(@coordinates)
-      {
-        name:             rep.name,
-        state:            @state.abbr,
-        district:         rep.district&.code,
-        office:           rep.office,
-        party:            rep.party,
-        phone:            rep.sorted_phones,
-        office_locations: rep.sorted_offices,
-        email:            rep.email,
-        url:              rep.url,
-        photo:            rep.photo,
-        twitter:          rep.twitter,
-        facebook:         rep.facebook,
-        youtube:          rep.youtube,
-        googleplus:       rep.googleplus
-      }
+  # Iterate over @raw_reps and assemble their attributes into a hash for JSON delivery.
+  def self.prep_the_reps
+    raw_reps.map do |rep|
+      rep.sort_offices(coordinates)
+      rep.to_hash(state)
     end
   end
 
@@ -77,21 +77,26 @@ class Rep < ApplicationRecord
   def self.random_rep
     random_rep = Rep.order("RANDOM()").limit(1).first
     return [] << { error: 'Something went wrong, try again.' } if random_rep.nil?
-    [] << {
-      name:             random_rep.name,
-      state:            random_rep.state.abbr,
-      district:         random_rep.district&.code,
-      office:           random_rep.office,
-      party:            random_rep.party,
-      phone:            random_rep.phones,
-      office_locations: random_rep.offices,
-      email:            random_rep.email,
-      url:              random_rep.url,
-      photo:            random_rep.photo,
-      twitter:          random_rep.twitter,
-      facebook:         random_rep.facebook,
-      youtube:          random_rep.youtube,
-      googleplus:       random_rep.googleplus
+    [] << random_rep.to_hash
+  end
+
+  # Assemble rep into hash, handling office sorting and nil :district
+  def to_hash(state = self.state)
+    {
+        name:             name,
+        state:            state.abbr,
+        district:         district&.code,
+        office:           office,
+        party:            party,
+        phone:            sorted_phones,
+        office_locations: sorted_offices,
+        email:            email,
+        url:              url,
+        photo:            photo,
+        twitter:          twitter,
+        facebook:         facebook,
+        youtube:          youtube,
+        googleplus:       googleplus
     }
   end
 
@@ -102,41 +107,21 @@ class Rep < ApplicationRecord
     @sorted_offices.uniq!
   end
 
-  # Map the phones in order of the sorted offices
+  # Map the phone number of every office location into one Array, sorting by location if possible.
   def sorted_phones
-    @sorted_offices.map { |office| office.phone } - [nil]
-  end
-
-  # Parse the rep's office locations into hashes and map them in the sorted order.
-  def sorted_offices
-    @sorted_offices.map do |office|
-      {
-        type:   office.office_type,
-        line_1: office.line1,
-        line_2: office.line2,
-        line_3: office.line3,
-        line_4: office.line4,
-        line_5: office.line5
-      }
+    if @sorted_offices
+      @sorted_offices.map(&:phone) - [nil]
+    else
+      office_locations.map(&:phone) - [nil]
     end
   end
 
-  # Map the phone number of every office location into one Array.
-  def phones
-    office_locations.map { |office| office.phone } - [nil]
-  end
-
-  # Map the office locations into one Array.
-  def offices
-    office_locations.map do |office|
-      {
-        type:   office.office_type,
-        line_1: office.line1,
-        line_2: office.line2,
-        line_3: office.line3,
-        line_4: office.line4,
-        line_5: office.line5
-      }
+  # Map the office locations into one Array, sorting by location if possible.
+  def sorted_offices
+    if @sorted_offices
+      @sorted_offices.map(&:to_hash)
+    else
+      office_locations.map(&:to_hash)
     end
   end
 
