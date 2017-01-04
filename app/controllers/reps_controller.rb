@@ -1,21 +1,22 @@
+# frozen_string_literal: true
 class RepsController < ApplicationController
   before_action :set_rep, only: [:show, :update, :destroy]
 
   # GET /reps
   def index
     # return the first result, or a random one
-    if params[:address]
-      # @reps  = Rep.get_top_reps(params[:address])
-      # @reps << Rep.get_state_reps(params[:address])
-      @reps = Rep.find_em(params[:address])
-    else
-      # Would like to find requesting IP address, geocode it and return the closest rep
-      # request = Rack::Request.new Rails.env
-      # result = request.location
-      # @office = OfficeLocation.near(result.postal_code)
-      # @reps = @office.rep
-      @reps = Rep.random_rep
-    end
+    @reps = if params[:address]
+              # @reps  = Rep.get_top_reps(params[:address])
+              # @reps << Rep.get_state_reps(params[:address])
+              Rep.find_em(params[:address])
+            else
+              # Would like to find requesting IP address, geocode it and return the closest rep
+              # request = Rack::Request.new Rails.env
+              # result = request.location
+              # @office = OfficeLocation.near(result.postal_code)
+              # @reps = @office.rep
+              Rep.random_rep
+            end
 
     render json: @reps
     # render json: @district
@@ -52,6 +53,7 @@ class RepsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_rep
       @rep = Rep.find(params[:id])

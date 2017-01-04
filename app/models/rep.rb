@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Rep < ApplicationRecord
   extend  Scrapeable::ClassMethods
   include Scrapeable::InstanceMethods
@@ -59,9 +60,8 @@ class Rep < ApplicationRecord
   # Add the reps to a :raw_reps array and eliminate any dupes.
   def self.find_raw_reps
     self.raw_reps  = []
-    self.raw_reps += Rep.where(district: district).
-                     or(Rep.where(state: state, district: nil)).
-                     includes(:office_locations, :district).to_a
+    self.raw_reps += Rep.where(district: district).or(Rep.where(state: state, district: nil)).
+                                                   includes(:office_locations, :district).to_a
     raw_reps.uniq!
   end
 
@@ -75,29 +75,27 @@ class Rep < ApplicationRecord
 
   # Pick a random rep and assemble into JSON blob.
   def self.random_rep
-    random_rep = Rep.order("RANDOM()").limit(1).first
+    random_rep = Rep.order('RANDOM()').limit(1).first
     return [] << { error: 'Something went wrong, try again.' } if random_rep.nil?
     [] << random_rep.to_hash
   end
 
   # Assemble rep into hash, handling office sorting and nil :district
   def to_hash(state = self.state)
-    {
-        name:             name,
-        state:            state.abbr,
-        district:         district&.code,
-        office:           office,
-        party:            party,
-        phone:            sorted_phones,
-        office_locations: sorted_offices,
-        email:            email,
-        url:              url,
-        photo:            photo,
-        twitter:          twitter,
-        facebook:         facebook,
-        youtube:          youtube,
-        googleplus:       googleplus
-    }
+    { name:             name,
+      state:            state.abbr,
+      district:         district&.code,
+      office:           office,
+      party:            party,
+      phone:            sorted_phones,
+      office_locations: sorted_offices,
+      email:            email,
+      url:              url,
+      photo:            photo,
+      twitter:          twitter,
+      facebook:         facebook,
+      youtube:          youtube,
+      googleplus:       googleplus }
   end
 
   # Sort the offices by proximity to the request coordinates, making sure to not miss offices that aren't geocoded.

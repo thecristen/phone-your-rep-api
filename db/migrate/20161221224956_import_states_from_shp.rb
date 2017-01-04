@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ImportStatesFromShp < ActiveRecord::Migration[5.0]
   def up
     from_shp_sql = `shp2pgsql -c -g geom -W LATIN1 -s 4326 #{Rails.root.join('lib', 'shapefiles', 'us_states_122116', 'cb_2015_us_state_500k.shp')} states_ref`
@@ -12,7 +13,6 @@ class ImportStatesFromShp < ActiveRecord::Migration[5.0]
 
       drop_table :states_ref
     end
-
   end
 
   def down

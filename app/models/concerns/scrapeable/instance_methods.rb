@@ -1,27 +1,28 @@
+# frozen_string_literal: true
 module Scrapeable
   module InstanceMethods
     # Build district offices for a new Rep.
     def build_district_office(rep)
-      unless rep.district_office.blank?
-        d_o             = office_locations.build
-        d_o.office_type = 'district'
-        d_o.line1       = rep.district_office[:line_1]
-        d_o.line2       = rep.district_office[:line_2]
-        d_o.line3       = rep.district_office[:line_3]
-        d_o.phone       = rep.phone.first
-      end
+      return if rep.district_office.blank?
+
+      d_o             = office_locations.build
+      d_o.office_type = 'district'
+      d_o.line1       = rep.district_office[:line_1]
+      d_o.line2       = rep.district_office[:line_2]
+      d_o.line3       = rep.district_office[:line_3]
+      d_o.phone       = rep.phone.first
     end
 
     # Build capitol offices for a new Rep.
     def build_capitol_office(rep)
-      unless rep.capitol_office.blank?
-        c_o             = office_locations.build
-        c_o.office_type = 'capitol'
-        c_o.line1       = rep.capitol_office[:line_1]
-        c_o.line2       = rep.capitol_office[:line_2]
-        c_o.line3       = rep.capitol_office[:line_3]
-        c_o.phone       = rep.phone.last
-      end
+      return if rep.capitol_office.blank?
+
+      c_o             = office_locations.build
+      c_o.office_type = 'capitol'
+      c_o.line1       = rep.capitol_office[:line_1]
+      c_o.line2       = rep.capitol_office[:line_2]
+      c_o.line3       = rep.capitol_office[:line_3]
+      c_o.phone       = rep.phone.last
     end
 
     # Build update params for an existing Rep.
@@ -39,9 +40,7 @@ module Scrapeable
 
     # Add rep email to update params.
     def update_email(rep)
-      unless (rep.email - email).empty?
-        @update_params[:email] = (self.email += rep.email)
-      end
+      @update_params[:email] = (self.email += rep.email) unless (rep.email - email).empty?
     end
 
     # Add rep social handles to update params.
@@ -65,14 +64,12 @@ module Scrapeable
 
     # Create a new capitol address for existing Rep.
     def create_capitol_address(rep)
-      office_locations.build(
-          office_type: rep.capitol_office[:type],
-          line1:       rep.capitol_office[:line_1],
-          line2:       rep.capitol_office[:line_2],
-          line3:       rep.capitol_office[:line_3],
-          line4:       rep.capitol_office[:line_4],
-          line5:       rep.capitol_office[:line_5],
-      )
+      office_locations.build(office_type: rep.capitol_office[:type],
+                             line1:       rep.capitol_office[:line_1],
+                             line2:       rep.capitol_office[:line_2],
+                             line3:       rep.capitol_office[:line_3],
+                             line4:       rep.capitol_office[:line_4],
+                             line5:       rep.capitol_office[:line_5])
     end
 
     # Update an existing capitol address for existing Rep.
@@ -101,9 +98,8 @@ module Scrapeable
 
     # Update committees of an existing Rep.
     def update_committees(rep)
-      unless rep.committees.nil? || (rep.committees - committees).empty?
-        @update_params[:committees] = (self.committees += rep.committees)
-      end
+      return if rep.committees.nil? || (rep.committees - committees).empty?
+      @update_params[:committees] = (self.committees += rep.committees)
     end
   end
 end

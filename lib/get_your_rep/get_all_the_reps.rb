@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # require 'net/http'
 # require 'csv'
 
@@ -50,7 +51,6 @@ module GetYourRep
         i += 1
         sleep(4)
       end
-
     end
   end
 end

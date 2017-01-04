@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 Rails.application.routes.draw do
   # allows access to the API via http://herokuapp.com/api/any_endpoint
   # namespace :api, defaults: { format: :json }, path: '/api' do

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class OfficeLocation < ApplicationRecord
   belongs_to       :rep
   validates        :office_type, :line1, presence: true
@@ -13,13 +14,11 @@ class OfficeLocation < ApplicationRecord
   end
 
   def to_hash
-    {
-        type:   office_type,
-        line_1: line1,
-        line_2: line2,
-        line_3: line3,
-        line_4: line4,
-        line_5: line5
-    }
+    { type:   office_type,
+      line_1: line1,
+      line_2: line2,
+      line_3: line3,
+      line_4: line4,
+      line_5: line5 }
   end
 end

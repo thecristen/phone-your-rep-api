@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Scrapeable
   module ClassMethods
     # Get Congress and state-wide reps
@@ -19,8 +20,8 @@ module Scrapeable
     def update_database
       @db_reps = where(last_name: @reps.last_names, first_name: @reps.first_names).
                  includes(:state, :office_locations)
-      self.update_rep_info_to_db
-      @new_reps.each { |new_rep| new_rep.save } unless @new_reps.blank?
+      update_rep_info_to_db
+      @new_reps.each(&:save) unless @new_reps.blank?
     end
 
     # Check each rep against the database.
@@ -28,7 +29,7 @@ module Scrapeable
       @reps.each do |rep|
         @db_rep = @db_reps.detect { |db_rep| db_rep.last_name == rep.last_name }
         if @db_rep.blank?
-          self.add_rep_to_db(rep)
+          add_rep_to_db(rep)
         else
           @db_rep.update_db_rep(rep)
         end
@@ -61,30 +62,25 @@ module Scrapeable
       r.youtube    = rep.youtube
       r.googleplus = rep.googleplus
       r.photo      = rep.photo
-      r.committees = rep.committees
       r
     end
 
     # Parse out the congressional district info of a new Rep.
     def parse_new_rep_district(rep)
+      @rep_district = if !(rep.office.downcase =~ /(united states house)/).nil?
+                        office_suffix = rep.office.split(' ').last
 
-      if rep.office.downcase.match(/(united states house)/)
-        office_suffix = rep.office.split(' ').last
+                        if !(office_suffix =~ /[A-Z]{2}-[0-9]{2}/).nil?
+                          office_suffix.split('-').last
+                        else
+                          '00'
+                        end
 
-        if office_suffix.match(/[A-Z]{2}-[0-9]{2}/)
-          @rep_district = office_suffix.split('-').last
-        else
-          @rep_district = '00'
-        end
-
-      elsif rep.office.downcase.match(/(united states senate)|(governor)/)
-        @rep_district = nil
-
-      elsif rep.office.downcase.match(/upper|lower|chamber/)
-        office_array  = rep.office.split(' ')
-        @rep_district = office_array.last
-
-      end
+                      elsif (rep.office.downcase =~ /(united states senate)|(governor)/).nil?
+                        nil
+                      elsif (rep.office.downcase =~ /upper|lower|chamber/).nil?
+                        rep.office.split(' ').last
+                      end
     end
   end
 end
