@@ -4,7 +4,7 @@ module Scrapeable
     def get_top_reps(address)
       @new_reps = []
       @address = Geocoder.address(address)
-      get_state
+      find_state
       @reps = GetYourRep::Google.top_level_reps(@address)
       update_database
       @reps

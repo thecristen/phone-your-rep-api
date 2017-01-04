@@ -9,17 +9,17 @@ class Rep < ApplicationRecord
   serialize  :email, Array
 
   # Find the reps in the db associated to that address and assemble into JSON blob
-  def self.get_em(address)
+  def self.find_em(address)
     @address = address
-    get_coordinates
-    get_state
-    get_district
-    get_raw_state_and_district_reps
+    find_coordinates
+    find_state
+    find_district
+    find_raw_reps
     cook_the_reps
   end
 
   # Geocode address into [lat, lon] coordinates.
-  def self.get_coordinates
+  def self.find_coordinates
     @coordinates = Geocoder.coordinates(@address)
     lat = @coordinates.first
     lon = @coordinates.last
@@ -27,7 +27,7 @@ class Rep < ApplicationRecord
   end
 
   # Parse out the two letter state abbreviation from address and find the State by that attribute.
-  def self.get_state
+  def self.find_state
     state_abbr = @address.split.grep(/[A-Z]{2}/)
     @state = State.where(abbr: state_abbr).includes(:districts).first
   end
@@ -35,13 +35,13 @@ class Rep < ApplicationRecord
   # Query all of the districts within that state by :state_code foreign key.
   # Collect the lat and lon from the coordinates and create a new RGeo Point object.
   # Select the district from the collection of state districts that contains the point.
-  def self.get_district
+  def self.find_district
     @district = @state.districts.detect { |district| @point.within?(district.geom) }
   end
 
   # Query for Reps that belong to either the state or the district.
   # Add the reps to a @raw_reps array.
-  def self.get_raw_state_and_district_reps
+  def self.find_raw_reps
     @raw_reps = []
     @raw_reps += Rep.where(district: @district).
                      or(Rep.where(state: @state, district: nil)).
@@ -95,7 +95,7 @@ class Rep < ApplicationRecord
     }
   end
 
-  # Sort the offices by proximity to the request coordinates
+  # Sort the offices by proximity to the request coordinates, making sure to not miss offices that aren't geocoded.
   def sort_offices(coordinates)
     @sorted_offices  = office_locations.near(coordinates, 4000)
     @sorted_offices += office_locations
@@ -140,7 +140,7 @@ class Rep < ApplicationRecord
     end
   end
 
-  # Convert shorthand party to longform.
+  # Convert shorthand party to long-form.
   def party
     case self[:party]
     when 'D'
