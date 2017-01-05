@@ -6,9 +6,9 @@ module Scrapeable
       @new_reps = []
       @address = Geocoder.address(address)
       find_state
-      @reps = GetYourRep::Google.top_level_reps(@address)
+      @delegation = GetYourRep::Google.top_level_reps(@address)
       update_database
-      @reps
+      @delegation
     end
 
     # Get state legislators
@@ -18,7 +18,7 @@ module Scrapeable
 
     # Find reps already in the database and decide whether to update or create a new record.
     def update_database
-      @db_reps = where(last_name: @reps.last_names, first_name: @reps.first_names).
+      @db_reps = where(last_name: @delegation.last_names, first_name: @delegation.first_names).
                  includes(:state, :office_locations)
       update_rep_info_to_db
       @new_reps.each(&:save) unless @new_reps.blank?
@@ -26,8 +26,8 @@ module Scrapeable
 
     # Check each rep against the database.
     def update_rep_info_to_db
-      @reps.each do |rep|
-        @db_rep = @db_reps.detect { |db_rep| db_rep.last_name == rep.last_name }
+      @delegation.reps.each do |rep|
+        @db_rep = @db_reps.detect { |db_rep| db_rep.last_name == rep.last_name && db_rep.first_name == rep.first_name }
         if @db_rep.blank?
           add_rep_to_db(rep)
         else
@@ -40,8 +40,8 @@ module Scrapeable
     def add_rep_to_db(rep)
       parse_new_rep_district(rep)
       new_rep = build_rep(rep)
-      new_rep.build_district_office(rep)
-      new_rep.build_capitol_office(rep)
+      new_rep.build_district_offices(rep)
+      new_rep.build_capitol_offices(rep)
       @new_reps << new_rep
     end
 

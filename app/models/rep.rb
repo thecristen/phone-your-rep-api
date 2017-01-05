@@ -80,6 +80,11 @@ class Rep < ApplicationRecord
     [] << random_rep.to_hash
   end
 
+  # DON'T USE! TOO MANY DATABASE QUERIES! NEEDS MORE WORK.
+  def self.show_all
+    Rep.all.map(&:to_hash)
+  end
+
   # Assemble rep into hash, handling office sorting and nil :district
   def to_hash(state = self.state)
     { name:             name,

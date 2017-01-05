@@ -2,27 +2,31 @@
 module Scrapeable
   module InstanceMethods
     # Build district offices for a new Rep.
-    def build_district_office(rep)
-      return if rep.district_office.blank?
+    def build_district_offices(rep)
+      return if rep.district_offices.blank?
 
-      d_o             = office_locations.build
-      d_o.office_type = 'district'
-      d_o.line1       = rep.district_office[:line_1]
-      d_o.line2       = rep.district_office[:line_2]
-      d_o.line3       = rep.district_office[:line_3]
-      d_o.phone       = rep.phone.first
+      rep.district_offices.each do |office|
+        d_o             = office_locations.build
+        d_o.office_type = 'district'
+        d_o.line1       = office.line_1
+        d_o.line2       = office.line_2
+        d_o.line3       = office.line_3
+        d_o.phone       = rep.phones.first
+      end
     end
 
     # Build capitol offices for a new Rep.
-    def build_capitol_office(rep)
-      return if rep.capitol_office.blank?
+    def build_capitol_offices(rep)
+      return if rep.capitol_offices.blank?
 
-      c_o             = office_locations.build
-      c_o.office_type = 'capitol'
-      c_o.line1       = rep.capitol_office[:line_1]
-      c_o.line2       = rep.capitol_office[:line_2]
-      c_o.line3       = rep.capitol_office[:line_3]
-      c_o.phone       = rep.phone.last
+      rep.capitol_offices.each do |office|
+        c_o             = office_locations.build
+        c_o.office_type = 'capitol'
+        c_o.line1       = office.line_1
+        c_o.line2       = office.line_2
+        c_o.line3       = office.line_3
+        c_o.phone       = rep.phones.last
+      end
     end
 
     # Build update params for an existing Rep.
@@ -53,9 +57,9 @@ module Scrapeable
 
     # Decide whether to add rep capitol address to update params, or create a new one.
     def update_or_create_capitol_address(rep)
-      return unless rep.capitol_office
+      return if rep.capitol_offices.blank?
       gather_office_locations
-      if @capitol_office.nil?
+      if @capitol_office.blank?
         create_capitol_address(rep)
       else
         update_capitol_address(rep)
@@ -64,28 +68,30 @@ module Scrapeable
 
     # Create a new capitol address for existing Rep.
     def create_capitol_address(rep)
-      office_locations.build(office_type: rep.capitol_office[:type],
-                             line1:       rep.capitol_office[:line_1],
-                             line2:       rep.capitol_office[:line_2],
-                             line3:       rep.capitol_office[:line_3],
-                             line4:       rep.capitol_office[:line_4],
-                             line5:       rep.capitol_office[:line_5])
+      rep.capitol_offices.each do |office|
+        office_locations.build(office_type: office.type,
+                               line1:       office.line_1,
+                               line2:       office.line_2,
+                               line3:       office.line_3,
+                               line4:       office.line_4,
+                               line5:       office.line_5)
+      end
     end
 
     # Update an existing capitol address for existing Rep.
     def update_capitol_address(rep)
       @cap_office_update_params = {}
 
-      if @capitol_office.line1 != rep.capitol_office[:line_1]
-        @cap_office_update_params[:line1] = rep.capitol_office[:line_1]
+      if @capitol_office.line1 != rep.capitol_offices[0].line_1
+        @cap_office_update_params[:line1] = rep.capitol_offices[0].line_1
       end
 
-      if @capitol_office.line2 != rep.capitol_office[:line_2]
-        @cap_office_update_params[:line2] = rep.capitol_office[:line_2]
+      if @capitol_office.line2 != rep.capitol_offices[0].line_2
+        @cap_office_update_params[:line2] = rep.capitol_offices[0].line_2
       end
 
-      if @capitol_office.line3 != rep.capitol_office[:line_3]
-        @cap_office_update_params[:line3] = rep.capitol_office[:line_3]
+      if @capitol_office.line3 != rep.capitol_offices[0].line_3
+        @cap_office_update_params[:line3] = rep.capitol_offices[0].line_3
       end
 
       @capitol_office.update(@cap_office_update_params) unless @cap_office_update_params.blank?
@@ -98,7 +104,7 @@ module Scrapeable
 
     # Update committees of an existing Rep.
     def update_committees(rep)
-      return if rep.committees.nil? || (rep.committees - committees).empty?
+      return if rep.committees.blank? || (rep.committees - committees).empty?
       @update_params[:committees] = (self.committees += rep.committees)
     end
   end
