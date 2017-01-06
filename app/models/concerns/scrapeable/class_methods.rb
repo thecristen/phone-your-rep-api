@@ -13,7 +13,7 @@ module Scrapeable
 
     # Get state legislators
     def get_state_reps(address)
-      GetYourRep::OpenStates.now(address)
+      GetYourRep::OpenStates.all_reps(address)
     end
 
     # Find reps already in the database and decide whether to update or create a new record.
