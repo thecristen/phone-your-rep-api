@@ -7,6 +7,7 @@ class Rep < ApplicationRecord
   belongs_to :state
   has_many   :office_locations, dependent: :destroy
   scope      :yours, ->(state:, district:) { where(district: district).or(Rep.where(state: state, district: nil)) }
+  scope      :match_names, ->(first_names:, last_names:) { where(first_name: first_names, last_name: last_names) }
   serialize  :committees, Array
   serialize  :email, Array
 
@@ -29,32 +30,39 @@ class Rep < ApplicationRecord
   # Instance attribute that holds offices sorted by location after calling the :sort_ofices method.
   attr_accessor :sorted_offices
 
-  # Find the reps in the db associated to that address and assemble into JSON blob
-  def self.find_em(address)
+  def self.init(address)
     self.address = address
-    find_location_data
-    find_reps
-  end
-
-  def self.find_location_data
     find_coordinates
     find_state
+  end
+
+  # Find the reps in the db associated to that address and assemble into JSON blob
+  def self.find_em(address)
+    init(address)
+    find_point
     find_district
+    find_reps
   end
 
   # Geocode address into [lat, lon] coordinates.
   # Collect the lat and lon from the coordinates and create a new RGeo Point object.
   def self.find_coordinates
     self.coordinates = Geocoder.coordinates(address)
-    lat              = coordinates.first
-    lon              = coordinates.last
-    self.point       = RGeo::Cartesian.factory.point(lon, lat)
+  end
+
+  def self.find_point
+    lat        = coordinates.first
+    lon        = coordinates.last
+    self.point = RGeo::Cartesian.factory.point(lon, lat)
   end
 
   # Parse out the two letter state abbreviation from address and find the State by that attribute.
   def self.find_state
-    state_abbr = address.split.grep(/[A-Z]{2}/)
     self.state = State.by_abbr_with_districts(abbr: state_abbr)
+  end
+
+  def self.state_abbr
+    address.split.grep(/[A-Z]{2}/)
   end
 
   # Query all of the districts within that state.
@@ -67,12 +75,23 @@ class Rep < ApplicationRecord
   # Add the reps to a :raw_reps array and eliminate any dupes.
   def self.find_reps
     self.raw_reps = Rep.yours(state: state, district: district).includes(:office_locations, :district).to_a
+    process_reps
+  end
+
+  def self.external_reps(address)
+    init(address)
+    ex_reps = GetYourRep::Google.all_reps(address, congress_only: true)
+    self.raw_reps = Rep.match_names(first_names: ex_reps.first_names, last_names: ex_reps.last_names).to_a
+    process_reps
+  end
+
+  def self.process_reps
     raw_reps.uniq!
-    prep_the_reps
+    build_rep_hashes
   end
 
   # Iterate over @raw_reps and assemble their attributes into a hash for JSON delivery.
-  def self.prep_the_reps
+  def self.build_rep_hashes
     raw_reps.map do |rep|
       rep.sort_offices(coordinates)
       rep.to_hash(state)

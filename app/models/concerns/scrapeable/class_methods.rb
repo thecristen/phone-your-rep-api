@@ -6,7 +6,7 @@ module Scrapeable
       @new_reps = []
       @address = Geocoder.address(address)
       find_state
-      @delegation = GetYourRep::Google.top_level_reps(@address)
+      @delegation = GetYourRep::Google.all_reps(@address, congress_only: true)
       update_database
       @delegation
     end
