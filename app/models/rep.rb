@@ -6,6 +6,7 @@ class Rep < ApplicationRecord
   belongs_to :district
   belongs_to :state
   has_many   :office_locations, dependent: :destroy
+  scope      :yours, ->(state:, district:) { where(district: district).or(Rep.where(state: state, district: nil)) }
   serialize  :committees, Array
   serialize  :email, Array
 
@@ -53,20 +54,19 @@ class Rep < ApplicationRecord
   # Parse out the two letter state abbreviation from address and find the State by that attribute.
   def self.find_state
     state_abbr = address.split.grep(/[A-Z]{2}/)
-    self.state = State.where(abbr: state_abbr).includes(:districts).first
+    self.state = State.by_abbr_with_districts(abbr: state_abbr)
   end
 
   # Query all of the districts within that state.
   # Select the district from the collection of state districts that contains the :point.
   def self.find_district
-    self.district = state.districts.detect { |district| point.within?(district.geom) }
+    self.district = state.districts.detect { |district| district.contains?(point) }
   end
 
   # Query for Reps that belong to either the state or the district.
   # Add the reps to a :raw_reps array and eliminate any dupes.
   def self.find_reps
-    self.raw_reps = Rep.where(district: district).or(Rep.where(state: state, district: nil)).
-                                                  includes(:office_locations, :district).to_a
+    self.raw_reps = Rep.yours(state: state, district: district).includes(:office_locations, :district).to_a
     raw_reps.uniq!
     prep_the_reps
   end
