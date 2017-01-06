@@ -25,14 +25,20 @@ class Rep < ApplicationRecord
     attr_accessor :raw_reps
   end # Metaclass ----------------------------------------------------------------------------------------------------
 
+  # Instance attribute that holds offices sorted by location after calling the :sort_ofices method.
+  attr_accessor :sorted_offices
+
   # Find the reps in the db associated to that address and assemble into JSON blob
   def self.find_em(address)
     self.address = address
+    find_location_data
+    find_reps
+  end
+
+  def self.find_location_data
     find_coordinates
     find_state
     find_district
-    find_raw_reps
-    prep_the_reps
   end
 
   # Geocode address into [lat, lon] coordinates.
@@ -58,11 +64,11 @@ class Rep < ApplicationRecord
 
   # Query for Reps that belong to either the state or the district.
   # Add the reps to a :raw_reps array and eliminate any dupes.
-  def self.find_raw_reps
-    self.raw_reps  = []
-    self.raw_reps += Rep.where(district: district).or(Rep.where(state: state, district: nil)).
-                                                   includes(:office_locations, :district).to_a
+  def self.find_reps
+    self.raw_reps = Rep.where(district: district).or(Rep.where(state: state, district: nil)).
+                                                  includes(:office_locations, :district).to_a
     raw_reps.uniq!
+    prep_the_reps
   end
 
   # Iterate over @raw_reps and assemble their attributes into a hash for JSON delivery.
@@ -76,24 +82,19 @@ class Rep < ApplicationRecord
   # Pick a random rep and assemble into JSON blob.
   def self.random_rep
     random_rep = Rep.order('RANDOM()').limit(1).first
-    return [] << { error: 'Something went wrong, try again.' } if random_rep.nil?
+    return [] << { error: 'Something went wrong, try again.' } unless random_rep
     [] << random_rep.to_hash
-  end
-
-  # DON'T USE! TOO MANY DATABASE QUERIES! NEEDS MORE WORK.
-  def self.show_all
-    Rep.all.map(&:to_hash)
   end
 
   # Assemble rep into hash, handling office sorting and nil :district
   def to_hash(state = self.state)
     { name:             name,
       state:            state.abbr,
-      district:         district&.code,
+      district:         district_code,
       office:           office,
       party:            party,
       phone:            sorted_phones,
-      office_locations: sorted_offices,
+      office_locations: sorted_offices_hash,
       email:            email,
       url:              url,
       photo:            photo,
@@ -105,32 +106,28 @@ class Rep < ApplicationRecord
 
   # Sort the offices by proximity to the request coordinates, making sure to not miss offices that aren't geocoded.
   def sort_offices(coordinates)
-    @sorted_offices  = office_locations.near(coordinates, 4000)
-    @sorted_offices += office_locations
-    @sorted_offices.uniq!
+    closest_offices       = office_locations.near(coordinates, 4000)
+    closest_offices      += office_locations
+    self.sorted_offices   = closest_offices.uniq! || []
+  end
+
+  def district_code
+    district.code unless district.blank?
+  end
+
+  def sorted_offices_hash
+    sorted_offices.map(&:to_hash)
   end
 
   # Map the phone number of every office location into one Array, sorting by location if possible.
   def sorted_phones
-    if @sorted_offices
-      @sorted_offices.map(&:phone) - [nil]
-    else
-      office_locations.map(&:phone) - [nil]
-    end
-  end
-
-  # Map the office locations into one Array, sorting by location if possible.
-  def sorted_offices
-    if @sorted_offices
-      @sorted_offices.map(&:to_hash)
-    else
-      office_locations.map(&:to_hash)
-    end
+    sorted_offices.map(&:phone) - [nil]
   end
 
   # Convert shorthand party to long-form.
   def party
-    case self[:party]
+    party = self[:party]
+    case party
     when 'D'
       'Democratic'
     when 'R'
@@ -138,7 +135,7 @@ class Rep < ApplicationRecord
     when 'I'
       'Independent'
     else
-      self[:party]
+      party
     end
   end
 end
