@@ -38,7 +38,7 @@ module Scrapeable
 
     # Build a new Rep (and it's office locations) and add it to an array of new reps to be batch saved.
     def add_rep_to_db(rep)
-      parse_new_rep_district(rep)
+      @rep_district = parse_new_rep_district(rep)
       new_rep = build_rep(rep)
       new_rep.build_district_offices(rep)
       new_rep.build_capitol_offices(rep)
