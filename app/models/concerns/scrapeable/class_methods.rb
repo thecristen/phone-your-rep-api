@@ -47,40 +47,43 @@ module Scrapeable
 
     # Build the new rep.
     def build_rep(rep)
-      r            = new
-      r.state      = @state
-      r.district   = @state.districts.detect { |d| d.code == @rep_district }
-      r.office     = rep.office
-      r.name       = rep.name
-      r.last_name  = rep.last_name
-      r.first_name = rep.first_name
-      r.party      = rep.party
-      r.email      = rep.email
-      r.url        = rep.url
-      r.twitter    = rep.twitter
-      r.facebook   = rep.facebook
-      r.youtube    = rep.youtube
-      r.googleplus = rep.googleplus
-      r.photo      = rep.photo
-      r
+      new_rep            = new
+      new_rep.state      = @state
+      new_rep.district   = @state.districts.detect { |district| district.code == @rep_district }
+      new_rep.office     = rep.office
+      new_rep.name       = rep.name
+      new_rep.last_name  = rep.last_name
+      new_rep.first_name = rep.first_name
+      new_rep.party      = rep.party
+      new_rep.email      = rep.email
+      new_rep.url        = rep.url
+      new_rep.twitter    = rep.twitter
+      new_rep.facebook   = rep.facebook
+      new_rep.youtube    = rep.youtube
+      new_rep.googleplus = rep.googleplus
+      new_rep.photo      = rep.photo
+      new_rep
     end
 
     # Parse out the congressional district info of a new Rep.
     def parse_new_rep_district(rep)
-      @rep_district = if !(rep.office.downcase =~ /(united states house)/).nil?
-                        office_suffix = rep.office.split(' ').last
+      rep_office          = rep.office
+      rep_office_downcase = rep_office.downcase
+      office_suffix       = rep_office.split(' ').last
 
-                        if !(office_suffix =~ /[A-Z]{2}-[0-9]{2}/).nil?
-                          office_suffix.split('-').last
-                        else
-                          '00'
-                        end
+      if rep_office_downcase =~ /(united states house)/
 
-                      elsif (rep.office.downcase =~ /(united states senate)|(governor)/).nil?
-                        nil
-                      elsif (rep.office.downcase =~ /upper|lower|chamber/).nil?
-                        rep.office.split(' ').last
-                      end
+        if office_suffix =~ /[A-Z]{2}-[0-9]{2}/
+          office_suffix.split('-').last
+        else
+          '00'
+        end
+
+      elsif rep_office_downcase =~ /(united states senate)|(governor)/
+        nil
+      elsif rep_office_downcase =~ /upper|lower|chamber/
+        office_suffix
+      end
     end
   end
 end
