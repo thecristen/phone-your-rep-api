@@ -4,6 +4,7 @@ class OfficeLocation < ApplicationRecord
   validates        :office_type, :line1, presence: true
   geocoded_by      :full_address
   after_validation :geocode, :set_lonlat
+  scope            :find_with_rep, ->(id) { where(id: id).includes(rep: :office_locations) }
 
   def set_lonlat
     self[:lonlat] = RGeo::Cartesian.factory.point(longitude, latitude)
@@ -19,6 +20,66 @@ class OfficeLocation < ApplicationRecord
       line_2: line2,
       line_3: line3,
       line_4: line4,
-      line_5: line5 }
+      line_5: line5,
+      v_card_link: "localhost:3000/v_cards/#{id}"
+    }
+  end
+
+  def make_vcard
+    Vpim::Vcard::Maker.make2 do |maker|
+
+      maker.add_name do |name|
+        name.prefix = ''
+        name.given  = rep.first_name
+        name.family = rep.last_name
+      end
+
+      unless phone.blank?
+        maker.add_tel(phone) do |tel|
+          tel.preferred = true
+          tel.location = 'work'
+          tel.capability = 'voice'
+        end
+      end
+
+      maker.add_addr do |addr|
+        address_ary = line3.split(' ')
+        addr.preferred = true
+        addr.location = 'work'
+        addr.street = line1
+        addr.locality = address_ary.first.split(',').first
+        addr.region = address_ary.second
+        addr.postalcode = address_ary.third
+      end
+
+      rep.office_locations.each do |office|
+        next if office == self
+        maker.add_addr do |addr|
+          address_ary = office.line3.split(' ')
+          addr.preferred = false
+          addr.location = 'work'
+          addr.street = office.line1
+          addr.locality = address_ary.first.split(',').first
+          addr.region = address_ary.second
+          addr.postalcode = address_ary.third
+        end
+
+        maker.add_tel(office.phone) do |tel|
+          tel.preferred = false
+          tel.location = 'work'
+          tel.capability = 'voice'
+        end
+      end
+
+      rep.email.each do |email|
+        unless email.blank?
+          maker.add_email(email) do |eml|
+            eml.location = 'work'
+          end
+        end
+      end
+
+      maker.org = rep.office
+    end
   end
 end
