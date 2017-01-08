@@ -18,9 +18,9 @@ class OfficeLocation < ApplicationRecord
     { type:   office_type,
       line_1: line1,
       line_2: line2,
-      line_3: line3,
-      line_4: line4,
-      line_5: line5,
+      city:   city,
+      state:  state,
+      zip:    zip,
       v_card_link: "localhost:3000/v_cards/#{id}"
     }
   end
@@ -43,10 +43,9 @@ class OfficeLocation < ApplicationRecord
       end
 
       maker.add_addr do |addr|
-        address_ary = line3.split(' ')
         addr.preferred = true
         addr.location = 'work'
-        addr.street = line1
+        addr.street = "#{line1}" + (", #{line2}" if line2)
         addr.locality = address_ary.first.split(',').first
         addr.region = address_ary.second
         addr.postalcode = address_ary.third
