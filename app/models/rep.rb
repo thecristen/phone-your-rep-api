@@ -126,7 +126,7 @@ class Rep < ApplicationRecord
   def sort_offices(coordinates)
     closest_offices       = office_locations.near(coordinates, 4000)
     closest_offices      += office_locations
-    self.sorted_offices   = closest_offices.uniq! || []
+    self.sorted_offices   = closest_offices.uniq || []
   end
 
   def district_code
