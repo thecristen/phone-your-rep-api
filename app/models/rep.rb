@@ -7,7 +7,6 @@ class Rep < ApplicationRecord
   belongs_to :state
   has_many   :office_locations, dependent: :destroy
   scope      :yours, ->(state:, district:) { where(district: district).or(Rep.where(state: state, district: nil)) }
-  scope      :match_names, ->(first_names:, last_names:) { where(first_name: first_names, last_name: last_names) }
   serialize  :committees, Array
   serialize  :email, Array
 
@@ -81,7 +80,7 @@ class Rep < ApplicationRecord
   def self.external_reps(address)
     init(address)
     ex_reps = GetYourRep::Google.all_reps(address, congress_only: true)
-    self.raw_reps = Rep.match_names(first_names: ex_reps.first_names, last_names: ex_reps.last_names).to_a
+    self.raw_reps = Rep.where(name: ex_reps.names).to_a
     process_reps
   end
 
@@ -110,12 +109,12 @@ class Rep < ApplicationRecord
     { name:             name,
       state:            state.abbr,
       district:         district_code,
-      office:           office,
+      office:           role,
       party:            party,
       phone:            sorted_phones,
       office_locations: sorted_offices_hash,
       email:            email,
-      url:              url,
+      website:          website,
       photo:            photo,
       twitter:          twitter,
       facebook:         facebook,
@@ -140,7 +139,7 @@ class Rep < ApplicationRecord
 
   # Map the phone number of every office location into one Array, sorting by location if possible.
   def sorted_phones
-    sorted_offices.map(&:phone) - [nil]
+    sorted_offices.map(&:phones).flatten - [nil]
   end
 
   # Convert shorthand party to long-form.

@@ -1,0 +1,442 @@
+﻿member_full,office_locations,state_and_district,name,last_name,first_name,middle_name,suffix,party,capitol_address,capitol_city,capitol_state,capitol_zip,bioguide_id,office_location_ids
+"AK00 Don Young, R","ANCHORAGE DISTRICT OFFICE, FAIRBANKS FIELD OFFICE",AK00,Don Young,Young,Don,,,R,2314 Rayburn House Office Building,Washington,DC,20515-0200,Y000033,"26,27"
+"AL01 Bradley Byrne, R","Baldwin County Office, Mobile Office",AL01,Bradley Byrne,Byrne,Bradley,,,R,119 Cannon House Office Building,Washington,DC,20515-0101,B001289,"5,6"
+"AL02 Martha Roby, R","Andalusia Office, Dothan Office, Montgomery Office",AL02,Martha Roby,Roby,Martha,,,R,442 Cannon House Office Building,Washington,DC,20515-0102,R000591,"7,8,9"
+"AL03 Mike Rogers, R","Anniston, Opelika",AL03,Mike Rogers,Rogers,Mike,,,R,2184 Rayburn House Office Building,Washington,DC,20515-0103,R000575,"10,11"
+"AL04 Robert B. Aderholt, R","Cullman Office, Gadsden Office, Jasper Office, Tuscumbia Office",AL04,Robert B. Aderholt,Aderholt,Robert,B.,,R,235 Cannon House Office Building,Washington,DC,20515-0104,A000055,"12,13,14,15"
+"AL05 Mo Brooks, R","Decatur Office, Huntsville Office, Shoals Office",AL05,Mo Brooks,Brooks,Mo,,,R,2400 Rayburn House Office Building,Washington,DC,20515-0105,B001274,"16,17,18"
+"AL06 Gary J. Palmer, R","Birmingham, Clanton, Oneonta",AL06,Gary J. Palmer,Palmer,Gary,J.,,R,330 Cannon House Office Building,Washington,DC,20515-0106,P000609,"19,20,21"
+"AL07 Terri A. Sewell, D","Birmingham Office, Montgomery Office, Selma Office, Tuscaloosa Office",AL07,Terri A. Sewell,Sewell,Terri,A.,,D,2201 Rayburn House Office Building,Washington,DC,20515-0107,S001185,"22,23,24,25"
+"AR01 Eric A. ""Rick"" Crawford, R","Jonesboro Office, Cabot Office, Mountain Home Office ",AR01,"Eric A. ""Rick"" Crawford",Crawford,Eric,"A. ""Rick""",,R,2422 Rayburn House Office Building,Washington,DC,20515-0401,C001087,"58,59,60"
+"AR02 J. French Hill, R","Conway Office, Little Rock Office",AR02,J. French Hill,Hill,J.,French,,R,1229 Longworth House Office Building,Washington,DC,20515-0402,H001072,"66,67"
+"AR03 Steve Womack, R","Rogers Office, Harrison Office, Fort Smith Office",AR03,Steve Womack,Womack,Steve,,,R,2412 Rayburn House Office Building,Washington,DC,20515-0403,W000809,"100,101,102"
+"AR04 Bruce Westerman, R","El Dorado Office, Hot Springs Office, Ozark Office, Pine Bluff Office",AR04,Bruce Westerman,Westerman,Bruce,,,R,130 Cannon House Office Building,Washington,DC,20515-0404,W000821,"103,104,105,106"
+"AS00 Aumua Amata Coleman Radewagen, R",American Samoa Office,AS00,Aumua Amata Coleman Radewagen,Radewagen,Aumua Amata,Coleman,,R,1339 Longworth House Office Building,Washington,DC,20515-5200,R000600,107
+"AZ01 Tom O'Halleran, D",,AZ01,Tom O'Halleran,O'Halleran,Tom,,,D,126 Cannon House Office Building,Washington,DC,20515-0301,O000171,
+"AZ02 Martha McSally, R","Sierra Vista Office, Tucson Office",AZ02,Martha McSally,McSally,Martha,,,R,510 Cannon House Office Building,Washington,DC,20515-0302,M001197,"109,110"
+"AZ03 Raul M. Grijalva, D","Avondale Office, Somerton Office, Tucson Office",AZ03,Raul M. Grijalva,Grijalva,Raul,M.,,D,1511 Longworth House Office Building,Washington,DC,20515-0303,G000551,"111,112,113"
+"AZ04 Paul A. Gosar, R","Gold Canyon Office, Prescott Office",AZ04,Paul A. Gosar,Gosar,Paul,A.,,R,2057 Rayburn House Office Building,Washington,DC,20515-0304,G000565,"114,115"
+"AZ05 Andy Biggs, R",,AZ05,Andy Biggs,Biggs,Andy,,,R,1626 Longworth House Office Building,Washington,DC,20515-0305,B001302,
+"AZ06 David Schweikert, R",Scottsdale Office,AZ06,David Schweikert,Schweikert,David,,,R,2059 Rayburn House Office Building,Washington,DC,20515-0306,S001183,61
+"AZ07 Ruben Gallego, D",Phoenix Office,AZ07,Ruben Gallego,Gallego,Ruben,,,D,1218 Longworth House Office Building,Washington,DC,20515-0307,G000574,116
+"AZ08 Trent Franks, R",Glendale Office,AZ08,Trent Franks,Franks,Trent,,,R,2435 Rayburn House Office Building,Washington,DC,20515-0308,F000448,118
+"AZ09 Kyrsten Sinema, D",Phoenix District Office,AZ09,Kyrsten Sinema,Sinema,Kyrsten,,,D,1725 Longworth House Office Building,Washington,DC,20515-0309,S001191,120
+"CA01 Doug LaMalfa, R","Auburn District Office, Oroville District Office, Redding District Office",CA01,Doug LaMalfa,LaMalfa,Doug,,,R,322 Cannon House Office Building,Washington,DC,20515-0501,L000578,"62,64,65"
+"CA02 Jared Huffman, D","Eureka District Office, Fort Bragg District Office, Petaluma District Office, San Rafael District Office, Ukiah District Office",CA02,Jared Huffman,Huffman,Jared,,,D,1406 Longworth House Office Building,Washington,DC,20515-0502,H001068,"121,123,124,126,128"
+"CA03 John Garamendi, D","Davis Office, Fairfield Office, Yuba City Office",CA03,John Garamendi,Garamendi,John,,,D,2438 Rayburn House Office Building,Washington,DC,20515-0503,G000559,"129,130,131"
+"CA04 Tom McClintock, R",Roseville District Office,CA04,Tom McClintock,McClintock,Tom,,,R,2312 Rayburn House Office Building,Washington,DC,20515-0504,M001177,132
+"CA05 Mike Thompson, D","Napa District Office, Santa Rosa District Office, Vallejo District Office",CA05,Mike Thompson,Thompson,Mike,,,D,231 Cannon House Office Building,Washington,DC,20515-0505,T000460,"133,134,135"
+"CA06 Doris O. Matsui, D",Sacramento Office,CA06,Doris O. Matsui,Matsui,Doris,O.,,D,2311 Rayburn House Office Building,Washington,DC,20515-0506,M001163,136
+"CA07 Ami Bera, D",Sacramento County Office,CA07,Ami Bera,Bera,Ami,,,D,1431 Longworth House Office Building,Washington,DC,20515-0507,B001287,137
+"CA08 Paul Cook, R","Apple Valley District Office, Yucaipa District Office",CA08,Paul Cook,Cook,Paul,,,R,1222 Longworth House Office Building,Washington,DC,20515-0508,C001094,"138,139"
+"CA09 Jerry McNerney, D","Antioch Office, Stockton Office",CA09,Jerry McNerney,McNerney,Jerry,,,D,2265 Rayburn House Office Building,Washington,DC,20515-0509,M001166,"140,141"
+"CA10 Jeff Denham, R",Modesto District Office,CA10,Jeff Denham,Denham,Jeff,,,R,1730 Longworth House Office Building,Washington,DC,20515-0510,D000612,142
+"CA11 Mark DeSaulnier, D","Richmond Office, Walnut Creek Office",CA11,Mark DeSaulnier,DeSaulnier,Mark,,,D,115 Cannon House Office Building,Washington,DC,20515-0511,D000623,"143,144"
+"CA12 Nancy Pelosi, D",San Francisco District Office,CA12,Nancy Pelosi,Pelosi,Nancy,,,D,233 Cannon House Office Building,Washington,DC,20515-0512,P000197,145
+"CA13 Barbara Lee, D", Oakland Office,CA13,Barbara Lee,Lee,Barbara,,,D,2267 Rayburn House Office Building,Washington,DC,20515-0513,L000551,146
+"CA14 Jackie Speier, D",San Mateo Office,CA14,Jackie Speier,Speier,Jackie,,,D,2465 Rayburn House Office Building,Washington,DC,20515-0514,S001175,147
+"CA15 Eric Swalwell, D",Castro Valley District Office,CA15,Eric Swalwell,Swalwell,Eric,,,D,129 Cannon House Office Building,Washington,DC,20515-0515,S001193,148
+"CA16 Jim Costa, D","Fresno Office, Merced Office",CA16,Jim Costa,Costa,Jim,,,D,2081 Rayburn House Office Building,Washington,DC,20515-0516,C001059,"149,150"
+"CA17 Ro Khanna, D",Santa Clara Office,CA17,Ro Khanna,Khanna,Ro,,,D,513 Cannon House Office Building,Washington,DC,20515-0517,K000389,151
+"CA18 Anna G. Eshoo, D",Palo Alto Office,CA18,Anna G. Eshoo,Eshoo,Anna,G.,,D,241 Cannon House Office Building,Washington,DC,20515-0518,E000215,152
+"CA19 Zoe Lofgren, D", San Jose Office,CA19,Zoe Lofgren,Lofgren,Zoe,,,D,1401 Longworth House Office Building,Washington,DC,20515-0519,L000397,153
+"CA20 Jimmy Panetta, D","Salinas Office, Santa Cruz Office",CA20,Jimmy Panetta,Panetta,Jimmy,,,D,228 Cannon House Office Building,Washington,DC,20515-0520,P000613,"154,155"
+"CA21 David G. Valadao, R","Hanford Office, Bakersfield Office",CA21,David G. Valadao,Valadao,David,G.,,R,1728 Longworth House Office Building,Washington,DC,20515-0521,V000129,"156,157"
+"CA22 Devin Nunes, R","Clovis Office, Visalia Office",CA22,Devin Nunes,Nunes,Devin,,,R,1013 Longworth House Office Building,Washington,DC,20515-0522,N000181,"158,159"
+"CA23 Kevin McCarthy, R",Bakersfield District Office,CA23,Kevin McCarthy,McCarthy,Kevin,,,R,2421 Rayburn House Office Building,Washington,DC,20515-0523,M001165,160
+"CA24 Salud O. Carbajal, D",San Luis Obispo Office,CA24,Salud O. Carbajal,Carbajal,Salud,O.,,D,212 Cannon House Office Building,Washington,DC,20515-0524,C001112,161
+"CA25 Stephen Knight, R","Antelope Valley Office, Santa Clarita Valley Office, Simi Valley Office",CA25,Stephen Knight,Knight,Stephen,,,R,1023 Longworth House Office Building,Washington,DC,20515-0525,K000387,"162,163,164"
+"CA26 Julia Brownley, D","Oxnard, CA Office, Thousand Oaks, CA Office",CA26,Julia Brownley,Brownley,Julia,,,D,1019 Longworth House Office Building,Washington,DC,20515-0526,B001285,"165,166"
+"CA27 Judy Chu, D","Claremont Office, Pasadena Office",CA27,Judy Chu,Chu,Judy,,,D,2423 Rayburn House Office Building,Washington,DC,20515-0527,C001080,"167,168"
+"CA28 Adam B. Schiff, D",,CA28,Adam B. Schiff,Schiff,Adam,B.,,D,2372 Rayburn House Office Building,Washington,DC,20515-0528,S001150,
+"CA29 Tony Cardenas, D",,CA29,Tony Cardenas,Cardenas,Tony,,,D,1510 Longworth House Office Building,Washington,DC,20515-0529,C001097,
+"CA30 Brad Sherman, D",,CA30,Brad Sherman,Sherman,Brad,,,D,2181 Rayburn House Office Building,Washington,DC,20515-0530,S000344,
+"CA31 Pete Aguilar, D",,CA31,Pete Aguilar,Aguilar,Pete,,,D,1223 Longworth House Office Building,Washington,DC,20515-0531,A000371,
+"CA32 Grace F. Napolitano, D",,CA32,Grace F. Napolitano,Napolitano,Grace,F.,,D,1610 Longworth House Office Building,Washington,DC,20515-0532,N000179,
+"CA33 Ted Lieu, D",,CA33,Ted Lieu,Lieu,Ted,,,D,236 Cannon House Office Building,Washington,DC,20515-0533,L000582,
+"CA34 Xavier Becerra, D",,CA34,Xavier Becerra,Becerra,Xavier,,,D,1226 Longworth House Office Building,Washington,DC,20515-0534,B000287,
+"CA35 Norma J. Torres, D",,CA35,Norma J. Torres,Torres,Norma,J.,,D,1713 Longworth House Office Building,Washington,DC,20515-0535,T000474,
+"CA36 Raul Ruiz, D",,CA36,Raul Ruiz,Ruiz,Raul,,,D,1319 Longworth House Office Building,Washington,DC,20515-0536,R000599,
+"CA37 Karen Bass, D",,CA37,Karen Bass,Bass,Karen,,,D,2241 Rayburn House Office Building,Washington,DC,20515-0537,B001270,
+"CA38 Linda T. Sanchez, D",,CA38,Linda T. Sanchez,Sanchez,Linda,T.,,D,2329 Rayburn House Office Building,Washington,DC,20515-0538,S001156,
+"CA39 Edward R. Royce, R",,CA39,Edward R. Royce,Royce,Edward,R.,,R,2310 Rayburn House Office Building,Washington,DC,20515-0539,R000487,
+"CA40 Lucille Roybal-Allard, D",,CA40,Lucille Roybal-Allard,Roybal-Allard,Lucille,,,D,2083 Rayburn House Office Building,Washington,DC,20515-0540,R000486,
+"CA41 Mark Takano, D",,CA41,Mark Takano,Takano,Mark,,,D,1507 Longworth House Office Building,Washington,DC,20515-0541,T000472,
+"CA42 Ken Calvert, R",District Office,CA42,Ken Calvert,Calvert,Ken,,,R,2205 Rayburn House Office Building,Washington,DC,20515-0542,C000059,63
+"CA43 Maxine Waters, D",,CA43,Maxine Waters,Waters,Maxine,,,D,2221 Rayburn House Office Building,Washington,DC,20515-0543,W000187,
+"CA44 Nanette Diaz Barragan, D",,CA44,Nanette Diaz Barragan,Barragan,Nanette,Diaz,,D,1320 Longworth House Office Building,Washington,DC,20515-0544,B001300,
+"CA45 Mimi Walters, R",,CA45,Mimi Walters,Walters,Mimi,,,R,215 Cannon House Office Building,Washington,DC,20515-0545,W000820,
+"CA46 J. Luis Correa, D",,CA46,J. Luis Correa,Correa,J.,Luis,,D,1039 Longworth House Office Building,Washington,DC,20515-0546,C001110,
+"CA47 Alan S. Lowenthal, D",,CA47,Alan S. Lowenthal,Lowenthal,Alan,S.,,D,125 Cannon House Office Building,Washington,DC,20515-0547,L000579,
+"CA48 Dana Rohrabacher, R",,CA48,Dana Rohrabacher,Rohrabacher,Dana,,,R,2300 Rayburn House Office Building,Washington,DC,20515-0548,R000409,
+"CA49 Darrell E. Issa, R",,CA49,Darrell E. Issa,Issa,Darrell,E.,,R,2269 Rayburn House Office Building,Washington,DC,20515-0549,I000056,
+"CA50 Duncan Hunter, R",,CA50,Duncan Hunter,Hunter,Duncan,,,R,2429 Rayburn House Office Building,Washington,DC,20515-0550,H001048,
+"CA51 Juan Vargas, D",,CA51,Juan Vargas,Vargas,Juan,,,D,1605 Longworth House Office Building,Washington,DC,20515-0551,V000130,
+"CA52 Scott H. Peters, D",,CA52,Scott H. Peters,Peters,Scott,H.,,D,1122 Longworth House Office Building,Washington,DC,20515-0552,P000608,
+"CA53 Susan A. Davis, D",,CA53,Susan A. Davis,Davis,Susan,A.,,D,1214 Longworth House Office Building,Washington,DC,20515-0553,D000598,
+"CO01 Diana DeGette, D",,CO01,Diana DeGette,DeGette,Diana,,,D,2111 Rayburn House Office Building,Washington,DC,20515-0601,D000197,
+"CO02 Jared Polis, D",,CO02,Jared Polis,Polis,Jared,,,D,1727 Longworth House Office Building,Washington,DC,20515-0602,P000598,
+"CO03 Scott R. Tipton, R",,CO03,Scott R. Tipton,Tipton,Scott,R.,,R,218 Cannon House Office Building,Washington,DC,20515-0603,T000470,
+"CO04 Ken Buck, R",,CO04,Ken Buck,Buck,Ken,,,R,1130 Longworth House Office Building,Washington,DC,20515-0604,B001297,
+"CO05 Doug Lamborn, R",,CO05,Doug Lamborn,Lamborn,Doug,,,R,2402 Rayburn House Office Building,Washington,DC,20515-0605,L000564,
+"CO06 Mike Coffman, R",,CO06,Mike Coffman,Coffman,Mike,,,R,2443 Rayburn House Office Building,Washington,DC,20515-0606,C001077,
+"CO07 Ed Perlmutter, D",,CO07,Ed Perlmutter,Perlmutter,Ed,,,D,1410 Longworth House Office Building,Washington,DC,20515-0607,P000593,
+"CT01 John B. Larson, D",,CT01,John B. Larson,Larson,John,B.,,D,1501 Longworth House Office Building,Washington,DC,20515-0701,L000557,
+"CT02 Joe Courtney, D",,CT02,Joe Courtney,Courtney,Joe,,,D,2348 Rayburn House Office Building,Washington,DC,20515-0702,C001069,
+"CT03 Rosa L. DeLauro, D",,CT03,Rosa L. DeLauro,DeLauro,Rosa,L.,,D,2413 Rayburn House Office Building,Washington,DC,20515-0703,D000216,
+"CT04 James A. Himes, D",,CT04,James A. Himes,Himes,James,A.,,D,1227 Longworth House Office Building,Washington,DC,20515-0704,H001047,
+"CT05 Elizabeth H. Esty, D",,CT05,Elizabeth H. Esty,Esty,Elizabeth,H.,,D,221 Cannon House Office Building,Washington,DC,20515-0705,E000293,
+"DC00 Eleanor Holmes Norton, D",,DC00,Eleanor Holmes Norton,Norton,Eleanor,Holmes,,D,2136 Rayburn House Office Building,Washington,DC,20515-5101,N000147,
+"DE00 Lisa Blunt Rochester, D",,DE00,Lisa Blunt Rochester,Blunt Rochester,Lisa,,,D,1123 Longworth House Office Building,Washington,DC,20515-0800,B001303,
+"FL01 Matt Gaetz, R",,FL01,Matt Gaetz,Gaetz,Matt,,,R,507 Cannon House Office Building,Washington,DC,20515-0901,G000578,
+"FL02 Neal P. Dunn, R",,FL02,Neal P. Dunn,Dunn,Neal,P.,,R,423 Cannon House Office Building,Washington,DC,20515-0902,D000628,
+"FL03 Ted S. Yoho, R",,FL03,Ted S. Yoho,Yoho,Ted,S.,,R,511 Cannon House Office Building,Washington,DC,20515-0903,Y000065,
+"FL04 John H. Rutherford, R",,FL04,John H. Rutherford,Rutherford,John,H.,,R,230 Cannon House Office Building,Washington,DC,20515-0904,R000609,
+"FL05 Al  Lawson, Jr., D",,FL05,"Al  Lawson, Jr.",Lawson,Al,,Jr.,D,1337 Longworth House Office Building,Washington,DC,20515-0905,L000586,
+"FL06 Ron DeSantis, R",,FL06,Ron DeSantis,DeSantis,Ron,,,R,1524 Longworth House Office Building,Washington,DC,20515-0906,D000621,
+"FL07 Stephanie N. Murphy, D",,FL07,Stephanie N. Murphy,Murphy,Stephanie,N.,,D,1237 Longworth House Office Building,Washington,DC,20515-0907,M001202,
+"FL08 Bill Posey, R",,FL08,Bill Posey,Posey,Bill,,,R,2150 Rayburn House Office Building,Washington,DC,20515-0908,P000599,
+"FL09 Darren Soto, D",,FL09,Darren Soto,Soto,Darren,,,D,1429 Longworth House Office Building,Washington,DC,20515-0909,S001200,
+"FL10 Val Butler Demings, D",,FL10,Val Butler Demings,Demings,Val,Butler,,D,238 Cannon House Office Building,Washington,DC,20515-0910,D000627,
+"FL11 Daniel Webster, R",,FL11,Daniel Webster,Webster,Daniel,,,R,1210 Longworth House Office Building,Washington,DC,20515-0911,W000806,
+"FL12 Gus M. Bilirakis, R",,FL12,Gus M. Bilirakis,Bilirakis,Gus,M.,,R,2112 Rayburn House Office Building,Washington,DC,20515-0912,B001257,
+"FL13 Charlie Crist, D",,FL13,Charlie Crist,Crist,Charlie,,,D,427 Cannon House Office Building,Washington,DC,20515-0913,C001111,
+"FL14 Kathy Castor, D",,FL14,Kathy Castor,Castor,Kathy,,,D,2052 Rayburn House Office Building,Washington,DC,20515-0914,C001066,
+"FL15 Dennis A. Ross, R",,FL15,Dennis A. Ross,Ross,Dennis,A.,,R,436 Cannon House Office Building,Washington,DC,20515-0915,R000593,
+"FL16 Vern Buchanan, R",,FL16,Vern Buchanan,Buchanan,Vern,,,R,2104 Rayburn House Office Building,Washington,DC,20515-0916,B001260,
+"FL17 Thomas J. Rooney, R",,FL17,Thomas J. Rooney,Rooney,Thomas,J.,,R,2160 Rayburn House Office Building,Washington,DC,20515-0917,R000583,
+"FL18 Brian J. Mast, R",,FL18,Brian J. Mast,Mast,Brian,J.,,R,2182 Rayburn House Office Building,Washington,DC,20515-0918,M001199,
+"FL19 Francis Rooney, R",,FL19,Francis Rooney,Rooney,Francis,,,R,120 Cannon House Office Building,Washington,DC,20515-0919,R000607,
+"FL20 Alcee L. Hastings, D",,FL20,Alcee L. Hastings,Hastings,Alcee,L.,,D,2353 Rayburn House Office Building,Washington,DC,20515-0920,H000324,
+"FL21 Lois Frankel, D",,FL21,Lois Frankel,Frankel,Lois,,,D,1037 Longworth House Office Building,Washington,DC,20515-0921,F000462,
+"FL22 Theodore E. Deutch, D",,FL22,Theodore E. Deutch,Deutch,Theodore,E.,,D,2447 Rayburn House Office Building,Washington,DC,20515-0922,D000610,
+"FL23 Debbie Wasserman Schultz, D",,FL23,Debbie Wasserman Schultz,Wasserman Schultz,Debbie,,,D,1114 Longworth House Office Building,Washington,DC,20515-0923,W000797,
+"FL24 Frederica S. Wilson, D",,FL24,Frederica S. Wilson,Wilson,Frederica,S.,,D,2445 Rayburn House Office Building,Washington,DC,20515-0924,W000808,
+"FL25 Mario Diaz-Balart, R",,FL25,Mario Diaz-Balart,Diaz-Balart,Mario,,,R,440 Cannon House Office Building,Washington,DC,20515-0925,D000600,
+"FL26 Carlos Curbelo, R",,FL26,Carlos Curbelo,Curbelo,Carlos,,,R,1404 Longworth House Office Building,Washington,DC,20515-0926,C001107,
+"FL27 Ileana Ros-Lehtinen, R",,FL27,Ileana Ros-Lehtinen,Ros-Lehtinen,Ileana,,,R,2206 Rayburn House Office Building,Washington,DC,20515-0927,R000435,
+"GA01 Earl L. ""Buddy"" Carter, R",,GA01,"Earl L. ""Buddy"" Carter",Carter,Earl,"L. ""Buddy""",,R,432 Cannon House Office Building,Washington,DC,20515-1001,C001103,
+"GA02 Sanford D. Bishop, Jr., D",,GA02,"Sanford D. Bishop, Jr.",Bishop,Sanford,D.,Jr.,D,2407 Rayburn House Office Building,Washington,DC,20515-1002,B000490,
+"GA03 A. Drew Ferguson, IV, R",,GA03,"A. Drew Ferguson, IV",Ferguson,A.,Drew,IV,R,1032 Longworth House Office Building,Washington,DC,20515-1003,F000465,
+"GA04 Henry C. ""Hank"" Johnson, Jr., D",,GA04,"Henry C. ""Hank"" Johnson, Jr.",Johnson,Henry,"C. ""Hank""",Jr.,D,2240 Rayburn House Office Building,Washington,DC,20515-1004,J000288,
+"GA05 John Lewis, D",,GA05,John Lewis,Lewis,John,,,D,343 Cannon House Office Building,Washington,DC,20515-1005,L000287,
+"GA06 Tom Price, R",,GA06,Tom Price,Price,Tom,,,R,1211 Longworth House Office Building,Washington,DC,20515-1006,P000591,
+"GA07 Rob Woodall, R",,GA07,Rob Woodall,Woodall,Rob,,,R,1724 Longworth House Office Building,Washington,DC,20515-1007,W000810,
+"GA08 Austin Scott, R",,GA08,Austin Scott,Scott,Austin,,,R,2417 Rayburn House Office Building,Washington,DC,20515-1008,S001189,
+"GA09 Doug Collins, R",Gainesville,GA09,Doug Collins,Collins,Doug,,,R,1504 Longworth House Office Building,Washington,DC,20515-1009,C001093,91
+"GA10 Jody B. Hice, R","MILLEDGEVILLE OFFICE, MONROE OFFICE, THOMSON OFFICE",GA10,Jody B. Hice,Hice,Jody,B.,,R,324 Cannon House Office Building,Washington,DC,20515-1010,H001071,"92,93,94"
+"GA11 Barry Loudermilk, R","Woodstock District Office, Cartersville District Office, 600 Galleria Pkwy, Suite 120, Galleria District Office",GA11,Barry Loudermilk,Loudermilk,Barry,,,R,329 Cannon House Office Building,Washington,DC,20515-1011,L000583,"230,231,232,233"
+"GA12 Rick W. Allen, R","AUGUSTA DISTRICT OFFICE, DUBLIN DISTRICT OFFICE, STATESBORO DISTRICT OFFICE, VIDALIA DISTRICT OFFICE",GA12,Rick W. Allen,Allen,Rick,W.,,R,426 Cannon House Office Building,Washington,DC,20515-1012,A000372,"234,235,236,237"
+"GA13 David Scott, D","JONESBORO DISTRICT OFFICE, SMYRNA DISTRICT OFFICE",GA13,David Scott,Scott,David,,,D,225 Cannon House Office Building,Washington,DC,20515-1013,S001157,"238,239"
+"GA14 Tom Graves, R","ROME, GA OFFICE, DALTON, GA OFFICE ",GA14,Tom Graves,Graves,Tom,,,R,2078 Rayburn House Office Building,Washington,DC,20515-1014,G000560,"240,241"
+"GU00 Madeleine Z. Bordallo, D",GUAM OFFICE,GU00,Madeleine Z. Bordallo,Bordallo,Madeleine,Z.,,D,2441 Rayburn House Office Building,Washington,DC,20515-5301,B001245,242
+"HI01 Colleen Hanabusa, D",Honolulu Office,HI01,Colleen Hanabusa,Hanabusa,Colleen,,,D,422 Cannon House Office Building,Washington,DC,20515-1101,H001050,243
+"HI02 Tulsi Gabbard, D",Hawaiʻi District Office,HI02,Tulsi Gabbard,Gabbard,Tulsi,,,D,1433 Longworth House Office Building,Washington,DC,20515-1102,G000571,244
+"IA01 Rod Blum, R","Cedar Falls Office, Cedar Rapids Office, Dubuque Office",IA01,Rod Blum,Blum,Rod,,,R,1108 Longworth House Office Building,Washington,DC,20515-1501,B001294,"245,246,247"
+"IA02 David Loebsack, D","Iowa City Office, Davenport Office",IA02,David Loebsack,Loebsack,David,,,D,1527 Longworth House Office Building,Washington,DC,20515-1502,L000565,"248,249"
+"IA03 David Young, R","Council Bluffs Constituent Services Office, Creston Constituent Services Office, Des Moines Constituent Services Office",IA03,David Young,Young,David,,,R,240 Cannon House Office Building,Washington,DC,20515-1503,Y000066,"250,251,252"
+"IA04 Steve King, R","Ames, Fort Dodge, Mason City, Sioux City, Spencer",IA04,Steve King,King,Steve,,,R,2210 Rayburn House Office Building,Washington,DC,20515-1504,K000362,"253,254,255,256,257"
+"ID01 Raul R. Labrador, R",,ID01,Raul R. Labrador,Labrador,Raul,R.,,R,1523 Longworth House Office Building,Washington,DC,20515-1201,L000573,
+"ID02 Michael K. Simpson, R",,ID02,Michael K. Simpson,Simpson,Michael,K.,,R,2084 Rayburn House Office Building,Washington,DC,20515-1202,S001148,
+"IL01 Bobby L. Rush, D",,IL01,Bobby L. Rush,Rush,Bobby,L.,,D,2188 Rayburn House Office Building,Washington,DC,20515-1301,R000515,
+"IL02 Robin L. Kelly, D",,IL02,Robin L. Kelly,Kelly,Robin,L.,,D,1239 Longworth House Office Building,Washington,DC,20515-1302,K000385,
+"IL03 Daniel Lipinski, D",,IL03,Daniel Lipinski,Lipinski,Daniel,,,D,2346 Rayburn House Office Building,Washington,DC,20515-1303,L000563,
+"IL04 Luis V. Gutierrez, D",,IL04,Luis V. Gutierrez,Gutierrez,Luis,V.,,D,2408 Rayburn House Office Building,Washington,DC,20515-1304,G000535,
+"IL05 Mike Quigley, D",,IL05,Mike Quigley,Quigley,Mike,,,D,2458 Rayburn House Office Building,Washington,DC,20515-1305,Q000023,
+"IL06 Peter J. Roskam, R",,IL06,Peter J. Roskam,Roskam,Peter,J.,,R,2246 Rayburn House Office Building,Washington,DC,20515-1306,R000580,
+"IL07 Danny K. Davis, D",,IL07,Danny K. Davis,Davis,Danny,K.,,D,2159 Rayburn House Office Building,Washington,DC,20515-1307,D000096,
+"IL08 Raja Krishnamoorthi, D",,IL08,Raja Krishnamoorthi,Krishnamoorthi,Raja,,,D,515 Cannon House Office Building,Washington,DC,20515-1308,K000391,
+"IL09 Janice D. Schakowsky, D",,IL09,Janice D. Schakowsky,Schakowsky,Janice,D.,,D,2367 Rayburn House Office Building,Washington,DC,20515-1309,S001145,
+"IL10 Bradley Scott Schneider, D",,IL10,Bradley Scott Schneider,Schneider,Bradley,Scott,,D,1432 Longworth House Office Building,Washington,DC,20515-1310,S001190,
+"IL11 Bill Foster, D",,IL11,Bill Foster,Foster,Bill,,,D,1224 Longworth House Office Building,Washington,DC,20515-1311,F000454,
+"IL12 Mike Bost, R",,IL12,Mike Bost,Bost,Mike,,,R,1440 Longworth House Office Building,Washington,DC,20515-1312,B001295,
+"IL13 Rodney Davis, R",,IL13,Rodney Davis,Davis,Rodney,,,R,1740 Longworth House Office Building,Washington,DC,20515-1313,D000619,
+"IL14 Randy Hultgren, R",,IL14,Randy Hultgren,Hultgren,Randy,,,R,2455 Rayburn House Office Building,Washington,DC,20515-1314,H001059,
+"IL15 John Shimkus, R",,IL15,John Shimkus,Shimkus,John,,,R,2217 Rayburn House Office Building,Washington,DC,20515-1315,S000364,
+"IL16 Adam Kinzinger, R",,IL16,Adam Kinzinger,Kinzinger,Adam,,,R,2245 Rayburn House Office Building,Washington,DC,20515-1316,K000378,
+"IL17 Cheri Bustos, D",,IL17,Cheri Bustos,Bustos,Cheri,,,D,1009 Longworth House Office Building,Washington,DC,20515-1317,B001286,
+"IL18 Darin LaHood, R",,IL18,Darin LaHood,LaHood,Darin,,,R,1424 Longworth House Office Building,Washington,DC,20515-1318,L000585,
+"IN01 Peter J. Visclosky, D",,IN01,Peter J. Visclosky,Visclosky,Peter,J.,,D,2328 Rayburn House Office Building,Washington,DC,20515-1401,V000108,
+"IN02 Jackie Walorski, R",,IN02,Jackie Walorski,Walorski,Jackie,,,R,419 Cannon House Office Building,Washington,DC,20515-1402,W000813,
+"IN03 Jim Banks, R",,IN03,Jim Banks,Banks,Jim,,,R,509 Cannon House Office Building,Washington,DC,20515-1403,B001299,
+"IN04 Todd Rokita, R",,IN04,Todd Rokita,Rokita,Todd,,,R,2439 Rayburn House Office Building,Washington,DC,20515-1404,R000592,
+"IN05 Susan W. Brooks, R",5th District Offices,IN05,Susan W. Brooks,Brooks,Susan,W.,,R,1030 Longworth House Office Building,Washington,DC,20515-1405,B001284,186
+"IN06 Luke Messer, R",Shelbyville Office,IN06,Luke Messer,Messer,Luke,,,R,1230 Longworth House Office Building,Washington,DC,20515-1406,M001189,187
+"IN07 Andre Carson, D",Indianapolis Office,IN07,Andre Carson,Carson,Andre,,,D,2135 Rayburn House Office Building,Washington,DC,20515-1407,C001072,188
+"IN08 Larry Bucshon, R",Evansvile Office,IN08,Larry Bucshon,Bucshon,Larry,,,R,1005 Longworth House Office Building,Washington,DC,20515-1408,B001275,189
+"IN09 Trey Hollingsworth, R",Jeffersonville Office,IN09,Trey Hollingsworth,Hollingsworth,Trey,,,R,1641 Longworth House Office Building,Washington,DC,20515-1409,H001074,190
+"KS01 Roger W. Marshall, R",Salina Office,KS01,Roger W. Marshall,Marshall,Roger,W.,,R,312 Cannon House Office Building,Washington,DC,20515-1601,M001198,266
+"KS02 Lynn Jenkins, R",Topeka Office,KS02,Lynn Jenkins,Jenkins,Lynn,,,R,1526 Longworth House Office Building,Washington,DC,20515-1602,J000290,267
+"KS03 Kevin Yoder, R",Overland Park Office,KS03,Kevin Yoder,Yoder,Kevin,,,R,2433 Rayburn House Office Building,Washington,DC,20515-1603,Y000063,268
+"KS04 Mike Pompeo, R",Wichita Office,KS04,Mike Pompeo,Pompeo,Mike,,,R,2452 Rayburn House Office Building,Washington,DC,20515-1604,P000602,269
+"KY01 James Comer, R",Tompkinsville Office,KY01,James Comer,Comer,James,,,R,1513 Longworth House Office Building,Washington,DC,20515-1701,C001108,270
+"KY02 Brett Guthrie, R",Bowling Green District Office,KY02,Brett Guthrie,Guthrie,Brett,,,R,2434 Rayburn House Office Building,Washington,DC,20515-1702,G000558,271
+"KY03 John A. Yarmuth, D",Romano Mazzoli Federal Office Building,KY03,John A. Yarmuth,Yarmuth,John,A.,,D,131 Cannon House Office Building,Washington,DC,20515-1703,Y000062,272
+"KY04 Thomas Massie, R",Ashland Office,KY04,Thomas Massie,Massie,Thomas,,,R,2453 Rayburn House Office Building,Washington,DC,20515-1704,M001184,273
+"KY05 Harold Rogers, R","Somerset, KY Offixe",KY05,Harold Rogers,Rogers,Harold,,,R,2406 Rayburn House Office Building,Washington,DC,20515-1705,R000395,274
+"KY06 Andy Barr, R",,KY06,Andy Barr,Barr,Andy,,,R,1427 Longworth House Office Building,Washington,DC,20515-1706,B001282,
+"LA01 Steve Scalise, R",,LA01,Steve Scalise,Scalise,Steve,,,R,2338 Rayburn House Office Building,Washington,DC,20515-1801,S001176,
+"LA02 Cedric L. Richmond, D",,LA02,Cedric L. Richmond,Richmond,Cedric,L.,,D,420 Cannon House Office Building,Washington,DC,20515-1802,R000588,
+"LA03 Clay Higgins, R",,LA03,Clay Higgins,Higgins,Clay,,,R,1711 Longworth House Office Building,Washington,DC,20515-1803,H001077,
+"LA04 Mike Johnson, R",,LA04,Mike Johnson,Johnson,Mike,,,R,327 Cannon House Office Building,Washington,DC,20515-1804,J000299,
+"LA05 Ralph Lee Abraham, R",,LA05,Ralph Lee Abraham,Abraham,Ralph,Lee,,R,417 Cannon House Office Building,Washington,DC,20515-1805,A000374,
+"LA06 Garret Graves, R",,LA06,Garret Graves,Graves,Garret,,,R,430 Cannon House Office Building,Washington,DC,20515-1806,G000577,
+"MA01 Richard E. Neal, D",,MA01,Richard E. Neal,Neal,Richard,E.,,D,341 Cannon House Office Building,Washington,DC,20515-2101,N000015,
+"MA02 James P. McGovern, D",,MA02,James P. McGovern,McGovern,James,P.,,D,438 Cannon House Office Building,Washington,DC,20515-2102,M000312,
+"MA03 Niki Tsongas, D",,MA03,Niki Tsongas,Tsongas,Niki,,,D,1714 Longworth House Office Building,Washington,DC,20515-2103,T000465,
+"MA04 Joseph P. Kennedy, III, D",,MA04,"Joseph P. Kennedy, III",Kennedy,Joseph,P.,III,D,434 Cannon House Office Building,Washington,DC,20515-2104,K000379,
+"MA05 Katherine M. Clark, D",,MA05,Katherine M. Clark,Clark,Katherine,M.,,D,1415 Longworth House Office Building,Washington,DC,20515-2105,C001101,
+"MA06 Seth Moulton, D",,MA06,Seth Moulton,Moulton,Seth,,,D,1408 Longworth House Office Building,Washington,DC,20515-2106,M001196,
+"MA07 Michael E. Capuano, D",,MA07,Michael E. Capuano,Capuano,Michael,E.,,D,1414 Longworth House Office Building,Washington,DC,20515-2107,C001037,
+"MA08 Stephen F. Lynch, D",,MA08,Stephen F. Lynch,Lynch,Stephen,F.,,D,2268 Rayburn House Office Building,Washington,DC,20515-2108,L000562,
+"MA09 William R. Keating, D",,MA09,William R. Keating,Keating,William,R.,,D,2351 Rayburn House Office Building,Washington,DC,20515-2109,K000375,
+"MD01 Andy Harris, R",,MD01,Andy Harris,Harris,Andy,,,R,1533 Longworth House Office Building,Washington,DC,20515-2001,H001052,
+"MD02 C. A. Dutch Ruppersberger, D",,MD02,C. A. Dutch Ruppersberger,Ruppersberger,C.,A. Dutch,,D,2416 Rayburn House Office Building,Washington,DC,20515-2002,R000576,
+"MD03 John P. Sarbanes, D",,MD03,John P. Sarbanes,Sarbanes,John,P.,,D,2444 Rayburn House Office Building,Washington,DC,20515-2003,S001168,
+"MD04 Anthony G. Brown, D",,MD04,Anthony G. Brown,Brown,Anthony,G.,,D,1505 Longworth House Office Building,Washington,DC,20515-2004,B001304,
+"MD05 Steny H. Hoyer, D",,MD05,Steny H. Hoyer,Hoyer,Steny,H.,,D,1705 Longworth House Office Building,Washington,DC,20515-2005,H000874,
+"MD06 John K. Delaney, D",,MD06,John K. Delaney,Delaney,John,K.,,D,1632 Longworth House Office Building,Washington,DC,20515-2006,D000620,
+"MD07 Elijah E. Cummings, D",,MD07,Elijah E. Cummings,Cummings,Elijah,E.,,D,2163 Rayburn House Office Building,Washington,DC,20515-2007,C000984,
+"MD08 Jamie Raskin, D","WASHINGTON, DC OFFICE, ROCKVILLE OFFICE",MD08,Jamie Raskin,Raskin,Jamie,,,D,431 Cannon House Office Building,Washington,DC,20515-2008,R000606,"191,192"
+"ME01 Chellie Pingree, D","Portland Office , Waterville Office, Washington, DC Office",ME01,Chellie Pingree,Pingree,Chellie,,,D,2162 Rayburn House Office Building,Washington,DC,20515-1901,P000597,"193,194,195"
+"ME02 Bruce Poliquin, R","WASHINGTON, DC OFFICE, BANGOR OFFICE, LEWISTON OFFICE, PRESQUE ISLE OFFICE",ME02,Bruce Poliquin,Poliquin,Bruce,,,R,1208 Longworth House Office Building,Washington,DC,20515-1902,P000611,"196,197,198,199"
+"MI01 Jack Bergman, R",WASHINGTON DC,MI01,Jack Bergman,Bergman,Jack,,,R,414 Cannon House Office Building,Washington,DC,20515-2201,B001301,200
+"MI02 Bill Huizenga, R",Grandville office,MI02,Bill Huizenga,Huizenga,Bill,,,R,2232 Rayburn House Office Building,Washington,DC,20515-2202,H001058,32
+"MI03 Justin Amash, R","Grand Rapids, MI office",MI03,Justin Amash,Amash,Justin,,,R,114 Cannon House Office Building,Washington,DC,20515-2203,A000367,28
+"MI04 John R. Moolenaar, R",Cadillac office,MI04,John R. Moolenaar,Moolenaar,John,R.,,R,117 Cannon House Office Building,Washington,DC,20515-2204,M001194,37
+"MI05 Daniel T. Kildee, D",Flint office,MI05,Daniel T. Kildee,Kildee,Daniel,T.,,D,227 Cannon House Office Building,Washington,DC,20515-2205,K000380,33
+"MI06 Fred Upton, R",Kalamazoo,MI06,Fred Upton,Upton,Fred,,,R,2183 Rayburn House Office Building,Washington,DC,20515-2206,U000031,39
+"MI07 Tim Walberg, R",Jackson office,MI07,Tim Walberg,Walberg,Tim,,,R,2436 Rayburn House Office Building,Washington,DC,20515-2207,W000798,40
+"MI08 Mike Bishop, R",Brighton Office,MI08,Mike Bishop,Bishop,Mike,,,R,428 Cannon House Office Building,Washington,DC,20515-2208,B001293,29
+"MI09 Sander M. Levin, D",Roseville office,MI09,Sander M. Levin,Levin,Sander,M.,,D,1236 Longworth House Office Building,Washington,DC,20515-2209,L000263,35
+"MI10 Paul Mitchell, R",Washington MI office,MI10,Paul Mitchell,Mitchell,Paul,,,R,211 Cannon House Office Building,Washington,DC,20515-2210,M001201,36
+"MI11 David A. Trott, R",Troy office,MI11,David A. Trott,Trott,David,A.,,R,1722 Longworth House Office Building,Washington,DC,20515-2211,T000475,38
+"MI12 Debbie Dingell, D",Dearborn office,MI12,Debbie Dingell,Dingell,Debbie,,,D,116 Cannon House Office Building,Washington,DC,20515-2212,D000624,31
+"MI13 John  Conyers, Jr., D",Detroit office,MI13,"John  Conyers, Jr.",Conyers,John,,Jr.,D,2426 Rayburn House Office Building,Washington,DC,20515-2213,C000714,30
+"MI14 Brenda L. Lawrence, D",Southfield office,MI14,Brenda L. Lawrence,Lawrence,Brenda,L.,,D,1213 Longworth House Office Building,Washington,DC,20515-2214,L000581,34
+"MN01 Timothy J. Walz, D","Washington, DC Office",MN01,Timothy J. Walz,Walz,Timothy,J.,,D,2313 Rayburn House Office Building,Washington,DC,20515-2301,W000799,201
+"MN02 Jason Lewis, R","WASHINGTON, DC OFFICE, BURNSVILLE OFFICE",MN02,Jason Lewis,Lewis,Jason,,,R,418 Cannon House Office Building,Washington,DC,20515-2302,L000587,"202,203"
+"MN03 Erik Paulsen, R"," Washington, DC , District Office",MN03,Erik Paulsen,Paulsen,Erik,,,R,127 Cannon House Office Building,Washington,DC,20515-2303,P000594,"204,205"
+"MN04 Betty McCollum, D","Washington, DC Office, St. Paul Office",MN04,Betty McCollum,McCollum,Betty,,,D,2256 Rayburn House Office Building,Washington,DC,20515-2304,M001143,"206,207"
+"MN05 Keith Ellison, D","Washington, DC Office, Minneapolis Office",MN05,Keith Ellison,Ellison,Keith,,,D,2263 Rayburn House Office Building,Washington,DC,20515-2305,E000288,"208,209"
+"MN06 Tom Emmer, R","Washington, D.C. Office, District Office",MN06,Tom Emmer,Emmer,Tom,,,R,315 Cannon House Office Building,Washington,DC,20515-2306,E000294,"210,211"
+"MN07 Collin C. Peterson, D","Washington, DC Office, Marshall District Office, Redwood Falls District Office, Detroit Lakes District Office, Montevideo District Office, Willmar District Office ",MN07,Collin C. Peterson,Peterson,Collin,C.,,D,2204 Rayburn House Office Building,Washington,DC,20515-2307,P000258,"212,213,214,215,216,217"
+"MN08 Richard M. Nolan, D",,MN08,Richard M. Nolan,Nolan,Richard,M.,,D,2366 Rayburn House Office Building,Washington,DC,20515-2308,N000127,
+"MO01 Wm. Lacy Clay, D",,MO01,Wm. Lacy Clay,Clay,Wm.,Lacy,,D,2428 Rayburn House Office Building,Washington,DC,20515-2501,C001049,
+"MO02 Ann Wagner, R",,MO02,Ann Wagner,Wagner,Ann,,,R,435 Cannon House Office Building,Washington,DC,20515-2502,W000812,
+"MO03 Blaine Luetkemeyer, R",,MO03,Blaine Luetkemeyer,Luetkemeyer,Blaine,,,R,2230 Rayburn House Office Building,Washington,DC,20515-2503,L000569,
+"MO04 Vicky Hartzler, R",,MO04,Vicky Hartzler,Hartzler,Vicky,,,R,2235 Rayburn House Office Building,Washington,DC,20515-2504,H001053,
+"MO05 Emanuel Cleaver, D",,MO05,Emanuel Cleaver,Cleaver,Emanuel,,,D,2335 Rayburn House Office Building,Washington,DC,20515-2505,C001061,
+"MO06 Sam Graves, R",,MO06,Sam Graves,Graves,Sam,,,R,1135 Longworth House Office Building,Washington,DC,20515-2506,G000546,
+"MO07 Billy Long, R",,MO07,Billy Long,Long,Billy,,,R,2454 Rayburn House Office Building,Washington,DC,20515-2507,L000576,
+"MO08 Jason Smith, R",,MO08,Jason Smith,Smith,Jason,,,R,1118 Longworth House Office Building,Washington,DC,20515-2508,S001195,
+"MP00 Gregorio Kilili Camacho Sablan, D",,MP00,Gregorio Kilili Camacho Sablan,Sablan,Gregorio,Kilili Camacho,,D,2411 Rayburn House Office Building,Washington,DC,20515-5201,S001177,
+"MS01 Trent Kelly, R",,MS01,Trent Kelly,Kelly,Trent,,,R,1721 Longworth House Office Building,Washington,DC,20515-2401,K000388,
+"MS02 Bennie G. Thompson, D",,MS02,Bennie G. Thompson,Thompson,Bennie,G.,,D,2466 Rayburn House Office Building,Washington,DC,20515-2402,T000193,
+"MS03 Gregg Harper, R",,MS03,Gregg Harper,Harper,Gregg,,,R,2227 Rayburn House Office Building,Washington,DC,20515-2403,H001045,
+"MS04 Steven M. Palazzo, R",,MS04,Steven M. Palazzo,Palazzo,Steven,M.,,R,2349 Rayburn House Office Building,Washington,DC,20515-2404,P000601,
+"MT00 Ryan K. Zinke, R",,MT00,Ryan K. Zinke,Zinke,Ryan,K.,,R,1419 Longworth House Office Building,Washington,DC,20515-2600,Z000018,
+"NC01 G. K. Butterfield, D",,NC01,G. K. Butterfield,Butterfield,G.,K.,,D,2080 Rayburn House Office Building,Washington,DC,20515-3301,B001251,
+"NC02 George Holding, R",,NC02,George Holding,Holding,George,,,R,1110 Longworth House Office Building,Washington,DC,20515-3302,H001065,
+"NC03 Walter B. Jones, R",,NC03,Walter B. Jones,Jones,Walter,B.,,R,2333 Rayburn House Office Building,Washington,DC,20515-3303,J000255,
+"NC04 David E. Price, D",,NC04,David E. Price,Price,David,E.,,D,2108 Rayburn House Office Building,Washington,DC,20515-3304,P000523,
+"NC05 Virginia Foxx, R",,NC05,Virginia Foxx,Foxx,Virginia,,,R,2262 Rayburn House Office Building,Washington,DC,20515-3305,F000450,
+"NC06 Mark Walker, R",,NC06,Mark Walker,Walker,Mark,,,R,1305 Longworth House Office Building,Washington,DC,20515-3306,W000819,
+"NC07 David Rouzer, R",,NC07,David Rouzer,Rouzer,David,,,R,424 Cannon House Office Building,Washington,DC,20515-3307,R000603,
+"NC08 Richard Hudson, R",,NC08,Richard Hudson,Hudson,Richard,,,R,429 Cannon House Office Building,Washington,DC,20515-3308,H001067,
+"NC09 Robert Pittenger, R",,NC09,Robert Pittenger,Pittenger,Robert,,,R,224 Cannon House Office Building,Washington,DC,20515-3309,P000606,
+"NC10 Patrick T. McHenry, R",,NC10,Patrick T. McHenry,McHenry,Patrick,T.,,R,2334 Rayburn House Office Building,Washington,DC,20515-3310,M001156,
+"NC11 Mark Meadows, R",,NC11,Mark Meadows,Meadows,Mark,,,R,1024 Longworth House Office Building,Washington,DC,20515-3311,M001187,
+"NC12 Alma S. Adams, D","Charlotte District Office, Greensboro District Office",NC12,Alma S. Adams,Adams,Alma,S.,,D,222 Cannon House Office Building,Washington,DC,20515-3312,A000370,"73,76"
+"NC13 Ted Budd, R",,NC13,Ted Budd,Budd,Ted,,,R,118 Cannon House Office Building,Washington,DC,20515-3313,B001305,
+"ND00 Kevin Cramer, R","Bismarck, Fargo, Grand Forks, Minot",ND00,Kevin Cramer,Cramer,Kevin,,,R,1717 Longworth House Office Building,Washington,DC,20515-3400,C001096,"79,81,82,83"
+"NE01 Jeff Fortenberry, R","Fremont Office, Lincoln Office, Norfolk Office",NE01,Jeff Fortenberry,Fortenberry,Jeff,,,R,1514 Longworth House Office Building,Washington,DC,20515-2701,F000449,"84,85,86"
+"NE02 Don Bacon, R",OMAHA OFFICE,NE02,Don Bacon,Bacon,Don,,,R,1516 Longworth House Office Building,Washington,DC,20515-2702,B001298,87
+"NE03 Adrian Smith, R","Grand Island, Scottsbluff",NE03,Adrian Smith,Smith,Adrian,,,R,320 Cannon House Office Building,Washington,DC,20515-2703,S001172,"88,89"
+"NH01 Carol Shea-Porter, D",DOVER OFFICE,NH01,Carol Shea-Porter,Shea-Porter,Carol,,,D,1530 Longworth House Office Building,Washington,DC,20515-2901,S001170,90
+"NH02 Ann M. Kuster, D","Concord, Nashua, North Country Office",NH02,Ann M. Kuster,Kuster,Ann,M.,,D,137 Cannon House Office Building,Washington,DC,20515-2902,K000382,"218,219,220"
+"NJ01 Donald Norcross, D","Cherry Hill Office, Washington, DC Office",NJ01,Donald Norcross,Norcross,Donald,,,D,1531 Longworth House Office Building,Washington,DC,20515-3001,N000188,"41,42"
+"NJ02 Frank A. LoBiondo, R","Mays Landing Office, Washington, DC Office",NJ02,Frank A. LoBiondo,LoBiondo,Frank,A.,,R,2427 Rayburn House Office Building,Washington,DC,20515-3002,L000554,"43,44"
+"NJ03 Thomas MacArthur, R","Burlington County Office, Burlington County Office Mailing Address, Ocean County Office, Washington, DC Office",NJ03,Thomas MacArthur,MacArthur,Thomas,,,R,506 Cannon House Office Building,Washington,DC,20515-3003,M001193,"45,46,47,48"
+"NJ04 Christopher H. Smith, R","Monmouth County Constituent Services Center , Ocean County Office, Hamilton District Office, Washington, DC Office",NJ04,Christopher H. Smith,Smith,Christopher,H.,,R,2373 Rayburn House Office Building,Washington,DC,20515-3004,S000522,"49,50,51,52"
+"NJ05 Josh Gottheimer, D","Glen Rock Office, Washington, DC Office",NJ05,Josh Gottheimer,Gottheimer,Josh,,,D,213 Cannon House Office Building,Washington,DC,20515-3005,G000583,"53,54"
+"NJ06 Frank  Pallone, Jr., D","New Brunswick Office, Long Branch Office, Washington, DC Office",NJ06,"Frank  Pallone, Jr.",Pallone,Frank,,Jr.,D,237 Cannon House Office Building,Washington,DC,20515-3006,P000034,"55,56,57"
+"NJ07 Leonard Lance, R","Flemington District Office, Westfield District Office",NJ07,Leonard Lance,Lance,Leonard,,,R,2352 Rayburn House Office Building,Washington,DC,20515-3007,L000567,"221,222"
+"NJ08 Albio Sires, D","Elizabeth Office, Jersey City Office, West New York Office",NJ08,Albio Sires,Sires,Albio,,,D,2342 Rayburn House Office Building,Washington,DC,20515-3008,S001165,"223,224,225"
+"NJ09 Bill  Pascrell, Jr., D","Englewood District Office, Lyndhurst District Office, Passaic District Office, Paterson District Office",NJ09,"Bill  Pascrell, Jr.",Pascrell,Bill,,Jr.,D,2370 Rayburn House Office Building,Washington,DC,20515-3009,P000096,"226,227,228,229"
+"NJ10 Donald M. Payne, Jr., D",,NJ10,"Donald M. Payne, Jr.",Payne,Donald,M.,Jr.,D,132 Cannon House Office Building,Washington,DC,20515-3010,P000604,
+"NJ11 Rodney P. Frelinghuysen, R",,NJ11,Rodney P. Frelinghuysen,Frelinghuysen,Rodney,P.,,R,2306 Rayburn House Office Building,Washington,DC,20515-3011,F000372,
+"NJ12 Bonnie Watson Coleman, D",,NJ12,Bonnie Watson Coleman,Watson Coleman,Bonnie,,,D,1535 Longworth House Office Building,Washington,DC,20515-3012,W000822,
+"NM01 Michelle Lujan Grisham, D",,NM01,Michelle Lujan Grisham,Lujan Grisham,Michelle,,,D,214 Cannon House Office Building,Washington,DC,20515-3101,L000580,
+"NM02 Stevan Pearce, R",,NM02,Stevan Pearce,Pearce,Stevan,,,R,2432 Rayburn House Office Building,Washington,DC,20515-3102,P000588,
+"NM03 Ben Ray Lujan, D",,NM03,Ben Ray Lujan,Lujan,Ben,Ray,,D,2231 Rayburn House Office Building,Washington,DC,20515-3103,L000570,
+"NV01 Dina Titus, D",,NV01,Dina Titus,Titus,Dina,,,D,2464 Rayburn House Office Building,Washington,DC,20515-2801,T000468,
+"NV02 Mark E. Amodei, R",,NV02,Mark E. Amodei,Amodei,Mark,E.,,R,332 Cannon House Office Building,Washington,DC,20515-2802,A000369,
+"NV03 Jacky Rosen, D",,NV03,Jacky Rosen,Rosen,Jacky,,,D,413 Cannon House Office Building,Washington,DC,20515-2803,R000608,
+"NV04 Ruben Kihuen, D",,NV04,Ruben Kihuen,Kihuen,Ruben,,,D,313 Cannon House Office Building,Washington,DC,20515-2804,K000390,
+"NY01 Lee M. Zeldin, R",,NY01,Lee M. Zeldin,Zeldin,Lee,M.,,R,1517 Longworth House Office Building,Washington,DC,20515-3201,Z000017,
+"NY02 Peter T. King, R",,NY02,Peter T. King,King,Peter,T.,,R,339 Cannon House Office Building,Washington,DC,20515-3202,K000210,
+"NY03 Thomas R. Suozzi, D",,NY03,Thomas R. Suozzi,Suozzi,Thomas,R.,,D,226 Cannon House Office Building,Washington,DC,20515-3203,S001201,
+"NY04 Kathleen M. Rice, D",,NY04,Kathleen M. Rice,Rice,Kathleen,M.,,D,1508 Longworth House Office Building,Washington,DC,20515-3204,R000602,
+"NY05 Gregory W. Meeks, D",,NY05,Gregory W. Meeks,Meeks,Gregory,W.,,D,2234 Rayburn House Office Building,Washington,DC,20515-3205,M001137,
+"NY06 Grace Meng, D",,NY06,Grace Meng,Meng,Grace,,,D,1317 Longworth House Office Building,Washington,DC,20515-3206,M001188,
+"NY07 Nydia M. Velazquez, D",,NY07,Nydia M. Velazquez,Velazquez,Nydia,M.,,D,2302 Rayburn House Office Building,Washington,DC,20515-3207,V000081,
+"NY08 Hakeem S. Jeffries, D",,NY08,Hakeem S. Jeffries,Jeffries,Hakeem,S.,,D,1607 Longworth House Office Building,Washington,DC,20515-3208,J000294,
+"NY09 Yvette D. Clarke, D",,NY09,Yvette D. Clarke,Clarke,Yvette,D.,,D,2058 Rayburn House Office Building,Washington,DC,20515-3209,C001067,
+"NY10 Jerrold Nadler, D",,NY10,Jerrold Nadler,Nadler,Jerrold,,,D,2109 Rayburn House Office Building,Washington,DC,20515-3210,N000002,
+"NY11 Daniel M. Donovan, Jr., R",,NY11,"Daniel M. Donovan, Jr.",Donovan,Daniel,M.,Jr.,R,1541 Longworth House Office Building,Washington,DC,20515-3211,D000625,
+"NY12 Carolyn B. Maloney, D",,NY12,Carolyn B. Maloney,Maloney,Carolyn,B.,,D,2308 Rayburn House Office Building,Washington,DC,20515-3212,M000087,
+"NY13 Adriano Espaillat, D",,NY13,Adriano Espaillat,Espaillat,Adriano,,,D,1630 Longworth House Office Building,Washington,DC,20515-3213,E000297,
+"NY14 Joseph Crowley, D",,NY14,Joseph Crowley,Crowley,Joseph,,,D,1035 Longworth House Office Building,Washington,DC,20515-3214,C001038,
+"NY15 Jose E. Serrano, D",,NY15,Jose E. Serrano,Serrano,Jose,E.,,D,2354 Rayburn House Office Building,Washington,DC,20515-3215,S000248,
+"NY16 Eliot L. Engel, D",,NY16,Eliot L. Engel,Engel,Eliot,L.,,D,2462 Rayburn House Office Building,Washington,DC,20515-3216,E000179,
+"NY17 Nita M. Lowey, D",,NY17,Nita M. Lowey,Lowey,Nita,M.,,D,2365 Rayburn House Office Building,Washington,DC,20515-3217,L000480,
+"NY18 Sean Patrick Maloney, D",,NY18,Sean Patrick Maloney,Maloney,Sean,Patrick,,D,1027 Longworth House Office Building,Washington,DC,20515-3218,M001185,
+"NY19 John J. Faso, R",,NY19,John J. Faso,Faso,John,J.,,R,1616 Longworth House Office Building,Washington,DC,20515-3219,F000464,
+"NY20 Paul Tonko, D",,NY20,Paul Tonko,Tonko,Paul,,,D,2463 Rayburn House Office Building,Washington,DC,20515-3220,T000469,
+"NY21 Elise M. Stefanik, R",,NY21,Elise M. Stefanik,Stefanik,Elise,M.,,R,318 Cannon House Office Building,Washington,DC,20515-3221,S001196,
+"NY22 Claudia Tenney, R",,NY22,Claudia Tenney,Tenney,Claudia,,,R,512 Cannon House Office Building,Washington,DC,20515-3222,T000478,
+"NY23 Tom Reed, R",,NY23,Tom Reed,Reed,Tom,,,R,2437 Rayburn House Office Building,Washington,DC,20515-3223,R000585,
+"NY24 John Katko, R",,NY24,John Katko,Katko,John,,,R,1620 Longworth House Office Building,Washington,DC,20515-3224,K000386,
+"NY25 Louise McIntosh Slaughter, D",,NY25,Louise McIntosh Slaughter,Slaughter,Louise,McIntosh,,D,2469 Rayburn House Office Building,Washington,DC,20515-3225,S000480,
+"NY26 Brian Higgins, D",,NY26,Brian Higgins,Higgins,Brian,,,D,2459 Rayburn House Office Building,Washington,DC,20515-3226,H001038,
+"NY27 Chris Collins, R",,NY27,Chris Collins,Collins,Chris,,,R,1117 Longworth House Office Building,Washington,DC,20515-3227,C001092,
+"OH01 Steve Chabot, R",,OH01,Steve Chabot,Chabot,Steve,,,R,2371 Rayburn House Office Building,Washington,DC,20515-3501,C000266,
+"OH02 Brad R. Wenstrup, R",,OH02,Brad R. Wenstrup,Wenstrup,Brad,R.,,R,2419 Longworth House Office Building,Washington,DC,20515-3502,W000815,
+"OH03 Joyce Beatty, D",,OH03,Joyce Beatty,Beatty,Joyce,,,D,133 Cannon House Office Building,Washington,DC,20515-3503,B001281,
+"OH04 Jim Jordan, R",,OH04,Jim Jordan,Jordan,Jim,,,R,2056 Rayburn House Office Building,Washington,DC,20515-3504,J000289,
+"OH05 Robert E. Latta, R",,OH05,Robert E. Latta,Latta,Robert,E.,,R,2448 Rayburn House Office Building,Washington,DC,20515-3505,L000566,
+"OH06 Bill Johnson, R",,OH06,Bill Johnson,Johnson,Bill,,,R,1710 Longworth House Office Building,Washington,DC,20515-3506,J000292,
+"OH07 Bob Gibbs, R",,OH07,Bob Gibbs,Gibbs,Bob,,,R,2446 Rayburn House Office Building,Washington,DC,20515-3507,G000563,
+"OH08 Warren Davidson, R",,OH08,Warren Davidson,Davidson,Warren,,,R,1004 Longworth House Office Building,Washington,DC,20515-3508,D000626,
+"OH09 Marcy Kaptur, D",,OH09,Marcy Kaptur,Kaptur,Marcy,,,D,2186 Rayburn House Office Building,Washington,DC,20515-3509,K000009,
+"OH10 Michael R. Turner, R",,OH10,Michael R. Turner,Turner,Michael,R.,,R,2368 Rayburn House Office Building,Washington,DC,20515-3510,T000463,
+"OH11 Marcia L. Fudge, D",,OH11,Marcia L. Fudge,Fudge,Marcia,L.,,D,2344 Rayburn House Office Building,Washington,DC,20515-3511,F000455,
+"OH12 Patrick J. Tiberi, R",,OH12,Patrick J. Tiberi,Tiberi,Patrick,J.,,R,1203 Longworth House Office Building,Washington,DC,20515-3512,T000462,
+"OH13 Tim Ryan, D",,OH13,Tim Ryan,Ryan,Tim,,,D,1126 Longworth House Office Building,Washington,DC,20515-3513,R000577,
+"OH14 David P. Joyce, R",,OH14,David P. Joyce,Joyce,David,P.,,R,1124 Longworth House Office Building,Washington,DC,20515-3514,J000295,
+"OH15 Steve Stivers, R",,OH15,Steve Stivers,Stivers,Steve,,,R,1022 Longworth House Office Building,Washington,DC,20515-3515,S001187,
+"OH16 James B. Renacci, R",,OH16,James B. Renacci,Renacci,James,B.,,R,328 Cannon House Office Building,Washington,DC,20515-3516,R000586,
+"OK01 Jim Bridenstine, R",,OK01,Jim Bridenstine,Bridenstine,Jim,,,R,216 Cannon House Office Building,Washington,DC,20515-3601,B001283,
+"OK02 Markwayne Mullin, R",,OK02,Markwayne Mullin,Mullin,Markwayne,,,R,1113 Longworth House Office Building,Washington,DC,20515-3602,M001190,
+"OK03 Frank D. Lucas, R",,OK03,Frank D. Lucas,Lucas,Frank,D.,,R,2405 Rayburn House Office Building,Washington,DC,20515-3603,L000491,
+"OK04 Tom Cole, R",,OK04,Tom Cole,Cole,Tom,,,R,2467 Rayburn House Office Building,Washington,DC,20515-3604,C001053,
+"OK05 Steve Russell, R",,OK05,Steve Russell,Russell,Steve,,,R,128 Cannon House Office Building,Washington,DC,20515-3605,R000604,
+"OR01 Suzanne Bonamici, D",,OR01,Suzanne Bonamici,Bonamici,Suzanne,,,D,439 Cannon House Office Building,Washington,DC,20515-3701,B001278,
+"OR02 Greg Walden, R",,OR02,Greg Walden,Walden,Greg,,,R,2185 Rayburn House Office Building,Washington,DC,20515-3702,W000791,
+"OR03 Earl Blumenauer, D",,OR03,Earl Blumenauer,Blumenauer,Earl,,,D,1111 Longworth House Office Building,Washington,DC,20515-3703,B000574,
+"OR04 Peter A. DeFazio, D",,OR04,Peter A. DeFazio,DeFazio,Peter,A.,,D,2134 Rayburn House Office Building,Washington,DC,20515-3704,D000191,
+"OR05 Kurt Schrader, D",,OR05,Kurt Schrader,Schrader,Kurt,,,D,2431 Rayburn House Office Building,Washington,DC,20515-3705,S001180,
+"PA01 Robert A. Brady, D","Delaware County Office, E. Clearfield Street Office, Memphis Street Office, S. Broad Street Office",PA01,Robert A. Brady,Brady,Robert,A.,,D,2004 Rayburn House Office Building,Washington,DC,20515-3801,B001227,"258,259,260,261"
+"PA02 Dwight Evans, D",Philadelphia Office,PA02,Dwight Evans,Evans,Dwight,,,D,1105 Longworth House Office Building,Washington,DC,20515-3802,E000296,262
+"PA03 Mike Kelly, R","Erie District Office, Sharon Office, Butler Office",PA03,Mike Kelly,Kelly,Mike,,,R,1707 Longworth House Office Building,Washington,DC,20515-3803,K000376,"263,264,265"
+"PA04 Scott Perry, R",,PA04,Scott Perry,Perry,Scott,,,R,1207 Longworth House Office Building,Washington,DC,20515-3804,P000605,
+"PA05 Glenn Thompson, R",,PA05,Glenn Thompson,Thompson,Glenn,,,R,124 Cannon House Office Building,Washington,DC,20515-3805,T000467,
+"PA06 Ryan A. Costello, R",,PA06,Ryan A. Costello,Costello,Ryan,A.,,R,326 Cannon House Office Building,Washington,DC,20515-3806,C001106,
+"PA07 Patrick Meehan, R",,PA07,Patrick Meehan,Meehan,Patrick,,,R,2305 Rayburn House Office Building,Washington,DC,20515-3807,M001181,
+"PA08 Brian K. Fitzpatrick, R",,PA08,Brian K. Fitzpatrick,Fitzpatrick,Brian,K.,,R,514 Cannon House Office Building,Washington,DC,20515-3808,F000466,
+"PA09 Bill Shuster, R",,PA09,Bill Shuster,Shuster,Bill,,,R,2079 Rayburn House Office Building,Washington,DC,20515-3809,S001154,
+"PA10 Tom Marino, R",,PA10,Tom Marino,Marino,Tom,,,R,2242 Rayburn House Office Building,Washington,DC,20515-3810,M001179,
+"PA11 Lou Barletta, R",,PA11,Lou Barletta,Barletta,Lou,,,R,2049 Rayburn House Office Building,Washington,DC,20515-3811,B001269,
+"PA12 Keith J. Rothfus, R",,PA12,Keith J. Rothfus,Rothfus,Keith,J.,,R,1205 Longworth House Office Building,Washington,DC,20515-3812,R000598,
+"PA13 Brendan F. Boyle, D",,PA13,Brendan F. Boyle,Boyle,Brendan,F.,,D,1133 Longworth House Office Building,Washington,DC,20515-3813,B001296,
+"PA14 Michael F. Doyle, D",,PA14,Michael F. Doyle,Doyle,Michael,F.,,D,239 Cannon House Office Building,Washington,DC,20515-3814,D000482,
+"PA15 Charles W. Dent, R",,PA15,Charles W. Dent,Dent,Charles,W.,,R,2082 Rayburn House Office Building,Washington,DC,20515-3815,D000604,
+"PA16 Lloyd Smucker, R",,PA16,Lloyd Smucker,Smucker,Lloyd,,,R,516 Cannon House Office Building,Washington,DC,20515-3816,S001199,
+"PA17 Matt Cartwright, D",,PA17,Matt Cartwright,Cartwright,Matt,,,D,1034 Longworth House Office Building,Washington,DC,20515-3817,C001090,
+"PA18 Tim Murphy, R",,PA18,Tim Murphy,Murphy,Tim,,,R,2332 Rayburn House Office Building,Washington,DC,20515-3818,M001151,
+"PR00 Jenniffer Gonzalez-Colon, R",,PR00,Jenniffer Gonzalez-Colon,Gonzalez-Colon,Jenniffer,,,R,1529 Longworth House Office Building,Washington,DC,20515-5401,G000582,
+"RI01 David N. Cicilline, D",,RI01,David N. Cicilline,Cicilline,David,N.,,D,2244 Rayburn House Office Building,Washington,DC,20515-3901,C001084,
+"RI02 James R. Langevin, D",,RI02,James R. Langevin,Langevin,James,R.,,D,2077 Rayburn House Office Building,Washington,DC,20515-3902,L000559,
+"SC01 Mark Sanford, R",,SC01,Mark Sanford,Sanford,Mark,,,R,2211 Rayburn House Office Building,Washington,DC,20515-4001,S000051,
+"SC02 Joe Wilson, R",,SC02,Joe Wilson,Wilson,Joe,,,R,1436 Longworth House Office Building,Washington,DC,20515-4002,W000795,
+"SC03 Jeff Duncan, R",,SC03,Jeff Duncan,Duncan,Jeff,,,R,2229 Rayburn House Office Building,Washington,DC,20515-4003,D000615,
+"SC04 Trey Gowdy, R",,SC04,Trey Gowdy,Gowdy,Trey,,,R,2418 Rayburn House Office Building,Washington,DC,20515-4004,G000566,
+"SC05 Mick Mulvaney, R",,SC05,Mick Mulvaney,Mulvaney,Mick,,,R,2350 Rayburn House Office Building,Washington,DC,20515-4005,M001182,
+"SC06 James E. Clyburn, D",,SC06,James E. Clyburn,Clyburn,James,E.,,D,242 Cannon House Office Building,Washington,DC,20515-4006,C000537,
+"SC07 Tom Rice, R",,SC07,Tom Rice,Rice,Tom,,,R,223 Cannon House Office Building,Washington,DC,20515-4007,R000597,
+"SD00 Kristi L. Noem, R",,SD00,Kristi L. Noem,Noem,Kristi,L.,,R,2457 Rayburn House Office Building,Washington,DC,20515-4100,N000184,
+"TN01 David P. Roe, R",,TN01,David P. Roe,Roe,David,P.,,R,336 Cannon House Office Building,Washington,DC,20515-4201,R000582,
+"TN02 John J. Duncan, Jr., R",,TN02,"John J. Duncan, Jr.",Duncan,John,J.,Jr.,R,2207 Rayburn House Office Building,Washington,DC,20515-4202,D000533,
+"TN03 Charles J. ""Chuck"" Fleischmann, R",,TN03,"Charles J. ""Chuck"" Fleischmann",Fleischmann,Charles,"J. ""Chuck""",,R,2410 Rayburn House Office Building,Washington,DC,20515-4203,F000459,
+"TN04 Scott DesJarlais, R",,TN04,Scott DesJarlais,DesJarlais,Scott,,,R,2301 Rayburn House Office Building,Washington,DC,20515-4204,D000616,
+"TN05 Jim Cooper, D",,TN05,Jim Cooper,Cooper,Jim,,,D,1536 Longworth House Office Building,Washington,DC,20515-4205,C000754,
+"TN06 Diane Black, R",,TN06,Diane Black,Black,Diane,,,R,1131 Longworth House Office Building,Washington,DC,20515-4206,B001273,
+"TN07 Marsha Blackburn, R",,TN07,Marsha Blackburn,Blackburn,Marsha,,,R,2266 Rayburn House Office Building,Washington,DC,20515-4207,B001243,
+"TN08 David Kustoff, R",,TN08,David Kustoff,Kustoff,David,,,R,508 Cannon House Office Building,Washington,DC,20515-4208,K000392,
+"TN09 Steve Cohen, D",,TN09,Steve Cohen,Cohen,Steve,,,D,2404 Rayburn House Office Building,Washington,DC,20515-4209,C001068,
+"TX01 Louie Gohmert, R",,TX01,Louie Gohmert,Gohmert,Louie,,,R,2243 Rayburn House Office Building,Washington,DC,20515-4301,G000552,
+"TX02 Ted Poe, R",,TX02,Ted Poe,Poe,Ted,,,R,2132 Rayburn House Office Building,Washington,DC,20515-4302,P000592,
+"TX03 Sam Johnson, R",,TX03,Sam Johnson,Johnson,Sam,,,R,2304 Rayburn House Office Building,Washington,DC,20515-4303,J000174,
+"TX04 John Ratcliffe, R",,TX04,John Ratcliffe,Ratcliffe,John,,,R,325 Cannon House Office Building,Washington,DC,20515-4304,R000601,
+"TX05 Jeb Hensarling, R",,TX05,Jeb Hensarling,Hensarling,Jeb,,,R,2228 Rayburn House Office Building,Washington,DC,20515-4305,H001036,
+"TX06 Joe Barton, R",,TX06,Joe Barton,Barton,Joe,,,R,2107 Rayburn House Office Building,Washington,DC,20515-4306,B000213,
+"TX07 John Abney Culberson, R",,TX07,John Abney Culberson,Culberson,John,Abney,,R,2161 Rayburn House Office Building,Washington,DC,20515-4307,C001048,
+"TX08 Kevin Brady, R",,TX08,Kevin Brady,Brady,Kevin,,,R,1011 Longworth House Office Building,Washington,DC,20515-4308,B000755,
+"TX09 Al Green, D",,TX09,Al Green,Green,Al,,,D,2347 Rayburn House Office Building,Washington,DC,20515-4309,G000553,
+"TX10 Michael T. McCaul, R",,TX10,Michael T. McCaul,McCaul,Michael,T.,,R,2001 Rayburn House Office Building,Washington,DC,20515-4310,M001157,
+"TX11 K. Michael Conaway, R",,TX11,K. Michael Conaway,Conaway,K.,Michael,,R,2430 Rayburn House Office Building,Washington,DC,20515-4311,C001062,
+"TX12 Kay Granger, R",,TX12,Kay Granger,Granger,Kay,,,R,1026 Longworth House Office Building,Washington,DC,20515-4312,G000377,
+"TX13 Mac Thornberry, R",,TX13,Mac Thornberry,Thornberry,Mac,,,R,2208 Rayburn House Office Building,Washington,DC,20515-4313,T000238,
+"TX14 Randy K. Weber, Sr., R",,TX14,"Randy K. Weber, Sr.",Weber,Randy,K.,Sr.,R,1708 Longworth House Office Building,Washington,DC,20515-4314,W000814,
+"TX15 Vicente Gonzalez, D",,TX15,Vicente Gonzalez,Gonzalez,Vicente,,,D,113 Cannon House Office Building,Washington,DC,20515-4315,G000581,
+"TX16 Beto O'Rourke, D",,TX16,Beto O'Rourke,O'Rourke,Beto,,,D,1330 Longworth House Office Building,Washington,DC,20515-4316,O000170,
+"TX17 Bill Flores, R",,TX17,Bill Flores,Flores,Bill,,,R,2440 Rayburn House Office Building,Washington,DC,20515-4317,F000461,
+"TX18 Sheila Jackson Lee, D",,TX18,Sheila Jackson Lee,Jackson Lee,Sheila,,,D,2187 Rayburn House Office Building,Washington,DC,20515-4318,J000032,
+"TX19 Jodey C. Arrington, R",,TX19,Jodey C. Arrington,Arrington,Jodey,C.,,R,1029 Longworth House Office Building,Washington,DC,20515-4319,A000375,
+"TX20 Joaquin Castro, D",,TX20,Joaquin Castro,Castro,Joaquin,,,D,1221 Longworth House Office Building,Washington,DC,20515-4320,C001091,
+"TX21 Lamar Smith, R",,TX21,Lamar Smith,Smith,Lamar,,,R,2409 Rayburn House Office Building,Washington,DC,20515-4321,S000583,
+"TX22 Pete Olson, R",,TX22,Pete Olson,Olson,Pete,,,R,2133 Rayburn House Office Building,Washington,DC,20515-4322,O000168,
+"TX23 Will Hurd, R",,TX23,Will Hurd,Hurd,Will,,,R,317 Cannon House Office Building,Washington,DC,20515-4323,H001073,
+"TX24 Kenny Marchant, R",,TX24,Kenny Marchant,Marchant,Kenny,,,R,2369 Rayburn House Office Building,Washington,DC,20515-4324,M001158,
+"TX25 Roger Williams, R",,TX25,Roger Williams,Williams,Roger,,,R,1323 Longworth House Office Building,Washington,DC,20515-4325,W000816,
+"TX26 Michael C. Burgess, R",,TX26,Michael C. Burgess,Burgess,Michael,C.,,R,2336 Rayburn House Office Building,Washington,DC,20515-4326,B001248,
+"TX27 Blake Farenthold, R",,TX27,Blake Farenthold,Farenthold,Blake,,,R,2331 Rayburn House Office Building,Washington,DC,20515-4327,F000460,
+"TX28 Henry Cuellar, D",,TX28,Henry Cuellar,Cuellar,Henry,,,D,2209 Rayburn House Office Building,Washington,DC,20515-4328,C001063,
+"TX29 Gene Green, D",,TX29,Gene Green,Green,Gene,,,D,2470 Rayburn House Office Building,Washington,DC,20515-4329,G000410,
+"TX30 Eddie Bernice Johnson, D",,TX30,Eddie Bernice Johnson,Johnson,Eddie,Bernice,,D,2468 Rayburn House Office Building,Washington,DC,20515-4330,J000126,
+"TX31 John R. Carter, R",,TX31,John R. Carter,Carter,John,R.,,R,2110 Rayburn House Office Building,Washington,DC,20515-4331,C001051,
+"TX32 Pete Sessions, R",,TX32,Pete Sessions,Sessions,Pete,,,R,2233 Rayburn House Office Building,Washington,DC,20515-4332,S000250,
+"TX33 Marc A. Veasey, D",,TX33,Marc A. Veasey,Veasey,Marc,A.,,D,1519 Longworth House Office Building,Washington,DC,20515-4333,V000131,
+"TX34 Filemon Vela, D",,TX34,Filemon Vela,Vela,Filemon,,,D,437 Cannon House Office Building,Washington,DC,20515-4334,V000132,
+"TX35 Lloyd Doggett, D",,TX35,Lloyd Doggett,Doggett,Lloyd,,,D,2307 Rayburn House Office Building,Washington,DC,20515-4335,D000399,
+"TX36 Brian Babin, R",,TX36,Brian Babin,Babin,Brian,,,R,316 Cannon House Office Building,Washington,DC,20515-4336,B001291,
+"UT01 Rob Bishop, R","Ogden office, Brigham City office",UT01,Rob Bishop,Bishop,Rob,,,R,123 Cannon House Office Building,Washington,DC,20515-4401,B001250,"68,69"
+"UT02 Chris Stewart, R","Salt Lake City District Office, St. George District Office",UT02,Chris Stewart,Stewart,Chris,,,R,323 Cannon House Office Building,Washington,DC,20515-4402,S001192,"70,71"
+"UT03 Jason Chaffetz, R","PROVO, UT OFFICE",UT03,Jason Chaffetz,Chaffetz,Jason,,,R,2236 Rayburn House Office Building,Washington,DC,20515-4403,C001076,72
+"UT04 Mia B. Love, R",State Offices,UT04,Mia B. Love,Love,Mia,B.,,R,217 Cannon House Office Building,Washington,DC,20515-4404,L000584,74
+"VA01 Robert J. Wittman, R","Yorktown Office, Tappahannock Office, Stafford Office",VA01,Robert J. Wittman,Wittman,Robert,J.,,R,2055 Rayburn House Office Building,Washington,DC,20515-4601,W000804,"75,77,78"
+"VA02 Scott Taylor, R",,VA02,Scott Taylor,Taylor,Scott,,,R,412 Cannon House Office Building,Washington,DC,20515-4602,T000477,80
+"VA03 Robert C. ""Bobby"" Scott, D",Hampton Roads,VA03,"Robert C. ""Bobby"" Scott",Scott,Robert,"C. ""Bobby""",,D,1201 Longworth House Office Building,Washington,DC,20515-4603,S000185,95
+"VA04 A. Donald McEachin, D",,VA04,A. Donald McEachin,McEachin,A.,Donald,,D,314 Cannon House Office Building,Washington,DC,20515-4604,M001200,
+"VA05 Thomas A. Garrett, Jr., R",,VA05,"Thomas A. Garrett, Jr.",Garrett,Thomas,A.,Jr.,R,415 Cannon House Office Building,Washington,DC,20515-4605,G000580,
+"VA06 Bob Goodlatte, R"," Harrisonburg Office, Lynchburg Office, Roanoke Office, Staunton Office",VA06,Bob Goodlatte,Goodlatte,Bob,,,R,2309 Rayburn House Office Building,Washington,DC,20515-4606,G000289,"96,97,98,99"
+"VA07 Dave Brat, R","Glen Allen District Office, Spotsylvania District Office",VA07,Dave Brat,Brat,Dave,,,R,1628 Longworth House Office Building,Washington,DC,20515-4607,B001290,"108,117"
+"VA08 Donald S. Beyer, Jr., D",District Office,VA08,"Donald S. Beyer, Jr.",Beyer,Donald,S.,Jr.,D,1119 Longworth House Office Building,Washington,DC,20515-4608,B001292,119
+"VA09 H. Morgan Griffith, R","Abingdon District Office, Christiansburg District Office, Big Stone Gap Office",VA09,H. Morgan Griffith,Griffith,H.,Morgan,,R,2202 Rayburn House Office Building,Washington,DC,20515-4609,G000568,"122,125,127"
+"VA10 Barbara Comstock, R","Loudoun County Office, Shenandoah Valley Office",VA10,Barbara Comstock,Comstock,Barbara,,,R,229 Cannon House Office Building,Washington,DC,20515-4610,C001105,"169,170"
+"VA11 Gerald E. Connolly, D","Annandale Office, Prince William Office",VA11,Gerald E. Connolly,Connolly,Gerald,E.,,D,2238 Rayburn House Office Building,Washington,DC,20515-4611,C001078,"171,172"
+"VI00 Stacey E. Plaskett, D","St. Croix Office, St. Thomas Office",VI00,Stacey E. Plaskett,Plaskett,Stacey,E.,,D,331 Cannon House Office Building,Washington,DC,20515-5500,P000610,"173,174"
+"VT00 Peter Welch, D",Burlington Office,VT00,Peter Welch,Welch,Peter,,,D,2303 Rayburn House Office Building,Washington,DC,20515-4500,W000800,1
+"WA01 Suzan K. DelBene, D","Bothell Office, Mount Vernon Office",WA01,Suzan K. DelBene,DelBene,Suzan,K.,,D,2442 Rayburn House Office Building,Washington,DC,20515-4701,D000617,"175,176"
+"WA02 Rick Larsen, D","Bellingham Office, Everett Office",WA02,Rick Larsen,Larsen,Rick,,,D,2113 Rayburn House Office Building,Washington,DC,20515-4702,L000560,"177,178"
+"WA03 Jaime Herrera Beutler, R"," Vancouver Office, Chehalis Office",WA03,Jaime Herrera Beutler,Herrera Beutler,Jaime,,,R,1107 Longworth House Office Building,Washington,DC,20515-4703,H001056,"179,180"
+"WA04 Dan Newhouse, R","Yakima Office, Tri-Cities Office",WA04,Dan Newhouse,Newhouse,Dan,,,R,1318 Longworth House Office Building,Washington,DC,20515-4704,N000189,"181,182"
+"WA05 Cathy McMorris Rodgers, R","Colville, Spokane, Walla Walla",WA05,Cathy McMorris Rodgers,McMorris Rodgers,Cathy,,,R,1314 Longworth House Office Building,Washington,DC,20515-4705,M001159,"183,184,185"
+"WA06 Derek Kilmer, D",,WA06,Derek Kilmer,Kilmer,Derek,,,D,1520 Longworth House Office Building,Washington,DC,20515-4706,K000381,
+"WA07 Pramila Jayapal, D",,WA07,Pramila Jayapal,Jayapal,Pramila,,,D,319 Cannon House Office Building,Washington,DC,20515-4707,J000298,
+"WA08 David G. Reichert, R",,WA08,David G. Reichert,Reichert,David,G.,,R,1127 Longworth House Office Building,Washington,DC,20515-4708,R000578,
+"WA09 Adam Smith, D",,WA09,Adam Smith,Smith,Adam,,,D,2264 Rayburn House Office Building,Washington,DC,20515-4709,S000510,
+"WA10 Denny Heck, D",,WA10,Denny Heck,Heck,Denny,,,D,425 Cannon House Office Building,Washington,DC,20515-4710,H001064,
+"WI01 Paul D. Ryan, R","Janesville office, Kenosha office, Racine office",WI01,Paul D. Ryan,Ryan,Paul,D.,,R,1233 Longworth House Office Building,Washington,DC,20515-4901,R000570,"2,3,4"
+"WI02 Mark Pocan, D",,WI02,Mark Pocan,Pocan,Mark,,,D,1421 Longworth House Office Building,Washington,DC,20515-4902,P000607,
+"WI03 Ron Kind, D",,WI03,Ron Kind,Kind,Ron,,,D,1502 Longworth House Office Building,Washington,DC,20515-4903,K000188,
+"WI04 Gwen Moore, D",,WI04,Gwen Moore,Moore,Gwen,,,D,2252 Rayburn House Office Building,Washington,DC,20515-4904,M001160,
+"WI05 F. James Sensenbrenner, Jr., R",,WI05,"F. James Sensenbrenner, Jr.",Sensenbrenner,F.,James,Jr.,R,2449 Rayburn House Office Building,Washington,DC,20515-4905,S000244,
+"WI06 Glenn Grothman, R",,WI06,Glenn Grothman,Grothman,Glenn,,,R,1217 Longworth House Office Building,Washington,DC,20515-4906,G000576,
+"WI07 Sean P. Duffy, R",,WI07,Sean P. Duffy,Duffy,Sean,P.,,R,2330 Rayburn House Office Building,Washington,DC,20515-4907,D000614,
+"WI08 Mike Gallagher, R",,WI08,Mike Gallagher,Gallagher,Mike,,,R,1007 Longworth House Office Building,Washington,DC,20515-4908,G000579,
+"WV01 David B. McKinley, R",,WV01,David B. McKinley,McKinley,David,B.,,R,2239 Rayburn House Office Building,Washington,DC,20515-4801,M001180,
+"WV02 Alexander X. Mooney, R",,WV02,Alexander X. Mooney,Mooney,Alexander,X.,,R,1232 Longworth House Office Building,Washington,DC,20515-4802,M001195,
+"WV03 Evan H. Jenkins, R",,WV03,Evan H. Jenkins,Jenkins,Evan,H.,,R,1609 Longworth House Office Building,Washington,DC,20515-4803,J000297,
+"WY00 Liz Cheney, R",,WY00,Liz Cheney,Cheney,Liz,,,R,416 Cannon House Office Building,Washington,DC,20515-5000,C001109,

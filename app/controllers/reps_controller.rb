@@ -9,7 +9,7 @@ class RepsController < ApplicationController
     @reps = if address
               # @reps  = Rep.get_top_reps(params[:address])
               # @reps << Rep.get_state_reps(params[:address])
-              Rep.find_em(address)
+              Rep.external_reps(address)
             else
               # Would like to find requesting IP address, geocode it and return the closest rep
               # request = Rack::Request.new Rails.env

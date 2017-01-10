@@ -108,8 +108,8 @@ def seed_sens
     d.line1       = row['district_office_line_1']
     d.line2       = row['district_office_line_2']
     d.city        = city
-    d.state       = line_3.split(' ')[0] if line_3
-    d.zip         = line_3.split(' ')[1] if line_3
+    d.state       = line_3[0].split(' ')[0] if line_3
+    d.zip         = line_3[0].split(' ')[1] if line_3
     d.phones      = [row['district_phone']]
     d.rep         = r
     d.save
@@ -137,8 +137,8 @@ def seed_rep_office_locations
     o = rep.office_locations.build(
     office_type: row['type'],
     office_name: row['office_name'],
-    line1:       row['line1'],
-    line2:       row['line2'],
+    line1:       row['line_1'],
+    line2:       row['line_2'],
     city:        row['city'],
     state:       row['state'],
     zip:         row['zip'],
