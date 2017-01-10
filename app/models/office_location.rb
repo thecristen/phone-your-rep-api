@@ -21,7 +21,7 @@ class OfficeLocation < ApplicationRecord
       city:   city,
       state:  state,
       zip:    zip,
-      v_card_link: "localhost:3000/v_cards/#{id}" } # TODO: change to production path for deployment
+      v_card_link: "phone-your-rep.herokuapp.com/v_cards/#{id}" } # TODO: change to production path for deployment
   end
 
   def make_vcard
