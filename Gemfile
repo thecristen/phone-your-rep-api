@@ -33,6 +33,9 @@ gem 'activerecord-postgis-adapter', '~> 4.0', '>= 4.0.2'
 # Use vPim for vCards
 gem 'vpim', '~> 13.11', '>= 13.11.11'
 
+# Use Rgeo::Shapefile to read and import shapefiles
+gem 'rgeo-shapefile'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
