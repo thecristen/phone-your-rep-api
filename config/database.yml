@@ -6,6 +6,9 @@
 #
 default: &default
   adapter: postgis
+  encoding: unicode
+  postgis_extension: postgis
+  schema_search_path: public, postgis
   pool: 5
   timeout: 5000
 
@@ -25,3 +28,4 @@ test:
 production:
   <<: *default
   database: phonerep_prod
+  url: <%= ENV["DATABASE_URL"] ? ENV["DATABASE_URL"].sub(/^postgres/, "postgis") : "" %>
