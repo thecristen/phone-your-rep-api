@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 class OfficeLocation < ApplicationRecord
   belongs_to       :rep
-  validates        :office_type, :line1, presence: true
   geocoded_by      :full_address
   after_validation :geocode, :set_lonlat
   scope            :find_with_rep, ->(id) { where(id: id).includes(rep: :office_locations) }
@@ -34,11 +33,13 @@ class OfficeLocation < ApplicationRecord
         name.family = rep.last_name
       end
 
-      unless phone.blank?
-        maker.add_tel(phone) do |tel|
-          tel.preferred = true
-          tel.location = 'work'
-          tel.capability = 'voice'
+      unless phones.blank?
+        phones.each do |phone|
+          maker.add_tel(phone) do |tel|
+            tel.preferred = true
+            tel.location = 'work'
+            tel.capability = 'voice'
+          end
         end
       end
 
@@ -62,10 +63,12 @@ class OfficeLocation < ApplicationRecord
           addr.postalcode = office.zip
         end
 
-        maker.add_tel(office.phone) do |tel|
-          tel.preferred = false
-          tel.location = 'work'
-          tel.capability = 'voice'
+        office.phones.each do |phone|
+          maker.add_tel(phone) do |tel|
+            tel.preferred = false
+            tel.location = 'work'
+            tel.capability = 'voice'
+          end
         end
       end
 
@@ -77,7 +80,7 @@ class OfficeLocation < ApplicationRecord
         end
       end
 
-      maker.org = rep.office
+      maker.org = rep.role
     end
   end
 end
