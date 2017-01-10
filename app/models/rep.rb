@@ -24,13 +24,19 @@ class Rep < ApplicationRecord
     attr_accessor :district
     # Raw Rep records from the database that need to be packaged for JSON response.
     attr_accessor :raw_reps
+    # State abbreviation parsed from address params.
+    attr_accessor :state_abbr
   end # Metaclass ----------------------------------------------------------------------------------------------------
 
   # Instance attribute that holds offices sorted by location after calling the :sort_ofices method.
   attr_accessor :sorted_offices
 
   def self.init(address)
-    self.address = address
+    self.raw_reps    = nil
+    self.coordinates = nil
+    self.address     = address
+    self.state_abbr  = address.split.grep(/[A-Z]{2}/)
+    return if state_abbr.blank?
     find_coordinates
     find_state
   end
@@ -38,6 +44,7 @@ class Rep < ApplicationRecord
   # Find the reps in the db associated to that address and assemble into JSON blob
   def self.find_em(address)
     init(address)
+    return [] if coordinates.blank?
     find_point
     find_district
     find_reps
@@ -58,10 +65,6 @@ class Rep < ApplicationRecord
   # Parse out the two letter state abbreviation from address and find the State by that attribute.
   def self.find_state
     self.state = State.by_abbr_with_districts(abbr: state_abbr)
-  end
-
-  def self.state_abbr
-    address.split.grep(/[A-Z]{2}/)
   end
 
   # Query all of the districts within that state.
