@@ -80,7 +80,7 @@ class Rep < ApplicationRecord
   def self.external_reps(address)
     init(address)
     ex_reps = GetYourRep::Google.all_reps(address, congress_only: true)
-    self.raw_reps = Rep.where(name: ex_reps.names).to_a
+    self.raw_reps = Rep.where(name: ex_reps.names).includes(:office_locations, :district, :state).to_a
     process_reps
   end
 
@@ -101,6 +101,7 @@ class Rep < ApplicationRecord
   def self.random_rep
     random_rep = Rep.order('RANDOM()').limit(1).first
     return [] << { error: 'Something went wrong, try again.' } unless random_rep
+    random_rep.sort_offices(coordinates)
     [] << random_rep.to_hash
   end
 
