@@ -21,7 +21,7 @@ class OfficeLocation < ApplicationRecord
       city:   city,
       state:  state,
       zip:    zip,
-      v_card_link: "phone-your-rep.herokuapp.com/v_cards/#{id}" } # TODO: change to production path for deployment
+      v_card_link: "localhost:3000/v_cards/#{id}" } # TODO: change to production path for deployment
   end
 
   def make_vcard
@@ -33,15 +33,16 @@ class OfficeLocation < ApplicationRecord
         name.family = rep.last_name
       end
 
-      unless phones.blank?
-        phones.each do |phone|
-          maker.add_tel(phone) do |tel|
-            tel.preferred = true
-            tel.location = 'work'
-            tel.capability = 'voice'
-          end
+
+      phones.each do |phone|
+        next if phone.blank?
+        maker.add_tel(phone) do |tel|
+          tel.preferred = true
+          tel.location = 'work'
+          tel.capability = 'voice'
         end
       end
+
 
       maker.add_addr do |addr|
         addr.preferred = true
