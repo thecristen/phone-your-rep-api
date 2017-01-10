@@ -5,6 +5,7 @@ class OfficeLocation < ApplicationRecord
   geocoded_by      :full_address
   after_validation :geocode, :set_lonlat
   scope            :find_with_rep, ->(id) { where(id: id).includes(rep: :office_locations) }
+  serialize        :phones, Array
 
   def set_lonlat
     self[:lonlat] = RGeo::Cartesian.factory.point(longitude, latitude)
@@ -21,8 +22,7 @@ class OfficeLocation < ApplicationRecord
       city:   city,
       state:  state,
       zip:    zip,
-      v_card_link: "localhost:3000/v_cards/#{id}"
-    }
+      v_card_link: "localhost:3000/v_cards/#{id}" } # TODO: change to production path for deployment
   end
 
   def make_vcard

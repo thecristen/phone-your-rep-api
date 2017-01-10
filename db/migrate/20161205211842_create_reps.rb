@@ -8,9 +8,11 @@ class CreateReps < ActiveRecord::Migration[5.0]
       t.string     :name
       t.string     :last_name
       t.string     :first_name
+      t.string     :middle_name
+      t.string     :suffix
       t.string     :party
       t.text       :email
-      t.string     :url
+      t.string     :website
       t.string     :twitter
       t.string     :facebook
       t.string     :youtube
