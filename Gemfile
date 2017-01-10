@@ -34,7 +34,7 @@ gem 'activerecord-postgis-adapter', '~> 4.0', '>= 4.0.2'
 gem 'vpim', '~> 13.11', '>= 13.11.11'
 
 # Use Rgeo::Shapefile to read and import shapefiles
-gem 'rgeo-shapefile'
+gem 'rgeo-shapefile', '~> 0.4', '>= 0.4.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
