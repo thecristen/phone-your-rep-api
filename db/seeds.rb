@@ -7,6 +7,33 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'csv'
+def seed_states
+  csv_state_text = File.read(Rails.root.join('lib', 'seeds', 'states.csv'))
+  csv_states = CSV.parse(csv_state_text, headers: true, encoding: 'ISO-8859-1')
+  csv_states.each do |row|
+    s = State.new
+    s.state_code = row['state_code']
+    s.name       = row['name']
+    s.abbr       = row['abbr']
+    s.save
+    puts "#{s.name} saved in database."
+  end
+  puts "There are now #{State.count} states in the database."
+end
+
+def seed_districts
+  csv_district_text = File.read(Rails.root.join('lib', 'seeds', 'districts.csv'))
+  csv_districts = CSV.parse(csv_district_text, headers: true, encoding: 'ISO-8859-1')
+  csv_districts.each do |row|
+    d = District.new
+    d.code       = row['code']
+    d.state_code = row['state_code']
+    d.full_code  = row['full_code']
+    d.save
+    puts "District #{d.code} of #{d.state.name} saved in database."
+  end
+  puts "There are now #{District.count} districts in the database."
+end
 
 def seed_reps
   csv_rep_text = File.read(Rails.root.join('lib', 'seeds', 'reps_20161226.csv'))
@@ -21,7 +48,7 @@ def seed_reps
     r.last_name    = row['last_name']
     r.first_name   = row['first_name']
     r.party        = row['party']
-    r.email        = [row['email'].gsub("---\n- ", '').gsub("\n", '')]
+    r.email        = [row['email'].gsub("---\n- ", '').gsub("\n", '')] if row['email']
     r.url          = row['url']
     r.twitter      = row['twitter']
     r.facebook     = row['facebook']
@@ -47,9 +74,9 @@ def seed_office_locations
     o.office_type = row['office_type']
     o.line1       = row['line1']
     o.line2       = row['line2']
-    o.city        = row['line3']
-    o.state       = row['line4']
-    o.zip         = row['line5']
+    o.city        = row['city']
+    o.state       = row['state']
+    o.zip         = row['zip']
     o.latitude    = row['latitude']
     o.longitude   = row['longitude']
     o.phone       = row['phone']
@@ -59,5 +86,7 @@ def seed_office_locations
   puts "There are now #{OfficeLocation.count} office locations in the database."
 end
 
+seed_states
+seed_districts
 seed_reps
 seed_office_locations

@@ -11,7 +11,7 @@ class OfficeLocation < ApplicationRecord
   end
 
   def full_address
-    [line1, line2, line3, line4, line5].join(' ')
+    [line1, line2, city, state, zip].join(' ')
   end
 
   def to_hash
@@ -45,22 +45,21 @@ class OfficeLocation < ApplicationRecord
       maker.add_addr do |addr|
         addr.preferred = true
         addr.location = 'work'
-        addr.street = "#{line1}" + (", #{line2}" if line2)
-        addr.locality = address_ary.first.split(',').first
-        addr.region = address_ary.second
-        addr.postalcode = address_ary.third
+        addr.street = line2 ? "#{line1}, #{line2}" : line1
+        addr.locality = city
+        addr.region = state
+        addr.postalcode = zip
       end
 
       rep.office_locations.each do |office|
         next if office == self
         maker.add_addr do |addr|
-          address_ary = office.line3.split(' ')
           addr.preferred = false
           addr.location = 'work'
-          addr.street = office.line1
-          addr.locality = address_ary.first.split(',').first
-          addr.region = address_ary.second
-          addr.postalcode = address_ary.third
+          addr.street = office.line1 ? "#{office.line1}, #{office.line2}" : office.line1
+          addr.locality = office.city
+          addr.region = office.state
+          addr.postalcode = office.zip
         end
 
         maker.add_tel(office.phone) do |tel|
