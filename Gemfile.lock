@@ -52,12 +52,8 @@ GEM
       i18n (~> 0.5)
     ffi (1.9.14)
     geocoder (1.4.1)
-<<<<<<< HEAD
     get_your_rep (1.0.4)
       colorize (~> 0.8.1)
-=======
-    get_your_rep (0.1.8)
->>>>>>> 67af50009d707fbfcb81ee9e775ecf9188063764
       geocoder (~> 1.4, >= 1.4.1)
       httparty (~> 0)
     globalid (0.3.7)
