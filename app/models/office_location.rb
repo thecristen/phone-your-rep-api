@@ -67,21 +67,22 @@ class OfficeLocation < ApplicationRecord
       end
 
       rep.office_locations.each do |office|
-        next if office == self
-    #    maker.add_addr do |addr|
-    #      addr.preferred = false
-    #      addr.location = 'work'
-    #      addr.street = office.suite ? "#{office.address}, #{office.suite}" : office.address
-    #      addr.locality = office.city
-    #      addr.region = office.state
-    #      addr.postalcode = office.zip
-    #    end
+        next if office.office_type == self.office_type
+        maker.add_addr do |addr|
+          addr.preferred = false
+          addr.location = 'work'
+          addr.street = office.suite ? "#{office.address}, #{office.suite}" : office.address
+          addr.locality = office.city
+          addr.region = office.state
+          addr.postalcode = office.zip
+        end
 
         maker.add_tel(office.phone) do |tel|
           tel.preferred  = false
           tel.location   = 'work'
           tel.capability = 'voice'
         end
+        break
       end
 
       maker.org = rep.role
