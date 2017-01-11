@@ -30,7 +30,7 @@ class OfficeLocation < ApplicationRecord
       hours:     hours,
       latitude:  latitude,
       longitude: longitude,
-      v_card_link: "phone-your-rep.herokuapp.com/v_cards/#{id}" } # TODO: change to production path for deployment
+      v_card_link: "https://phone-your-rep.herokuapp.com/v_cards/#{id}" } # TODO: change to production path for deployment
   end
 
   def make_vcard
