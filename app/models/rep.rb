@@ -5,7 +5,7 @@ class Rep < ApplicationRecord
 
   belongs_to :district
   belongs_to :state
-  has_many   :office_locations, dependent: :destroy
+  has_many   :office_locations, dependent: :destroy, foreign_key: :bioguide_id, primary_key: :bioguide_id
   scope      :yours, ->(state:, district:) { where(district: district).or(Rep.where(state: state, district: nil)) }
   serialize  :committees, Array
   serialize  :email, Array

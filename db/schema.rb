@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110063936) do
+ActiveRecord::Schema.define(version: 20170111042017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,10 +28,10 @@ ActiveRecord::Schema.define(version: 20170110063936) do
   create_table "office_locations", force: :cascade do |t|
     t.integer  "rep_id"
     t.string   "office_type"
-    t.string   "office_name"
-    t.text     "phones"
-    t.string   "line1"
-    t.string   "line2"
+    t.string   "suite"
+    t.string   "phone"
+    t.string   "address"
+    t.string   "building"
     t.string   "city"
     t.string   "state"
     t.string   "zip"
@@ -40,6 +40,9 @@ ActiveRecord::Schema.define(version: 20170110063936) do
     t.geometry "lonlat",      limit: {:srid=>0, :type=>"point"}
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
+    t.string   "bioguide_id"
+    t.string   "fax"
+    t.string   "hours"
     t.index ["rep_id"], name: "index_office_locations_on_rep_id", using: :btree
   end
 
@@ -47,14 +50,14 @@ ActiveRecord::Schema.define(version: 20170110063936) do
     t.integer  "district_id"
     t.integer  "state_id"
     t.string   "role"
-    t.string   "name"
-    t.string   "last_name"
-    t.string   "first_name"
-    t.string   "middle_name"
+    t.string   "official_full"
+    t.string   "last"
+    t.string   "first"
+    t.string   "middle"
     t.string   "suffix"
     t.string   "party"
-    t.text     "email"
-    t.string   "website"
+    t.string   "contact_form"
+    t.string   "url"
     t.string   "twitter"
     t.string   "facebook"
     t.string   "youtube"
@@ -63,9 +66,14 @@ ActiveRecord::Schema.define(version: 20170110063936) do
     t.string   "senate_class"
     t.string   "bioguide_id"
     t.string   "photo"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.string   "member_full"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "nickname"
+    t.string   "instagram"
+    t.integer  "instagram_id"
+    t.string   "facebook_id"
+    t.string   "youtube_id"
+    t.integer  "twitter_id"
     t.index ["district_id"], name: "index_reps_on_district_id", using: :btree
     t.index ["state_id"], name: "index_reps_on_state_id", using: :btree
   end

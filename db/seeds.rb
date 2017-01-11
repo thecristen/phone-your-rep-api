@@ -35,7 +35,19 @@ def seed_districts
   puts "There are now #{District.count} districts in the database."
 end
 
+def parse_yaml(file)
+  YAML::load(File.open(Rails.root.join('lib', 'seeds', file)))
+end
 
+@offices = parse_yaml('legislators-district-offices.yaml')
+
+@reps = parse_yaml('legislators-current.yaml')
+
+@socials = parse_yaml('legislators-social-media.yaml')
+
+def seed_reps
+
+end
 # seed_states
 # seed_districts
 seed_reps

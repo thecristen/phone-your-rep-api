@@ -1,17 +1,16 @@
 # frozen_string_literal: true
 class OfficeLocation < ApplicationRecord
-  belongs_to       :rep
+  belongs_to       :rep, foreign_key: :bioguide_id, primary_key: :bioguide_id
   geocoded_by      :full_address
   after_validation :geocode, :set_lonlat
   scope            :find_with_rep, ->(id) { where(id: id).includes(rep: :office_locations) }
-  serialize        :phones, Array
 
   def set_lonlat
     self[:lonlat] = RGeo::Cartesian.factory.point(longitude, latitude)
   end
 
   def full_address
-    [line1, line2, city, state, zip].join(' ')
+    [address, city, state, zip].join(' ')
   end
 
   def to_hash
