@@ -37,32 +37,32 @@ class OfficeLocation < ApplicationRecord
     Vpim::Vcard::Maker.make2 do |maker|
 
       maker.add_name do |name|
-        name.prefix = ''
+        name.prefix   = ''
         name.fullname = rep.official_full if rep.official_full
-        name.given  = rep.first if rep.first
-        name.family = rep.last if rep.last
-        name.suffix = rep.suffix if rep.suffix
+        name.given    = rep.first if rep.first
+        name.family   = rep.last if rep.last
+        name.suffix   = rep.suffix if rep.suffix
       end
 
       maker.add_tel(phone) do |tel|
-        tel.preferred = true
-        tel.location = 'work'
+        tel.preferred  = true
+        tel.location   = 'work'
         tel.capability = 'voice'
       end
 
       if rep.contact_form
         maker.add_email(rep.contact_form) do |email|
-          email.location = 'work'
+          email.location  = 'work'
           email.preferred = true
         end
       end
 
       maker.add_addr do |addr|
-        addr.preferred = true
-        addr.location = 'work'
-        addr.street = suite ? "#{address}, #{suite}" : address
-        addr.locality = city
-        addr.region = state
+        addr.preferred  = true
+        addr.location   = 'work'
+        addr.street     = suite ? "#{address}, #{suite}" : address
+        addr.locality   = city
+        addr.region     = state
         addr.postalcode = zip
       end
 
@@ -78,8 +78,8 @@ class OfficeLocation < ApplicationRecord
     #    end
 
         maker.add_tel(office.phone) do |tel|
-          tel.preferred = false
-          tel.location = 'work'
+          tel.preferred  = false
+          tel.location   = 'work'
           tel.capability = 'voice'
         end
       end

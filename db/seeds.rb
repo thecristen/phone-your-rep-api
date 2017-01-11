@@ -40,9 +40,7 @@ def parse_yaml(file)
 end
 
 @offices = parse_yaml('legislators-district-offices.yaml')
-
-@reps = parse_yaml('legislators-current.yaml')
-
+@reps    = parse_yaml('legislators-current.yaml')
 @socials = parse_yaml('legislators-social-media.yaml')
 
 def seed_reps
@@ -52,7 +50,7 @@ def seed_reps
     address_ary = term['address'].split(' ')
     dis_code = format('%d', term['district']) if term['district']
     dis_code = dis_code.size == 1 ? "0#{dis_code}" : dis_code if dis_code
-    r = Rep.new
+    r               = Rep.new
     r.bioguide_id   = rep['id']['bioguide']
     r.official_full = name['official_full']
     r.first         = name['first']
@@ -75,13 +73,13 @@ def seed_reps
     r.senate_class  = format('0%o', term['class']) if term['class']
     r.office_locations.build(
                           office_type: 'capitol',
-                          zip: address_ary.pop,
-                          state: address_ary.pop,
-                          city: address_ary.pop,
-                          address: address_ary.join(' ').gsub(';', ''),
-                          phone: term['phone'],
-                          fax: term['fax'],
-                          hours: term['hours']
+                          zip:         address_ary.pop,
+                          state:       address_ary.pop,
+                          city:        address_ary.pop,
+                          address:     address_ary.join(' ').gsub(';', ''),
+                          phone:       term['phone'],
+                          fax:         term['fax'],
+                          hours:       term['hours']
     )
     r.save
     puts "#{r.official_full} saved in the database."
@@ -91,7 +89,7 @@ end
 
 def seed_socials
   @socials.each do |social|
-    rep = Rep.find_by(bioguide_id: social['id']['bioguide'])
+    rep              = Rep.find_by(bioguide_id: social['id']['bioguide'])
     rep.facebook     = social['social']['facebook']
     rep.facebook_id  = social['social']['facebook_id']
     rep.twitter      = social['social']['twitter']
@@ -112,15 +110,15 @@ def seed_office_locations
     office['offices'].each do |off|
       rep.office_locations.build(
                               office_type: 'district',
-                              suite: off['suite'],
-                              phone: off['phone'],
-                              address: off['address'],
-                              building: off['building'],
-                              city: off['city'],
-                              state: off['state'],
-                              zip: off['zip'],
-                              fax: off['fax'],
-                              hours: off['hours']
+                              suite:       off['suite'],
+                              phone:       off['phone'],
+                              address:     off['address'],
+                              building:    off['building'],
+                              city:        off['city'],
+                              state:       off['state'],
+                              zip:         off['zip'],
+                              fax:         off['fax'],
+                              hours:       off['hours']
       )
       rep.save
       puts "#{rep.official_full}'s office location saved to the database."
