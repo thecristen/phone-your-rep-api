@@ -7,6 +7,6 @@ class VCardsController < ApplicationController
       @card   = @office.make_vcard
     end
 
-    send_data @card.to_s, :filename => "#{@rep.name} #{@rep.state.abbr}.vcf"
+    send_data @card.to_s, filename: "#{@rep.official_full} #{@rep.state.abbr}.vcf"
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class OfficeLocation < ApplicationRecord
   belongs_to       :rep, foreign_key: :bioguide_id, primary_key: :bioguide_id
-  geocoded_by      :full_address
+  geocoded_by      :city_state_zip
   after_validation :geocode, :set_lonlat
   scope            :find_with_rep, ->(id) { where(id: id).includes(rep: :office_locations) }
 
@@ -10,17 +10,27 @@ class OfficeLocation < ApplicationRecord
   end
 
   def full_address
-    [address, city, state, zip].join(' ')
+    "#{address}, #{city_state_zip}"
+  end
+
+  def city_state_zip
+    [city, state, zip].join(' ')
   end
 
   def to_hash
-    { type:   office_type,
-      line_1: line1,
-      line_2: line2,
-      city:   city,
-      state:  state,
-      zip:    zip,
-      v_card_link: "phone-your-rep.herokuapp.com/v_cards/#{id}" } # TODO: change to production path for deployment
+    { type:      office_type,
+      building:  building,
+      address:   address,
+      suite:     suite,
+      city:      city,
+      state:     state,
+      zip:       zip,
+      phone:     phone,
+      fax:       fax,
+      hours:     hours,
+      latitude:  latitude,
+      longitude: longitude,
+      v_card_link: "localhost:3000/v_cards/#{id}" } # TODO: change to production path for deployment
   end
 
   def make_vcard
@@ -28,25 +38,29 @@ class OfficeLocation < ApplicationRecord
 
       maker.add_name do |name|
         name.prefix = ''
-        name.given  = rep.first_name
-        name.family = rep.last_name
+        name.fullname = rep.official_full if rep.official_full
+        name.given  = rep.first if rep.first
+        name.family = rep.last if rep.last
+        name.suffix = rep.suffix if rep.suffix
       end
 
+      maker.add_tel(phone) do |tel|
+        tel.preferred = true
+        tel.location = 'work'
+        tel.capability = 'voice'
+      end
 
-      phones.each do |phone|
-        next if phone.blank?
-        maker.add_tel(phone) do |tel|
-          tel.preferred = true
-          tel.location = 'work'
-          tel.capability = 'voice'
+      if rep.contact_form
+        maker.add_email(rep.contact_form) do |email|
+          email.location = 'work'
+          email.preferred = true
         end
       end
-
 
       maker.add_addr do |addr|
         addr.preferred = true
         addr.location = 'work'
-        addr.street = line2 ? "#{line1}, #{line2}" : line1
+        addr.street = suite ? "#{address}, #{suite}" : address
         addr.locality = city
         addr.region = state
         addr.postalcode = zip
@@ -54,29 +68,19 @@ class OfficeLocation < ApplicationRecord
 
       rep.office_locations.each do |office|
         next if office == self
-        maker.add_addr do |addr|
-          addr.preferred = false
-          addr.location = 'work'
-          addr.street = office.line1 ? "#{office.line1}, #{office.line2}" : office.line1
-          addr.locality = office.city
-          addr.region = office.state
-          addr.postalcode = office.zip
-        end
+    #    maker.add_addr do |addr|
+    #      addr.preferred = false
+    #      addr.location = 'work'
+    #      addr.street = office.suite ? "#{office.address}, #{office.suite}" : office.address
+    #      addr.locality = office.city
+    #      addr.region = office.state
+    #      addr.postalcode = office.zip
+    #    end
 
-        office.phones.each do |phone|
-          maker.add_tel(phone) do |tel|
-            tel.preferred = false
-            tel.location = 'work'
-            tel.capability = 'voice'
-          end
-        end
-      end
-
-      rep.email.each do |email|
-        unless email.blank?
-          maker.add_email(email) do |eml|
-            eml.location = 'work'
-          end
+        maker.add_tel(office.phone) do |tel|
+          tel.preferred = false
+          tel.location = 'work'
+          tel.capability = 'voice'
         end
       end
 

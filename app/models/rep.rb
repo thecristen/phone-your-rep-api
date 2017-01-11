@@ -8,7 +8,6 @@ class Rep < ApplicationRecord
   has_many   :office_locations, dependent: :destroy, foreign_key: :bioguide_id, primary_key: :bioguide_id
   scope      :yours, ->(state:, district:) { where(district: district).or(Rep.where(state: state, district: nil)) }
   serialize  :committees, Array
-  serialize  :email, Array
 
   # Open up Rep Metaclass to set Class attributes --------------------------------------------------------------------
   class << self
@@ -83,7 +82,7 @@ class Rep < ApplicationRecord
   def self.external_reps(address)
     init(address)
     ex_reps = GetYourRep::Google.all_reps(address, congress_only: true)
-    self.raw_reps = Rep.where(name: ex_reps.names).includes(:office_locations, :district, :state).to_a
+    self.raw_reps = Rep.where(official_full: ex_reps.names).includes(:office_locations, :district, :state).to_a
     process_reps
   end
 
@@ -110,20 +109,31 @@ class Rep < ApplicationRecord
 
   # Assemble rep into hash, handling office sorting and nil :district
   def to_hash(state = self.state)
-    { name:             name,
+    { bioguide_id:      bioguide_id,
+      official_full:    official_full,
       state:            state.abbr,
       district:         district_code,
-      office:           role,
+      role:             role,
       party:            party,
-      phone:            sorted_phones,
+      last:             last,
+      first:            first,
+      middle:           middle,
+      nickname:         nickname,
+      suffix:           suffix,
       office_locations: sorted_offices_hash,
-      email:            email,
-      website:          website,
+      contact_form:     contact_form,
+      url:              url,
       photo:            photo,
+      senate_class:     senate_class,
       twitter:          twitter,
       facebook:         facebook,
       youtube:          youtube,
-      googleplus:       googleplus }
+      instagram:        instagram,
+      googleplus:       googleplus,
+      twitter_id:       twitter_id,
+      facebook_id:      facebook_id,
+      youtube_id:       youtube_id,
+      instagram_id:     instagram_id }
   end
 
   # Sort the offices by proximity to the request coordinates, making sure to not miss offices that aren't geocoded.
@@ -151,7 +161,7 @@ class Rep < ApplicationRecord
     party = self[:party]
     case party
     when 'D'
-      'Democratic'
+      'Democrat'
     when 'R'
       'Republican'
     when 'I'

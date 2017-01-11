@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170111042017) do
+ActiveRecord::Schema.define(version: 20170111044252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,10 +70,10 @@ ActiveRecord::Schema.define(version: 20170111042017) do
     t.datetime "updated_at",    null: false
     t.string   "nickname"
     t.string   "instagram"
-    t.integer  "instagram_id"
+    t.string   "instagram_id"
     t.string   "facebook_id"
     t.string   "youtube_id"
-    t.integer  "twitter_id"
+    t.string   "twitter_id"
     t.index ["district_id"], name: "index_reps_on_district_id", using: :btree
     t.index ["state_id"], name: "index_reps_on_state_id", using: :btree
   end
