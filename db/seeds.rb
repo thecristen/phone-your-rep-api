@@ -59,7 +59,7 @@ def seed_reps
     r.suffix        = name['suffix']
     r.nickname      = name['nickname']
     r.role          = if term['type'] == 'sen'
-                        'United States Senate'
+                        'United States Senator'
                       elsif term['type'] == 'rep'
                         'United States Representative'
                       else

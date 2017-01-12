@@ -115,16 +115,15 @@ class Rep < ApplicationRecord
       district:         district_code,
       role:             role,
       party:            party,
+      senate_class:     senate_class,
       last:             last,
       first:            first,
       middle:           middle,
       nickname:         nickname,
       suffix:           suffix,
-      office_locations: sorted_offices_hash,
       contact_form:     contact_form,
       url:              url,
       photo:            photo,
-      senate_class:     senate_class,
       twitter:          twitter,
       facebook:         facebook,
       youtube:          youtube,
@@ -133,7 +132,8 @@ class Rep < ApplicationRecord
       twitter_id:       twitter_id,
       facebook_id:      facebook_id,
       youtube_id:       youtube_id,
-      instagram_id:     instagram_id }
+      instagram_id:     instagram_id,
+      office_locations: sorted_offices_array}
   end
 
   # Sort the offices by proximity to the request coordinates, making sure to not miss offices that aren't geocoded.
@@ -147,7 +147,7 @@ class Rep < ApplicationRecord
     district.code unless district.blank?
   end
 
-  def sorted_offices_hash
+  def sorted_offices_array
     sorted_offices.map(&:to_hash)
   end
 
