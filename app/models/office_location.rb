@@ -1,12 +1,21 @@
 # frozen_string_literal: true
 class OfficeLocation < ApplicationRecord
-  belongs_to       :rep, foreign_key: :bioguide_id, primary_key: :bioguide_id
-  geocoded_by      :city_state_zip
-  after_validation :geocode, :set_lonlat
-  scope            :find_with_rep, ->(id) { where(id: id).includes(rep: :office_locations) }
+  belongs_to  :rep, foreign_key: :bioguide_id, primary_key: :bioguide_id
+  geocoded_by :city_state_zip
+  after_save  :geocode, if: :needs_geocoding?
+  scope       :find_with_rep, ->(id) { where(id: id).includes(rep: :office_locations) }
 
   def set_lonlat
-    self[:lonlat] = RGeo::Cartesian.factory.point(longitude, latitude)
+    self.lonlat = RGeo::Cartesian.factory.point(longitude, latitude)
+  end
+
+  def needs_geocoding?
+    latitude == nil || longitude == nil
+  end
+
+  def geocode
+    super
+    set_lonlat
   end
 
   def full_address
