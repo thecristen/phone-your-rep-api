@@ -5,9 +5,12 @@ class RepsController < ApplicationController
   # GET /reps
   def index
     address = params[:address]
+    lat     = params[:lat]
+    long    = params[:long]
+    state   = params[:state]
     # return the first result, or a random one
-    @reps = if address
-              Rep.find_em(address)
+    @reps = if params
+              Rep.find_em address: address, lat: lat, long: long, state: state
             else
               # Would like to find requesting IP address, geocode it and return the closest rep
               # request = Rack::Request.new Rails.env

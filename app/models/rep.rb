@@ -30,19 +30,24 @@ class Rep < ApplicationRecord
   # Instance attribute that holds offices sorted by location after calling the :sort_ofices method.
   attr_accessor :sorted_offices
 
-  def self.init(address)
+  def self.init(address, lat, long, state)
     self.raw_reps    = nil
-    self.coordinates = nil
+    self.coordinates = [lat.to_f, long.to_f] - [0.0]
+    self.state       = State.find_by(name: state)
     self.address     = address
+    return unless coordinates.blank? && self.state.blank?
+    find_by_address if address
+  end
+
+  def self.find_by_address
     self.state_abbr  = address.split.grep(/[A-Z]{2}/)
-    return if state_abbr.blank?
     find_coordinates
     find_state
   end
 
   # Find the reps in the db associated to that address and assemble into JSON blob
-  def self.find_em(address)
-    init(address)
+  def self.find_em(address: nil, lat: nil, long: nil, state: nil)
+    init(address, lat, long, state)
     return [] if coordinates.blank?
     find_point
     find_district
