@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 class Rep < ApplicationRecord
-  extend  Scrapeable::ClassMethods
-  include Scrapeable::InstanceMethods
-
   belongs_to :district
   belongs_to :state
   has_many   :office_locations, dependent: :destroy, foreign_key: :bioguide_id, primary_key: :bioguide_id
@@ -40,7 +37,7 @@ class Rep < ApplicationRecord
   end
 
   def self.find_by_address
-    self.state_abbr  = address.split.grep(/[A-Z]{2}/)
+    self.state_abbr = address.split.grep(/[A-Z]{2}/)
     find_coordinates
     find_state
   end
@@ -138,7 +135,7 @@ class Rep < ApplicationRecord
       facebook_id:      facebook_id,
       youtube_id:       youtube_id,
       instagram_id:     instagram_id,
-      office_locations: sorted_offices_array}
+      office_locations: sorted_offices_array }
   end
 
   # Sort the offices by proximity to the request coordinates, making sure to not miss offices that aren't geocoded.

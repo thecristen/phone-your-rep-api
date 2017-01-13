@@ -13,7 +13,7 @@ class OfficeLocation < ApplicationRecord
   end
 
   def needs_geocoding?
-    latitude == nil || longitude == nil
+    latitude.nil? || longitude.nil?
   end
 
   def geocode
@@ -66,71 +66,91 @@ class OfficeLocation < ApplicationRecord
   end
 
   def v_card_link
-    "https://phone-your-rep.herokuapp.com/v_cards/#{id}" # TODO: change to production path for deployment
+    "https://phone-your-rep.herokuapp.com/v_cards/#{id}" # change to localhost:3000/ path for development
   end
 
   def qr_code_link
-    "https://phone-your-rep.herokuapp.com/qr_codes/#{id}" # TODO: change to production path for deployment
+    "https://phone-your-rep.herokuapp.com/qr_codes/#{id}" # change to localhost:3000/ path for development
   end
 
   def make_vcard
     Vpim::Vcard::Maker.make2 do |maker|
-
-      maker.add_name do |name|
-        name.prefix   = ''
-        name.fullname = rep.official_full if rep.official_full
-        name.given    = rep.first if rep.first
-        name.family   = rep.last if rep.last
-        name.suffix   = rep.suffix if rep.suffix
-      end
-
-      unless phone.blank?
-        maker.add_tel(phone) do |tel|
-          tel.preferred  = true
-          tel.location   = 'work'
-          tel.capability = 'voice'
-        end
-      end
-
-      if rep.contact_form
-        maker.add_email(rep.contact_form) do |email|
-          email.location  = 'work'
-          email.preferred = true
-        end
-      end
-
-      maker.add_addr do |addr|
-        addr.preferred  = true
-        addr.location   = 'work'
-        addr.street     = suite ? "#{address}, #{suite}" : address
-        addr.locality   = city
-        addr.region     = state
-        addr.postalcode = zip
-      end
-
-      rep.office_locations.each do |office|
-        next if office.office_type == self.office_type
-        maker.add_addr do |addr|
-          addr.preferred = false
-          addr.location = 'work'
-          addr.street = office.suite ? "#{office.address}, #{office.suite}" : office.address
-          addr.locality = office.city
-          addr.region = office.state
-          addr.postalcode = office.zip
-        end
-
-        unless office.phone.blank?
-          maker.add_tel(office.phone) do |tel|
-            tel.preferred  = false
-            tel.location   = 'work'
-            tel.capability = 'voice'
-          end
-        end
-
-        break
-      end
-
+      add_rep_name(maker)
+      add_contact_form(maker)
+      add_primary_phone(maker)
+      add_primary_address(maker)
+      add_secondary_office(maker)
       maker.org = rep.role
+    end
+  end
+
+  def add_secondary_office(maker)
+    rep.office_locations.each do |office|
+      next if office.office_type == office_type
+      add_secondary_address(maker, office)
+      add_secondary_phone(maker, office)
+      break
+    end
+  end
+
+  def add_secondary_phone(maker, office)
+    unless office.phone.blank?
+      maker.add_tel(office.phone) do |tel|
+        tel.preferred  = false
+        tel.location   = 'work'
+        tel.capability = 'voice'
+      end
+    end
+  end
+
+  def add_secondary_address(maker, office)
+    maker.add_addr do |addr|
+      addr.preferred  = false
+      addr.location   = 'work'
+      addr.street     = office.suite ? "#{office.address}, #{office.suite}" : office.address
+      addr.locality   = office.city
+      addr.region     = office.state
+      addr.postalcode = office.zip
+    end
+  end
+
+  def add_primary_address(maker)
+    maker.add_addr do |addr|
+      addr.preferred  = true
+      addr.location   = 'work'
+      addr.street     = suite ? "#{address}, #{suite}" : address
+      addr.locality   = city
+      addr.region     = state
+      addr.postalcode = zip
+    end
+  end
+
+  def add_contact_form(maker)
+    if rep.contact_form
+      maker.add_email(rep.contact_form) do |email|
+        email.location  = 'work'
+        email.preferred = true
+      end
+    end
+  end
+
+  def add_primary_phone(maker)
+    unless phone.blank?
+      maker.add_tel(phone) do |tel|
+        tel.preferred  = true
+        tel.location   = 'work'
+        tel.capability = 'voice'
+      end
+    end
+  end
+
+  def add_rep_name(maker)
+    maker.add_name do |name|
+      name.prefix   = ''
+      name.fullname = rep.official_full if rep.official_full
+      name.given    = rep.first if rep.first
+      name.family   = rep.last if rep.last
+      name.suffix   = rep.suffix if rep.suffix
     end
   end
 end
