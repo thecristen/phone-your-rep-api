@@ -27,23 +27,28 @@ class OfficeLocation < ApplicationRecord
   end
 
   def to_hash
-    { type:        office_type,
-      building:    building,
-      address:     address,
-      suite:       suite,
-      city:        city,
-      state:       state,
-      zip:         zip,
-      phone:       phone,
-      fax:         fax,
-      hours:       hours,
-      latitude:    latitude,
-      longitude:   longitude,
-      v_card_link: v_card_link }
+    { type:         office_type,
+      building:     building,
+      address:      address,
+      suite:        suite,
+      city:         city,
+      state:        state,
+      zip:          zip,
+      phone:        phone,
+      fax:          fax,
+      hours:        hours,
+      latitude:     latitude,
+      longitude:    longitude,
+      v_card_link:  v_card_link,
+      qr_code_link: qr_code_link }
   end
 
   def v_card_link
     "https://phone-your-rep.herokuapp.com/v_cards/#{id}" # TODO: change to production path for deployment
+  end
+
+  def qr_code_link
+    "https://phone-your-rep.herokuapp.com/qr_codes/#{id}" # TODO: change to production path for deployment
   end
 
   def make_vcard
