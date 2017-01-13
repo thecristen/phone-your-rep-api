@@ -69,6 +69,10 @@ class OfficeLocation < ApplicationRecord
     "https://phone-your-rep.herokuapp.com/v_cards/#{id}" # TODO: change to production path for deployment
   end
 
+  def qr_code_link
+    "https://phone-your-rep.herokuapp.com/qr_codes/#{id}" # TODO: change to production path for deployment
+  end
+
   def make_vcard
     Vpim::Vcard::Maker.make2 do |maker|
 
