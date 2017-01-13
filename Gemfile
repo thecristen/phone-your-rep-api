@@ -36,6 +36,9 @@ gem 'vpim', '~> 13.11', '>= 13.11.11'
 # Use Rgeo::Shapefile to read and import shapefiles
 gem 'rgeo-shapefile', '~> 0.4'
 
+# Use rQRcode for QR codes
+gem 'rqrcode', '~> 0.10.1'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

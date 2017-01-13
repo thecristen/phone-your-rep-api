@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # namespace :api, defaults: { format: :json }, path: '/api' do
 
   resources :reps
-  get '/v_cards/:id', to: 'v_cards#show'
+  get '/v_cards/:id',  to: 'v_cards#show'
+  get '/qr_codes/:id', to: 'qr_codes#show'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
