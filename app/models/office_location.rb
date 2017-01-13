@@ -22,15 +22,15 @@ class OfficeLocation < ApplicationRecord
   end
 
   def add_qr_code_img
-    qr_code_img = RQRCode::QRCode.new(v_card, :size => 22, :level => :h).as_png(
-        resize_gte_to: false,
-        resize_exactly_to: false,
-        fill: 'white',
-        color: 'black',
-        size: 360,
-        border_modules: 4,
-        module_px_size: 6,
-        file: nil # path to write
+    qr_code_img = RQRCode::QRCode.new(v_card, size: 22, level: :h).as_png(
+      resize_gte_to: false,
+      resize_exactly_to: false,
+      fill: 'white',
+      color: 'black',
+      size: 360,
+      border_modules: 4,
+      module_px_size: 6,
+      file: nil # path to write
     )
     update_attribute :qr_code, qr_code_img.to_string
   end
@@ -94,12 +94,11 @@ class OfficeLocation < ApplicationRecord
   end
 
   def add_secondary_phone(maker, office)
-    unless office.phone.blank?
-      maker.add_tel(office.phone) do |tel|
-        tel.preferred  = false
-        tel.location   = 'work'
-        tel.capability = 'voice'
-      end
+    return if office.phone.blank?
+    maker.add_tel(office.phone) do |tel|
+      tel.preferred  = false
+      tel.location   = 'work'
+      tel.capability = 'voice'
     end
   end
 
@@ -126,21 +125,19 @@ class OfficeLocation < ApplicationRecord
   end
 
   def add_contact_form(maker)
-    if rep.contact_form
-      maker.add_email(rep.contact_form) do |email|
-        email.location  = 'work'
-        email.preferred = true
-      end
+    return unless rep.contact_form
+    maker.add_email(rep.contact_form) do |email|
+      email.location  = 'work'
+      email.preferred = true
     end
   end
 
   def add_primary_phone(maker)
-    unless phone.blank?
-      maker.add_tel(phone) do |tel|
-        tel.preferred  = true
-        tel.location   = 'work'
-        tel.capability = 'voice'
-      end
+    return if phone.blank?
+    maker.add_tel(phone) do |tel|
+      tel.preferred  = true
+      tel.location   = 'work'
+      tel.capability = 'voice'
     end
   end
 
