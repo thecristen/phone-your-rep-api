@@ -6,6 +6,8 @@ class OfficeLocation < ApplicationRecord
   before_save   :geocode, if: :needs_geocoding?
   scope         :find_with_rep, ->(id) { where(id: id).includes(rep: :office_locations) }
 
+  dragonfly_accessor :qr_code
+
   def set_lonlat
     self.lonlat = RGeo::Cartesian.factory.point(longitude, latitude)
   end
@@ -17,6 +19,25 @@ class OfficeLocation < ApplicationRecord
   def geocode
     super
     set_lonlat
+  end
+
+  def add_qr_code_img
+    qr_code_img = RQRCode::QRCode.new(v_card, :size => 22, :level => :h).as_png(
+        resize_gte_to: false,
+        resize_exactly_to: false,
+        fill: 'white',
+        color: 'black',
+        size: 360,
+        border_modules: 4,
+        module_px_size: 6,
+        file: nil # path to write
+    )
+    update_attribute :qr_code, qr_code_img.to_string
+  end
+
+  def add_v_card
+    v_card = make_vcard
+    update_attribute :v_card, v_card.to_s
   end
 
   def full_address
@@ -48,10 +69,6 @@ class OfficeLocation < ApplicationRecord
     "https://phone-your-rep.herokuapp.com/v_cards/#{id}" # TODO: change to production path for deployment
   end
 
-  def qr_code_link
-    "https://phone-your-rep.herokuapp.com/qr_codes/#{id}" # TODO: change to production path for deployment
-  end
-
   def make_vcard
     Vpim::Vcard::Maker.make2 do |maker|
 
@@ -63,10 +80,12 @@ class OfficeLocation < ApplicationRecord
         name.suffix   = rep.suffix if rep.suffix
       end
 
-      maker.add_tel(phone) do |tel|
-        tel.preferred  = true
-        tel.location   = 'work'
-        tel.capability = 'voice'
+      unless phone.blank?
+        maker.add_tel(phone) do |tel|
+          tel.preferred  = true
+          tel.location   = 'work'
+          tel.capability = 'voice'
+        end
       end
 
       if rep.contact_form
@@ -96,11 +115,14 @@ class OfficeLocation < ApplicationRecord
           addr.postalcode = office.zip
         end
 
-        maker.add_tel(office.phone) do |tel|
-          tel.preferred  = false
-          tel.location   = 'work'
-          tel.capability = 'voice'
+        unless office.phone.blank?
+          maker.add_tel(office.phone) do |tel|
+            tel.preferred  = false
+            tel.location   = 'work'
+            tel.capability = 'voice'
+          end
         end
+
         break
       end
 

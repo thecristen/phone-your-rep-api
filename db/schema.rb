@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170111044252) do
+ActiveRecord::Schema.define(version: 20170113161248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,12 +37,15 @@ ActiveRecord::Schema.define(version: 20170111044252) do
     t.string   "zip"
     t.float    "latitude"
     t.float    "longitude"
-    t.geometry "lonlat",      limit: {:srid=>0, :type=>"point"}
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.geometry "lonlat",       limit: {:srid=>0, :type=>"point"}
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.string   "bioguide_id"
     t.string   "fax"
     t.string   "hours"
+    t.string   "qr_code_uid"
+    t.string   "qr_code_name"
+    t.string   "v_card"
     t.index ["rep_id"], name: "index_office_locations_on_rep_id", using: :btree
   end
 

@@ -27,6 +27,6 @@
   <title><%= @office.rep.official_full %></title>
 </head>
 <body>
-<%= raw @qr.as_html %>
+<%= image_tag @qr_code.url %>
 </body>
 </html>
