@@ -58,14 +58,20 @@ class OfficeLocation < ApplicationRecord
   end
 
   def v_card_link
-    "https://phone-your-rep.herokuapp.com/v_cards/#{id}" if Rails.env.production?
-    "http://localhost:3000/v_cards/#{id}" if Rails.env.development?
+    if Rails.env.production?
+      "https://phone-your-rep.herokuapp.com/v_cards/#{id}"
+    elsif Rails.env.development?
+      "http://localhost:3000/v_cards/#{id}"
+    end
   end
 
   def qr_code_link
     return if qr_code.blank?
-    "https://phone-your-rep.herokuapp.com#{qr_code.url}" if Rails.env.production?
-    "http://localhost:3000#{qr_code.url}" if Rails.env.development?
+    if Rails.env.production?
+      "https://phone-your-rep.herokuapp.com#{qr_code.url}"
+    elsif Rails.env.development?
+      "http://localhost:3000#{qr_code.url}"
+    end
   end
 
   def make_vcard
