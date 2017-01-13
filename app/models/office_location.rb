@@ -22,17 +22,9 @@ class OfficeLocation < ApplicationRecord
   end
 
   def add_qr_code_img
-    qr_code_img = RQRCode::QRCode.new(v_card, size: 22, level: :h).as_png(
-      resize_gte_to: false,
-      resize_exactly_to: false,
-      fill: 'white',
-      color: 'black',
-      size: 360,
-      border_modules: 4,
-      module_px_size: 6,
-      file: nil # path to write
-    )
-    update_attribute :qr_code, qr_code_img.to_string
+    self.qr_code      = RQRCode::QRCode.new(v_card, size: 22, level: :h).as_png(size: 360).to_string
+    self.qr_code.name = "#{rep.official_full}_#{id}.png"
+    save
   end
 
   def add_v_card
@@ -66,11 +58,13 @@ class OfficeLocation < ApplicationRecord
   end
 
   def v_card_link
-    "https://phone-your-rep.herokuapp.com/v_cards/#{id}" # change to localhost:3000/ path for development
+    "https://phone-your-rep.herokuapp.com/v_cards/#{id}" if Rails.env.production?
+    "http://localhost:3000/v_cards/#{id}" if Rails.env.development?
   end
 
   def qr_code_link
-    "https://phone-your-rep.herokuapp.com/qr_codes/#{id}" # change to localhost:3000/ path for development
+    "https://phone-your-rep.herokuapp.com#{qr_code.url}" if Rails.env.production?
+    "http://localhost:3000#{qr_code.url}" if Rails.env.development?
   end
 
   def make_vcard
