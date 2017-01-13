@@ -25,5 +25,3 @@ import_geoms(dir:         'us_congress_districts_122116',
              model:       District,
              model_attr:  :full_code,
              record_attr: 'GEOID')
-
-#import_geoms(dir: dir, shp_file: shp_file, model: model, model_attr: model_attr, record_attr: record_attr)

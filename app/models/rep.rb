@@ -101,14 +101,6 @@ class Rep < ApplicationRecord
     end
   end
 
-  # Pick a random rep and assemble into JSON blob.
-  def self.random_rep
-    random_rep = Rep.order('RANDOM()').limit(1).first
-    return [] << { error: 'Something went wrong, try again.' } unless random_rep
-    random_rep.sort_offices(coordinates)
-    [] << random_rep.to_hash
-  end
-
   # Assemble rep into hash, handling office sorting and nil :district
   def to_hash(state = self.state)
     { bioguide_id:      bioguide_id,
@@ -151,11 +143,6 @@ class Rep < ApplicationRecord
 
   def sorted_offices_array
     sorted_offices.map(&:to_hash)
-  end
-
-  # Map the phone number of every office location into one Array, sorting by location if possible.
-  def sorted_phones
-    sorted_offices.map(&:phones).flatten - [nil]
   end
 
   # Convert shorthand party to long-form.

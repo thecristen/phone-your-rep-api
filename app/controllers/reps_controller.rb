@@ -17,11 +17,10 @@ class RepsController < ApplicationController
               # result = request.location
               # @office = OfficeLocation.near(result.postal_code)
               # @reps = @office.rep
-              Rep.random_rep
+              []
             end
 
     render json: @reps
-    # render json: @district
   end
 
   # GET /reps/1
