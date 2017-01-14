@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 class OfficeLocation < ApplicationRecord
   belongs_to    :rep, foreign_key: :bioguide_id, primary_key: :bioguide_id
+  has_many      :issues 
   geocoded_by   :city_state_zip
   before_create :geocode
   before_save   :geocode, if: :needs_geocoding?
