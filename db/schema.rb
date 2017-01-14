@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170113161248) do
+ActiveRecord::Schema.define(version: 20170114195053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(version: 20170113161248) do
     t.string   "full_code"
     t.geometry "geom",       limit: {:srid=>0, :type=>"geometry"}
     t.index ["state_id"], name: "index_districts_on_state_id", using: :btree
+  end
+
+  create_table "issues", force: :cascade do |t|
+    t.string   "type",                               null: false
+    t.boolean  "resolved?",          default: false
+    t.integer  "office_location_id"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.index ["office_location_id"], name: "index_issues_on_office_location_id", using: :btree
   end
 
   create_table "office_locations", force: :cascade do |t|
