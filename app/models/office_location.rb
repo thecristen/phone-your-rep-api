@@ -69,7 +69,7 @@ class OfficeLocation < ApplicationRecord
   def qr_code_link
     return if qr_code.blank?
     if Rails.env.production?
-      "https://phone-your-rep.herokuapp.com#{qr_code.url}"
+      qr_code.url
     elsif Rails.env.development?
       "http://localhost:3000#{qr_code.url}"
     end
