@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 20170114195053) do
   end
 
   create_table "issues", force: :cascade do |t|
-    t.string   "type",                               null: false
-    t.boolean  "resolved?",          default: false
+    t.string   "issue_type",                         null: false
+    t.boolean  "resolved",           default: false
     t.integer  "office_location_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
