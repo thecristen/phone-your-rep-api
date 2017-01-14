@@ -20,7 +20,7 @@ gem install rails --no-ri --no-rdoc
 gem install bundler
 bundle install
 bundle exec rake db:create
-bundle exec rake:gis:setup
+bundle exec rake db:gis:setup
 bundle exec rake db:migrate
 ruby lib/shapefiles.rb
 
