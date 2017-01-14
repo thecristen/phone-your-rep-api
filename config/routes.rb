@@ -8,8 +8,7 @@ Rails.application.routes.draw do
     end
   end
 
-
   resources :reps #, defaults: { format: 'json' }
+  resources :issues, only: [:index, :new, :create, :update]
   get '/v_cards/:id',  to: 'v_cards#show'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
