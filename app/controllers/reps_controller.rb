@@ -20,7 +20,11 @@ class RepsController < ApplicationController
               []
             end
 
-    render json: @reps
+    # render json: @reps
+    # respond_to do |format|
+    #   format.json { render json: @reps }
+    #   format.xml  { render xml: @reps }
+    # end
   end
 
   # GET /reps/1
