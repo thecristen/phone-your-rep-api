@@ -41,7 +41,8 @@ class OfficeLocation < ApplicationRecord
   end
 
   def to_hash
-    { type:         office_type,
+    { office_id:    id,
+      type:         office_type,
       building:     building,
       address:      address,
       suite:        suite,
