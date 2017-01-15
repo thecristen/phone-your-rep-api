@@ -3,6 +3,11 @@
 WIP.
 The companion to [the Phone Your Rep frontend](https://github.com/Flaque/phone-your-rep/tree/gh-pages).
 
+# Vagrant
+If you are too busy to do the manual installation, you can download a Vagrant BOX which has the requirements below already installed, download it here.
+
+https://s3.amazonaws.com/debugpyr/pyr.box
+
 # Installation
 
 Be sure to use Ruby 2.3.3.
