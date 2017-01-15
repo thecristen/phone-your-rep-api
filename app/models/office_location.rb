@@ -24,7 +24,7 @@ class OfficeLocation < ApplicationRecord
 
   def add_qr_code_img
     self.qr_code      = RQRCode::QRCode.new(v_card, size: 22, level: :h).as_png(size: 360).to_string
-    self.qr_code.name = "#{rep.official_full}_#{id}.png"
+    self.qr_code.name = "#{rep.last}_#{state}_#{zip}.png"
     save
   end
 
@@ -42,7 +42,8 @@ class OfficeLocation < ApplicationRecord
   end
 
   def to_hash
-    { type:         office_type,
+    { office_id:    id,
+      type:         office_type,
       building:     building,
       address:      address,
       suite:        suite,
@@ -69,7 +70,7 @@ class OfficeLocation < ApplicationRecord
   def qr_code_link
     return if qr_code.blank?
     if Rails.env.production?
-      "https://phone-your-rep.herokuapp.com#{qr_code.url}"
+      'https://s3.amazonaws.com/phone-your-rep-images/' +  qr_code_uid.split('/').last
     elsif Rails.env.development?
       "http://localhost:3000#{qr_code.url}"
     end
