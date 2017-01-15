@@ -4,7 +4,6 @@ class Reps2Controller < ApplicationController
 
   # GET /reps
   def index
-    puts "PFX #{@pfx}"
     address = params[:address]
     lat     = params[:lat]
     long    = params[:long]
