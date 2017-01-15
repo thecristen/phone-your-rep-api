@@ -1,9 +1,10 @@
 # frozen_string_literal: true
-class RepsController < ApplicationController
+class Reps2Controller < ApplicationController
   before_action :set_rep, only: [:show, :update, :destroy]
 
   # GET /reps
   def index
+    puts "PFX #{@pfx}"
     address = params[:address]
     lat     = params[:lat]
     long    = params[:long]
@@ -19,13 +20,18 @@ class RepsController < ApplicationController
               # @reps = @office.rep
               []
             end
+    @self=request.url
 
-    render inline: MultiJson.dump(@reps), content_type: 'application/json'
+  end
+
+  def aep
+
   end
 
   # GET /reps/1
   def show
-    render json: @rep
+
+     render json: @rep
   end
 
   # POST /reps
@@ -58,5 +64,8 @@ class RepsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_rep
       @rep = Rep.find(params[:id])
+
+      @pfx= request.protocol + request.host_with_port
+
     end
 end
