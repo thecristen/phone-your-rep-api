@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # namespace :api, defaults: { format: :json }, path: '/api' do
 
   resources :reps
-  resources :issues, only: [:index, :new, :create]
+  resources :issues, only: [:index, :new, :create, :update]
   get '/v_cards/:id',  to: 'v_cards#show'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
