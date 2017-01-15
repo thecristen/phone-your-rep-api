@@ -19,7 +19,7 @@ module Api
                   # @reps = @office.rep
                   []
                 end
-                respond_with @reps
+        respond_with @reps
       end
 
     end
