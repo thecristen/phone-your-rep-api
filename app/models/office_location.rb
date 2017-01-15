@@ -8,6 +8,7 @@ class OfficeLocation < ApplicationRecord
   scope         :find_with_rep, ->(id) { where(id: id).includes(rep: :office_locations) }
 
   dragonfly_accessor :qr_code
+  attr_reader        :distance
 
   def set_lonlat
     self.lonlat = RGeo::Cartesian.factory.point(longitude, latitude)
@@ -41,9 +42,14 @@ class OfficeLocation < ApplicationRecord
     [city, state, zip].join(' ')
   end
 
+  def calculate_distance(coordinates)
+    @distance = Geocoder::Calculations.distance_between(coordinates, [latitude, longitude])
+  end
+
   def to_hash
     { office_id:    id,
       type:         office_type,
+      distance:     distance,
       building:     building,
       address:      address,
       suite:        suite,

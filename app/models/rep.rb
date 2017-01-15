@@ -135,6 +135,7 @@ class Rep < ApplicationRecord
     closest_offices       = office_locations.near(coordinates, 4000)
     closest_offices      += office_locations
     self.sorted_offices   = closest_offices.uniq || []
+    sorted_offices.blank? ? [] : sorted_offices.each { |office| office.calculate_distance(coordinates) }
   end
 
   def district_code
