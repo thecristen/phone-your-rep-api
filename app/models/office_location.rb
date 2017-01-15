@@ -23,7 +23,7 @@ class OfficeLocation < ApplicationRecord
 
   def add_qr_code_img
     self.qr_code      = RQRCode::QRCode.new(v_card, size: 22, level: :h).as_png(size: 360).to_string
-    self.qr_code.name = "#{rep.official_full}_#{id}.png"
+    self.qr_code.name = "#{rep.last}_#{state}_#{zip}.png"
     save
   end
 
