@@ -15,7 +15,7 @@ gem 'puma', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# 
+#
 gem "responders"
 
 # Use Capistrano for deployment
@@ -55,6 +55,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring', '~> 2.0'
   gem 'pry', '~> 0.10.4'
+  gem 'pry-byebug'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
