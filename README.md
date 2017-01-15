@@ -9,6 +9,9 @@ Be sure to use Ruby 2.3.3.
 
 ```
 rbenv install 2.3.3 or rvm install 2.3.3
+```
+
+```
 brew install postgres
 brew install postgis
 ```
