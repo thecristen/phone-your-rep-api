@@ -19,7 +19,9 @@ module Api
                   # @reps = @office.rep
                   []
                 end
-        respond_with @reps
+        #respond_with @reps
+
+        render inline: MultiJson.dump(@reps), content_type: 'application/json'
       end
 
     end
