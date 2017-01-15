@@ -7,9 +7,10 @@ Rails.application.routes.draw do
       resources :reps
     end
   end
-  
-  resources :reps #, defaults: { format: 'json' }
+
+  resources :reps
   resources :issues, only: [:index, :new, :create, :update]
+  
   get '/v_cards/:id',  to: 'v_cards#show'
 
   # OSDI STUFF!
