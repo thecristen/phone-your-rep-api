@@ -43,7 +43,7 @@ class OfficeLocation < ApplicationRecord
   end
 
   def calculate_distance(coordinates)
-    @distance = Geocoder::Calculations.distance_between(coordinates, [latitude, longitude])
+    @distance = Geocoder::Calculations.distance_between(coordinates, [latitude, longitude]).round(1)
   end
 
   def to_hash
