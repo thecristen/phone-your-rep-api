@@ -4,10 +4,10 @@ i = 0
 CSV.foreach(Rails.root.join('lib', 'qr_codes.csv')) do |row|
   next if row[0] == 'bioguide_id'
   o = OfficeLocation.where(
-    bioguide_id: (row[0].blank? ? nil : row[0]),
-    phone:       (row[1].blank? ? nil : row[1]),
-    city:        (row[0].blank? ? nil : row[2]),
-    zip:         (row[0].blank? ? nil : row[3]),
+    bioguide_id: (row[0].blank? ? '' : row[0]),
+    phone:       (row[1].blank? ? '' : row[1]),
+    city:        (row[0].blank? ? '' : row[2]),
+    zip:         (row[0].blank? ? '' : row[3]),
   ).first
 
   # o.update(qr_code_uid: row[4], qr_code_name: row[5])

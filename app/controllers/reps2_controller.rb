@@ -19,7 +19,7 @@ class Reps2Controller < ApplicationController
               # @reps = @office.rep
               []
             end
-    @self=request.url
+    @self = request.url
 
   end
 
