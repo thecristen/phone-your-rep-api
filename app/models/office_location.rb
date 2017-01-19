@@ -15,7 +15,7 @@ class OfficeLocation < ApplicationRecord
   end
 
   def needs_geocoding?
-    latitude.nil? || longitude.nil?
+    latitude.blank? || longitude.blank?
   end
 
   def geocode
@@ -43,6 +43,7 @@ class OfficeLocation < ApplicationRecord
   end
 
   def calculate_distance(coordinates)
+    return if needs_geocoding?
     @distance = Geocoder::Calculations.distance_between(coordinates, [latitude, longitude]).round(1)
   end
 

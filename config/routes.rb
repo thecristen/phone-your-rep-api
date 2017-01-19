@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     namespace :v1 do # versioning
       resources :reps
     end
+    namespace :beta do #beta version
+      resources :reps
+    end
   end
 
   resources :reps
