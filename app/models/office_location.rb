@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 class OfficeLocation < ApplicationRecord
   belongs_to    :rep, foreign_key: :bioguide_id, primary_key: :bioguide_id
-  has_many      :issues 
-  geocoded_by   :city_state_zip
-  before_create :geocode
-  before_save   :geocode, if: :needs_geocoding?
-  scope         :find_with_rep, ->(id) { where(id: id).includes(rep: :office_locations) }
+  has_many      :issues
+
+  geocoded_by       :city_state_zip
+  after_validation  :geocode, if: :needs_geocoding?
+  scope             :find_with_rep, ->(id) { where(id: id).includes(rep: :office_locations) }
 
   dragonfly_accessor :qr_code
   attr_reader        :distance

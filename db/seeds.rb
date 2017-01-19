@@ -8,6 +8,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'csv'
 def seed_states
+  State.destroy_all
   csv_state_text = File.read(Rails.root.join('lib', 'seeds', 'states.csv'))
   csv_states = CSV.parse(csv_state_text, headers: true, encoding: 'ISO-8859-1')
   csv_states.each do |row|
@@ -22,6 +23,7 @@ def seed_states
 end
 
 def seed_districts
+  District.destroy_all
   csv_district_text = File.read(Rails.root.join('lib', 'seeds', 'districts.csv'))
   csv_districts = CSV.parse(csv_district_text, headers: true, encoding: 'ISO-8859-1')
   csv_districts.each do |row|
@@ -39,11 +41,12 @@ def parse_yaml(file)
   YAML::load(File.open(Rails.root.join('lib', 'seeds', file)))
 end
 
-@offices = parse_yaml('115-legislators-district-offices-011217.yaml')
-@reps    = parse_yaml('115-legislators-current-011117.yaml')
-@socials = parse_yaml('115-legislators-social-media-011117.yaml')
+@offices = parse_yaml('115-legislators-district-offices-011917.yaml')
+@reps    = parse_yaml('115-legislators-current-011917.yaml')
+@socials = parse_yaml('115-legislators-social-media-011917.yaml')
 
 def seed_reps
+  Rep.destroy_all
   @reps.each do |rep|
     name = rep['name']
     term = rep['terms'].last
@@ -104,9 +107,11 @@ def seed_socials
 end
 
 def seed_office_locations
+  OfficeLocation.destroy_all(office_type: 'district')
   @offices.each do |office|
     rep = Rep.find_by(bioguide_id: office['id']['bioguide'])
     next if rep.blank?
+    next if office['offices'].blank?
     office['offices'].each do |off|
       rep.office_locations.build(
                               office_type: 'district',
@@ -117,6 +122,8 @@ def seed_office_locations
                               city:        off['city'],
                               state:       off['state'],
                               zip:         off['zip'],
+                              latitude:    off['latitude'],
+                              longitude:   off['longitude'],
                               fax:         off['fax'],
                               hours:       off['hours']
       )
