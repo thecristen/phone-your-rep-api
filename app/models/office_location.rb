@@ -76,7 +76,7 @@ class OfficeLocation < ApplicationRecord
   def qr_code_link
     return if qr_code.blank?
     if Rails.env.production?
-      'https://s3.amazonaws.com/phone-your-rep-images/' +  qr_code_uid.split('/').last if qr_code_uid
+      "https://s3.amazonaws.com/phone-your-rep-images/#{qr_code_uid.split('/').last}" if qr_code_uid
     elsif Rails.env.development?
       "http://localhost:3000#{qr_code.url}"
     end
