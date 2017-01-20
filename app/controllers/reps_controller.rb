@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 class RepsController < ApplicationController
+  acts_as_token_authentication_handler_for User, only: [:create, :update, :destroy]
   before_action :set_rep, only: [:show, :update, :destroy]
 
   # GET /reps
@@ -25,7 +26,7 @@ class RepsController < ApplicationController
 
   # GET /reps/1
   def show
-    render json: @rep
+    render inline: MultiJson.dump(@rep), content_type: 'application/json'
   end
 
   # POST /reps
@@ -33,7 +34,9 @@ class RepsController < ApplicationController
     @rep = Rep.new(rep_params)
 
     if @rep.save
-      render json: @rep, status: :created, location: @rep
+      render inline: MultiJson.dump(@rep),
+        content_type: 'application/json',
+        status: :created, location: @rep
     else
       render json: @rep.errors, status: :unprocessable_entity
     end
@@ -42,7 +45,7 @@ class RepsController < ApplicationController
   # PATCH/PUT /reps/1
   def update
     if @rep.update(rep_params)
-      render json: @rep
+      render inline: MultiJson.dump(@rep), content_type: 'application/json'
     else
       render json: @rep.errors, status: :unprocessable_entity
     end
@@ -51,9 +54,14 @@ class RepsController < ApplicationController
   # DELETE /reps/1
   def destroy
     @rep.destroy
+
+    head :no_content
   end
 
   private
+    def rep_params
+      params.require(:rep).permit(:twitter)
+    end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_rep

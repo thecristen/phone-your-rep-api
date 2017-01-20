@@ -21,6 +21,4 @@ Rails.application.routes.draw do
   get '/osdi/people' => 'reps2#index'
   get '/osdi/people/:id' => 'reps2#show'
   get '/osdi' => 'reps2#aep'
-
-
 end
