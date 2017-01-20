@@ -3,9 +3,9 @@ class OfficeLocation < ApplicationRecord
   belongs_to    :rep, foreign_key: :bioguide_id, primary_key: :bioguide_id
   has_many      :issues
 
-  geocoded_by       :city_state_zip
-  after_validation  :geocode, if: :needs_geocoding?
-  scope             :find_with_rep, ->(id) { where(id: id).includes(rep: :office_locations) }
+  geocoded_by      :city_state_zip
+  after_validation :geocode, if: :needs_geocoding?
+  scope            :find_with_rep, ->(id) { where(id: id).includes(rep: :office_locations) }
 
   dragonfly_accessor :qr_code
   attr_reader        :distance
@@ -65,7 +65,6 @@ class OfficeLocation < ApplicationRecord
       v_card_link:  v_card_link,
       qr_code_link: qr_code_link }
   end
-
   def v_card_link
     if Rails.env.production?
       "https://phone-your-rep.herokuapp.com/v_cards/#{id}"
