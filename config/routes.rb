@@ -8,12 +8,13 @@ Rails.application.routes.draw do
     end
     namespace :beta do #beta version
       resources :reps
+      resources :issues, only: [:index, :new, :create, :update]
     end
   end
 
   resources :reps
-  resources :issues, only: [:index, :new, :create, :update]
-
+  # resources :issues, only: [:index, :new, :create, :update]
+  
   get '/v_cards/:id',  to: 'v_cards#show'
 
   # OSDI STUFF!
