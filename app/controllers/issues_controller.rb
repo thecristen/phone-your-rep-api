@@ -17,10 +17,12 @@ class IssuesController < ApplicationController
   def create
     @issue = Issue.create(issue_params)
     if @issue.save
-      render json: { status: :created }
+      @response = { status: :created }
     else
-      render json: { status: :unprocessable_entity }
+      @response = { status: :unprocessable_entity }
     end
+
+    render json: @response
   end
 
   def update
