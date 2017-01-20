@@ -1,9 +1,7 @@
 require_relative '../config/environment.rb'
 
 def import_geoms(dir:, shp_file:, model:, model_attr:, record_attr:)
-  RGeo::Shapefile::Reader.open(Rails.root.join(
-    'lib', 'shapefiles', dir, shp_file
-  ).to_s) do |file|
+  RGeo::Shapefile::Reader.open(Rails.root.join('lib', 'shapefiles', dir, shp_file).to_s) do |file|
     puts "File contains #{file.num_records} records."
     file.each do |record|
       puts "Record number #{record.index}:"
