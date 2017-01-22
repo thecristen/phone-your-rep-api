@@ -17,11 +17,18 @@ module Api
       end
 
       def create
-        @issue = Issue.create(issue_params)
-        if @issue.save
-          @response = { status: :created }
+        issue_type = issue_params[:issue_type]
+
+        if issue_type.is_a?(Array)
+          @response = []
+          issue_type.each do |issue|
+            @issue = Issue.new(issue_type: issue, office_location_id: issue_params[:office_location_id])
+            @response << @issue.save ? { status: :created } : { status: :unprocessable_entity }
+          end
+
         else
-          @response = { status: :unprocessable_entity }
+          @issue = Issue.new(issue_params)
+          @response = @issue.save ? { status: :created } : { status: :unprocessable_entity }
         end
 
         render json: @response
@@ -39,7 +46,7 @@ module Api
       private
 
       def issue_params
-        params.require(:issue).permit(:issue_type, :resolved, :office_location_id)
+        params.require(:issue).permit(:issue_type, :resolved, :office_location_id, issue_type: [])
       end
     end
   end
