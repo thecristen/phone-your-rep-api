@@ -3,14 +3,19 @@ module Api
     class IssuesController < ApplicationController
 
       def index
-        @issues_report = Issue.aggregate_issues
+        @issues_report     = Issue.aggregate_issues
         @unresolved_issues = Issue.unresolved
 
         render json: { issues_report: @issues_report, unresolved_issues: @unresolved_issues }
       end
 
       def new
-        @issue_categories = ['Incorrect phone number', 'Office location moved', 'Trouble downloading v-card', 'Incorrect Email']
+        @issue_categories = ['Incorrect phone number',
+                             'Office location moved',
+                             'V-card won\'t download or is inaccurate',
+                             'Incorrect Email',
+                             'Incorrect social media handle',
+                             'Incorrect website URL']
         @issue = Issue.new
 
         render json: { issue_categories: @issue_categories, issue: @issue }
