@@ -4,15 +4,15 @@ Rails.application.routes.draw do
   # namespace :api, defaults: { format: :json }, path: '/api' do
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do # versioning
-      resources :reps
+      resources :reps, only: [:index]
     end
-    namespace :beta do #beta version
-      resources :reps
+    namespace :beta do # beta version
+      resources :reps,   only: [:index]
       resources :issues, only: [:index, :new, :create, :update]
     end
   end
 
-  resources :reps
+  resources :reps, only: [:index]
   # resources :issues, only: [:index, :new, :create, :update]
   
   get '/v_cards/:id',  to: 'v_cards#show'
