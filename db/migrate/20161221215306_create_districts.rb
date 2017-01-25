@@ -6,7 +6,6 @@ class CreateDistricts < ActiveRecord::Migration[5.0]
       t.string     :code
       t.string     :state_code
       t.string     :full_code, unique: true
-      t.geometry    :geom, srid: 3857
     end
   end
 end

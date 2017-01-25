@@ -13,7 +13,7 @@ class OfficeLocation < ApplicationRecord
   FACTORY = RGeo::Geographic.simple_mercator_factory
 
   def set_lonlat
-    self.update lonlat: RGeo::Geographic.simple_mercator_factory.point(longitude, latitude)
+    self.update lonlat: FACTORY.point(longitude, latitude)
   end
 
   def needs_geocoding?

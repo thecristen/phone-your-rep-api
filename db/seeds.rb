@@ -12,12 +12,13 @@ def seed_states
   csv_state_text = File.read(Rails.root.join('lib', 'seeds', 'states.csv'))
   csv_states = CSV.parse(csv_state_text, headers: true, encoding: 'ISO-8859-1')
   csv_states.each do |row|
-    s = State.new
-    s.state_code = row['state_code']
-    s.name       = row['name']
-    s.abbr       = row['abbr']
-    s.save
-    puts "#{s.name} saved in database."
+    State.new do |s|
+      s.state_code = row['state_code']
+      s.name       = row['name']
+      s.abbr       = row['abbr']
+      s.save
+      puts "#{s.name} saved in database."
+    end
   end
   puts "There are now #{State.count} states in the database."
 end
@@ -27,12 +28,13 @@ def seed_districts
   csv_district_text = File.read(Rails.root.join('lib', 'seeds', 'districts.csv'))
   csv_districts = CSV.parse(csv_district_text, headers: true, encoding: 'ISO-8859-1')
   csv_districts.each do |row|
-    d = District.new
-    d.code       = row['code']
-    d.state_code = row['state_code']
-    d.full_code  = row['full_code']
-    d.save
-    puts "District #{d.code} of #{d.state.name} saved in database."
+    District.new do |d|
+      d.code       = row['code']
+      d.state_code = row['state_code']
+      d.full_code  = row['full_code']
+      d.save
+      puts "District #{d.code} of #{d.state.name} saved in database."
+    end
   end
   puts "There are now #{District.count} districts in the database."
 end
@@ -69,7 +71,7 @@ def seed_reps
                         term['type']
                       end
     r.state         = State.find_by(abbr: term['state'])
-    r.district      = District.where(code: dis_code, state: r.state).first if term['district']
+    r.district      = District.where(code: dis_code, state: r.state).take if term['district']
     r.party         = term['party']
     r.url           = term['url']
     r.contact_form  = term['contact_form']
@@ -134,8 +136,8 @@ def seed_office_locations
   puts "There are now #{OfficeLocation.count} office locations in the database."
 end
 
-# seed_states
-# seed_districts
+seed_states
+seed_districts
 seed_reps
 seed_socials
 seed_office_locations
