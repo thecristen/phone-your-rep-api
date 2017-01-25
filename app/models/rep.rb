@@ -3,7 +3,7 @@ class Rep < ApplicationRecord
   belongs_to :district
   belongs_to :state
   has_many   :office_locations, dependent: :destroy, foreign_key: :bioguide_id, primary_key: :bioguide_id
-  scope      :yours, ->(state:, district:) { where(district: District.where(full_code: district.full_code)).or(Rep.where(state: state, district: nil)) }
+  scope      :yours, ->(state:, district:) { where(district: district).or(Rep.where(state: state, district: nil)) }
   serialize  :committees, Array
 
   # Open up Rep Metaclass to set Class attributes --------------------------------------------------------------------
@@ -27,6 +27,14 @@ class Rep < ApplicationRecord
   # Instance attribute that holds offices sorted by location after calling the :sort_ofices method.
   attr_accessor :sorted_offices
 
+  # Find the reps in the db associated to that address and assemble into JSON blob
+  def self.find_em(address: nil, lat: nil, long: nil, state: nil)
+    init(address, lat, long, state)
+    return [] if coordinates.blank?
+    find_district_and_state
+    find_reps
+  end
+
   def self.init(address, lat, long, state)
     self.raw_reps    = nil
     self.coordinates = [lat.to_f, long.to_f] - [0.0]
@@ -37,18 +45,7 @@ class Rep < ApplicationRecord
   end
 
   def self.find_by_address
-    # self.state_abbr = address.split.grep(/[A-Z]{2}/)
     find_coordinates
-    # find_state
-  end
-
-  # Find the reps in the db associated to that address and assemble into JSON blob
-  def self.find_em(address: nil, lat: nil, long: nil, state: nil)
-    init(address, lat, long, state)
-    return [] if coordinates.blank?
-    # find_point
-    find_district
-    find_reps
   end
 
   # Geocode address into [lat, lon] coordinates.
@@ -57,35 +54,19 @@ class Rep < ApplicationRecord
     self.coordinates = Geocoder.coordinates(address)
   end
 
-  def self.find_point
-    lat        = coordinates.first
-    lon        = coordinates.last
-    self.point = RGeo::Geographic.simple_mercator_factory.point(lon, lat)
-  end
-
-  # Parse out the two letter state abbreviation from address and find the State by that attribute.
-  def self.find_state
-    self.state = State.by_abbr_with_districts(abbr: state_abbr)
-  end
-
   # Query all of the districts within that state.
   # Select the district from the collection of state districts that contains the :point.
-  def self.find_district
-    self.district = District.containing_latlon(coordinates.first, coordinates.last)
+  def self.find_district_and_state
+    lat           = coordinates.first
+    lon           = coordinates.last
+    self.district = DistrictGeom.containing_latlon(lat, lon).take.district
     self.state    = district.state
   end
 
   # Query for Reps that belong to either the state or the district.
   # Add the reps to a :raw_reps array and eliminate any dupes.
   def self.find_reps
-    self.raw_reps = Rep.yours(state: district.state, district: district).includes(:office_locations, :district).to_a
-    process_reps
-  end
-
-  def self.external_reps(address)
-    init(address)
-    ex_reps = GetYourRep::Google.all_reps(address, congress_only: true)
-    self.raw_reps = Rep.where(official_full: ex_reps.names).includes(:office_locations, :district, :state).to_a
+    self.raw_reps = Rep.yours(state: state, district: district).includes(:office_locations).to_a
     process_reps
   end
 
@@ -98,16 +79,16 @@ class Rep < ApplicationRecord
   def self.build_rep_hashes
     raw_reps.map do |rep|
       rep.sort_offices(coordinates)
-      rep.to_hash(state)
+      rep.to_hash(state, district)
     end
   end
 
   # Assemble rep into hash, handling office sorting and nil :district
-  def to_hash(state = self.state)
+  def to_hash(state = self.state, district = self.district)
     { bioguide_id:      bioguide_id,
       official_full:    official_full,
       state:            state.abbr,
-      district:         district_code,
+      district:         district_code(district),
       role:             role,
       party:            party,
       senate_class:     senate_class,
@@ -139,8 +120,8 @@ class Rep < ApplicationRecord
     sorted_offices.blank? ? [] : sorted_offices.each { |office| office.calculate_distance(coordinates) }
   end
 
-  def district_code
-    district.code unless district.blank?
+  def district_code(district)
+    district.code unless self.district_id.blank?
   end
 
   def sorted_offices_array

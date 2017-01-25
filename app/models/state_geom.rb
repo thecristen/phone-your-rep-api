@@ -8,12 +8,12 @@ class StateGeom < ApplicationRecord
 
   def self.containing_latlon(lat, lon)
     ewkb = EWKB.generate(FACTORY.point(lon, lat).projection)
-    where("ST_Intersects(geom, ST_GeomFromEWKB(E'\\\\x#{ewkb}'))").includes(:state).take
+    where("ST_Intersects(geom, ST_GeomFromEWKB(E'\\\\x#{ewkb}'))").includes(:state)
   end
 
   def self.containing_point(point)
     ewkb = EWKB.generate(point.projection)
-    where("ST_Intersects(geom, ST_GeomFromEWKB(E'\\\\x#{ewkb}'))").take
+    where("ST_Intersects(geom, ST_GeomFromEWKB(E'\\\\x#{ewkb}'))")
   end
 
   def contains?(point)
