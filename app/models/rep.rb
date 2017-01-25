@@ -3,7 +3,7 @@ class Rep < ApplicationRecord
   belongs_to :district
   belongs_to :state
   has_many   :office_locations, dependent: :destroy, foreign_key: :bioguide_id, primary_key: :bioguide_id
-  scope      :yours, ->(state:, district:) { where(district: district).or(Rep.where(state: state, district: nil)) }
+  scope      :yours, ->(state:, district:) { where(district: District.where(full_code: district.full_code)).or(Rep.where(state: state, district: nil)) }
   serialize  :committees, Array
 
   # Open up Rep Metaclass to set Class attributes --------------------------------------------------------------------
@@ -30,23 +30,23 @@ class Rep < ApplicationRecord
   def self.init(address, lat, long, state)
     self.raw_reps    = nil
     self.coordinates = [lat.to_f, long.to_f] - [0.0]
-    self.state       = State.find_by(name: state)
+    self.state       = nil
     self.address     = address
     return unless coordinates.blank? && self.state.blank?
     find_by_address if address
   end
 
   def self.find_by_address
-    self.state_abbr = address.split.grep(/[A-Z]{2}/)
+    # self.state_abbr = address.split.grep(/[A-Z]{2}/)
     find_coordinates
-    find_state
+    # find_state
   end
 
   # Find the reps in the db associated to that address and assemble into JSON blob
   def self.find_em(address: nil, lat: nil, long: nil, state: nil)
     init(address, lat, long, state)
     return [] if coordinates.blank?
-    find_point
+    # find_point
     find_district
     find_reps
   end
@@ -60,7 +60,7 @@ class Rep < ApplicationRecord
   def self.find_point
     lat        = coordinates.first
     lon        = coordinates.last
-    self.point = RGeo::Cartesian.factory.point(lon, lat)
+    self.point = RGeo::Geographic.simple_mercator_factory.point(lon, lat)
   end
 
   # Parse out the two letter state abbreviation from address and find the State by that attribute.
@@ -71,13 +71,14 @@ class Rep < ApplicationRecord
   # Query all of the districts within that state.
   # Select the district from the collection of state districts that contains the :point.
   def self.find_district
-    self.district = state.districts.detect { |district| district.contains?(point) }
+    self.district = District.containing_latlon(coordinates.first, coordinates.last)
+    self.state    = district.state
   end
 
   # Query for Reps that belong to either the state or the district.
   # Add the reps to a :raw_reps array and eliminate any dupes.
   def self.find_reps
-    self.raw_reps = Rep.yours(state: state, district: district).includes(:office_locations, :district).to_a
+    self.raw_reps = Rep.yours(state: district.state, district: district).includes(:office_locations, :district).to_a
     process_reps
   end
 

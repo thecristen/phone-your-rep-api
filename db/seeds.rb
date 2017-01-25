@@ -134,8 +134,8 @@ def seed_office_locations
   puts "There are now #{OfficeLocation.count} office locations in the database."
 end
 
-seed_states
-seed_districts
+# seed_states
+# seed_districts
 seed_reps
 seed_socials
 seed_office_locations

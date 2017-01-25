@@ -10,8 +10,10 @@ class OfficeLocation < ApplicationRecord
   dragonfly_accessor :qr_code
   attr_reader        :distance
 
+  FACTORY = RGeo::Geographic.simple_mercator_factory
+
   def set_lonlat
-    self.lonlat = RGeo::Cartesian.factory.point(longitude, latitude)
+    self.update lonlat: RGeo::Geographic.simple_mercator_factory.point(longitude, latitude)
   end
 
   def needs_geocoding?

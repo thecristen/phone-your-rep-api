@@ -5,7 +5,7 @@ class CreateStates < ActiveRecord::Migration[5.0]
       t.string   :state_code, unique: true
       t.string   :name, unique: true
       t.string   :abbr, unique: true
-      t.geometry :geom
+      t.geometry :geom, srid: 3857
     end
   end
 end

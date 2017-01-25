@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20170120070546) do
     t.string   "code"
     t.string   "state_code"
     t.string   "full_code"
-    t.geometry "geom",       limit: {:srid=>0, :type=>"geometry"}
+    t.geometry "geom",       limit: {:srid=>3857, :type=>"geometry"}
     t.index ["state_id"], name: "index_districts_on_state_id", using: :btree
   end
 
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 20170120070546) do
     t.string   "state_code"
     t.string   "name"
     t.string   "abbr"
-    t.geometry "geom",       limit: {:srid=>0, :type=>"geometry"}
+    t.geometry "geom",       limit: {:srid=>3857, :type=>"geometry"}
   end
 
   create_table "users", force: :cascade do |t|
