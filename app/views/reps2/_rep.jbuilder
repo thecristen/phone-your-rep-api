@@ -1,5 +1,5 @@
-
 # frozen_string_literal: true
+
 json.given_name rep[:first]
 json.family_name rep[:last]
 json.additional_name rep[:middle]

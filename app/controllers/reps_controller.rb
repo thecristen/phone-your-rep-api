@@ -19,13 +19,14 @@ class RepsController < ApplicationController
               # @reps = @office.rep
               []
             end
+    @self = request.url
 
-    render inline: MultiJson.dump(@reps), content_type: 'application/json'
+    # render inline: MultiJson.dump(@reps), content_type: 'application/json'
   end
 
   # GET /reps/1
   def show
-    render inline: MultiJson.dump(@rep), content_type: 'application/json'
+    # render inline: MultiJson.dump(@rep), content_type: 'application/json'
   end
 
   # POST /reps
@@ -66,6 +67,7 @@ class RepsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_rep
-    @rep = Rep.find(params[:id])
+    @rep = Rep.find_by(bioguide_id: params[:bioguide_id])
+    @pfx = request.protocol + request.host_with_port
   end
 end

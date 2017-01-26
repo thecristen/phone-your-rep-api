@@ -12,7 +12,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :reps, only: [:index]
+  get '/reps', to: 'reps#index'
+  get '/reps/:bioguide_id', to: 'reps#show'
+  # resources :reps, only: [:index, :show]
   # resources :issues, only: [:index, :new, :create, :update]
 
   get '/v_cards/:id', to: 'v_cards#show'
