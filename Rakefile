@@ -11,8 +11,8 @@ task :pyr_db_setup do
   if Rails.env.development?
     `rm db/schema.rb`
     `rails db:drop`
+    `rails db:create`
   end
-  `rails db:create`
   `rails db:gis:setup`
   `rails db:migrate`
   `rails db:seed`

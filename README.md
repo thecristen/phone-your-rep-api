@@ -40,8 +40,9 @@ You can setup and then fully seed the database with one rake task:
 ```
 bundle exec rake pyr_db_setup
 ```
-If you've already configured the database before, and are just resetting or updating, it's recommended that you just rake. It might take a few, so grab a cold one. If you're configuring for the first time, and/or you're getting errors, or you don't want to do a complete reset, or for whatever reason you just want more control, here are the manual steps:
+If you've already configured the database before, and are just resetting or updating, it's recommended that you just rake. It might take a few, so grab a cold one. If you're configuring for the first time, and/or you're getting errors, or you don't want to do a complete reset, or you're some kind of control freak, here are the manual steps:
 ```
+rails db:drop # skip this unless you're resetting
 rails db:create
 rails db:gis:setup
 rails db:migrate
@@ -80,6 +81,7 @@ Finally
 ```
 rails s
 ```
+#####Congrats! You've setup a geospatial database! Have a few cold ones, you deserve it.
 If you want to generate your own QR codes for the office locations, drop into the console with `rails c` and enter this line
 ```ruby
 OfficeLocation.all.each { |office| office.add_qr_code_img }
