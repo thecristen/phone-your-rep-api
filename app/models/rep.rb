@@ -40,7 +40,7 @@ class Rep < ApplicationRecord
     self.coordinates = [lat.to_f, long.to_f] - [0.0]
     self.state       = nil
     self.address     = address
-    return unless coordinates.blank? && self.state.blank?
+    return unless coordinates.blank? && state.blank?
     find_by_address if address
   end
 
@@ -59,7 +59,7 @@ class Rep < ApplicationRecord
   def self.find_district_and_state
     lat           = coordinates.first
     lon           = coordinates.last
-    self.district = DistrictGeom.containing_latlon(lat, lon).take.district
+    self.district = DistrictGeom.containing_latlon(lat, lon).includes(:district).take.district
     self.state    = district.state
   end
 
