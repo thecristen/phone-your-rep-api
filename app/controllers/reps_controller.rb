@@ -20,8 +20,6 @@ class RepsController < ApplicationController
               []
             end
     @self = request.url
-
-    # render inline: MultiJson.dump(@reps), content_type: 'application/json'
   end
 
   # GET /reps/1
@@ -32,10 +30,7 @@ class RepsController < ApplicationController
     @rep = Rep.new(rep_params)
 
     if @rep.save
-      render inline:       MultiJson.dump(@rep),
-             content_type: 'application/json',
-             status:       :created,
-             location:     @rep
+      render json: @rep, status: :created, location: @rep
     else
       render json: @rep.errors, status: :unprocessable_entity
     end
@@ -44,7 +39,7 @@ class RepsController < ApplicationController
   # PATCH/PUT /reps/1
   def update
     if @rep.update(rep_params)
-      render inline: MultiJson.dump(@rep), content_type: 'application/json'
+      render json: @rep
     else
       render json: @rep.errors, status: :unprocessable_entity
     end
@@ -53,8 +48,6 @@ class RepsController < ApplicationController
   # DELETE /reps/1
   def destroy
     @rep.destroy
-
-    head :no_content
   end
 
   private

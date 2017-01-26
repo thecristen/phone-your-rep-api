@@ -8,7 +8,7 @@ json._links do
   end
 
   json.set! 'pyr:demo' do
-    json.href "#{@pfx}/osdi/people?lat=40.740916&long=-73.999769&state=New+York"
+    json.href "#{@pfx}/osdi/people?lat=40.740916&long=-73.999769"
     json.title 'Demo query for representatives near Chelsea NYC, the center of the universe'
   end
 end
