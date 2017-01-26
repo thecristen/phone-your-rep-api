@@ -6,7 +6,7 @@ require_relative 'config/application'
 
 Rails.application.load_tasks
 
-desc "Drop schema and tables and rebuild the database"
+desc 'Drop schema and tables and rebuild the database'
 task :pyr_db_setup do
   if Rails.env.development?
     `rm db/schema.rb`

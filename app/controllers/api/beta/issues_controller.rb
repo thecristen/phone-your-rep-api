@@ -1,7 +1,6 @@
 module Api
   module Beta
     class IssuesController < ApplicationController
-
       def index
         @issues_report     = Issue.aggregate_issues
         @unresolved_issues = Issue.unresolved

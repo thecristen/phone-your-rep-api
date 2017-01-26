@@ -1,6 +1,6 @@
-require "application_responder"
-
 # frozen_string_literal: true
+require 'application_responder'
+
 class ApplicationController < ActionController::API
   include ActionController::MimeResponds
 
@@ -10,9 +10,8 @@ class ApplicationController < ActionController::API
   before_action :set_prefix
 
   private
-  def set_prefix
 
-    @pfx= request.protocol + request.host_with_port
-
-  end
+    def set_prefix
+      @pfx = request.protocol + request.host_with_port
+    end
 end

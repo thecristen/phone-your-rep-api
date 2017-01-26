@@ -28,14 +28,14 @@ class Rep < ApplicationRecord
   attr_accessor :sorted_offices
 
   # Find the reps in the db associated to that address and assemble into JSON blob
-  def self.find_em(address: nil, lat: nil, long: nil, state: nil)
-    init(address, lat, long, state)
+  def self.find_em(address: nil, lat: nil, long: nil)
+    init(address, lat, long)
     return [] if coordinates.blank?
     find_district_and_state
     find_reps
   end
 
-  def self.init(address, lat, long, state)
+  def self.init(address, lat, long)
     self.raw_reps    = nil
     self.coordinates = [lat.to_f, long.to_f] - [0.0]
     self.state       = nil
@@ -121,25 +121,10 @@ class Rep < ApplicationRecord
   end
 
   def district_code(district)
-    district.code unless self.district_id.blank?
+    district.code unless district_id.blank?
   end
 
   def sorted_offices_array
     sorted_offices.map(&:to_hash)
-  end
-
-  # Convert shorthand party to long-form.
-  def party
-    party = self[:party]
-    case party
-    when 'D'
-      'Democrat'
-    when 'R'
-      'Republican'
-    when 'I'
-      'Independent'
-    else
-      party
-    end
   end
 end

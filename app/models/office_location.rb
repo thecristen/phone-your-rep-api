@@ -13,7 +13,7 @@ class OfficeLocation < ApplicationRecord
   FACTORY = RGeo::Geographic.simple_mercator_factory
 
   def set_lonlat
-    self.update lonlat: FACTORY.point(longitude, latitude)
+    update lonlat: FACTORY.point(longitude, latitude)
   end
 
   def needs_geocoding?
@@ -26,8 +26,8 @@ class OfficeLocation < ApplicationRecord
   end
 
   def add_qr_code_img
-    self.qr_code      = RQRCode::QRCode.new(v_card, size: 22, level: :h).as_png(size: 360).to_string
-    self.qr_code.name = "#{rep.last}_#{office_type}_#{id}.png"
+    self.qr_code = RQRCode::QRCode.new(v_card, size: 22, level: :h).as_png(size: 360).to_string
+    qr_code.name = "#{rep.last}_#{office_type}_#{id}.png"
     save
   end
 
@@ -67,6 +67,7 @@ class OfficeLocation < ApplicationRecord
       v_card_link:  v_card_link,
       qr_code_link: qr_code_link }
   end
+
   def v_card_link
     if Rails.env.production?
       "https://phone-your-rep.herokuapp.com/v_cards/#{id}"

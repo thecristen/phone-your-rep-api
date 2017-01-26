@@ -1,16 +1,5 @@
+# frozen_string_literal: true
 require_relative '../config/environment.rb'
-
-# def import_geoms(dir:, shp_file:, model:, model_attr:, record_attr:)
-#   RGeo::Shapefile::Reader.open(Rails.root.join('lib', 'shapefiles', dir, shp_file).to_s, factory: model::FACTORY) do |file|
-#     puts "File contains #{file.num_records} records."
-#     file.each do |record|
-#       puts "Record number #{record.index}:"
-#       instance = model.find_by(model_attr => record.attributes[record_attr])
-#       instance.update(geom: record.geometry.projection)
-#       puts record.attributes
-#     end
-#   end
-# end
 
 def import_shapefile(dir:, shp_file:, model:, model_attr:, record_attr:)
   RGeo::Shapefile::Reader.

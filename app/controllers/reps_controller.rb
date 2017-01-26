@@ -8,10 +8,9 @@ class RepsController < ApplicationController
     address = params[:address]
     lat     = params[:lat]
     long    = params[:long]
-    state   = params[:state]
     # return the first result, or a random one
     @reps = if params
-              Rep.find_em address: address, lat: lat, long: long, state: state
+              Rep.find_em address: address, lat: lat, long: long
             else
               # Would like to find requesting IP address, geocode it and return the closest rep
               # request = Rack::Request.new Rails.env
@@ -34,9 +33,10 @@ class RepsController < ApplicationController
     @rep = Rep.new(rep_params)
 
     if @rep.save
-      render inline: MultiJson.dump(@rep),
-        content_type: 'application/json',
-        status: :created, location: @rep
+      render inline:       MultiJson.dump(@rep),
+             content_type: 'application/json',
+             status:       :created,
+             location:     @rep
     else
       render json: @rep.errors, status: :unprocessable_entity
     end
@@ -59,6 +59,7 @@ class RepsController < ApplicationController
   end
 
   private
+
     def rep_params
       params.require(:rep).permit(:twitter)
     end

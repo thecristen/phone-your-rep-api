@@ -7,10 +7,9 @@ class Reps2Controller < ApplicationController
     address = params[:address]
     lat     = params[:lat]
     long    = params[:long]
-    state   = params[:state]
     # return the first result, or a random one
     @reps = if params
-              Rep.find_em address: address, lat: lat, long: long, state: state
+              Rep.find_em address: address, lat: lat, long: long
             else
               # Would like to find requesting IP address, geocode it and return the closest rep
               # request = Rack::Request.new Rails.env
@@ -20,17 +19,13 @@ class Reps2Controller < ApplicationController
               []
             end
     @self = request.url
-
   end
 
-  def aep
-
-  end
+  def aep; end
 
   # GET /reps/1
   def show
-
-     render json: @rep
+    render json: @rep
   end
 
   # POST /reps
@@ -64,7 +59,6 @@ class Reps2Controller < ApplicationController
     def set_rep
       @rep = Rep.find(params[:id])
 
-      @pfx= request.protocol + request.host_with_port
-
+      @pfx = request.protocol + request.host_with_port
     end
 end
