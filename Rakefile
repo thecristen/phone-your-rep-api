@@ -5,3 +5,19 @@
 require_relative 'config/application'
 
 Rails.application.load_tasks
+
+desc "Drop schema and tables and rebuild the database"
+task :pyr_db_setup do
+  if Rails.env.development?
+    `rm db/schema.rb`
+    `rails db:drop`
+  end
+  `rails db:create`
+  `rails db:gis:setup`
+  `rails db:migrate`
+  `rails db:seed`
+  `ruby lib/shapefiles.rb`
+  `ruby lib/add_photos.rb`
+  `ruby lib/add_v_cards.rb`
+  `ruby lib/import_qr_codes.rb`
+end
