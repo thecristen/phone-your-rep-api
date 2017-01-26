@@ -4,21 +4,29 @@ Rails.application.routes.draw do
   # namespace :api, defaults: { format: :json }, path: '/api' do
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do # version 1
-      resources :reps, only: [:index]
-      resources :issues, only: [:index, :new, :create, :update]
+      resources :reps,             only: [:index]
+      resources :issues,           only: [:index, :new, :create, :update]
+      resources :office_locations, only: [:index, :show]
+      resources :districts,        only: [:index, :show]
+      resources :states,           only: [:index, :show]
     end
 
     namespace :beta do # beta version
-      resources :reps,   only: [:index]
-      resources :issues, only: [:index, :new, :create, :update]
+      resources :reps,             only: [:index]
+      resources :issues,           only: [:index, :new, :create, :update]
+      resources :office_locations, only: [:index, :show]
+      resources :districts,        only: [:index, :show]
+      resources :states,           only: [:index, :show]
     end
   end
 
-  get '/reps', to: 'reps#index'
-  get '/reps/:bioguide_id', to: 'reps#show'
-  # resources :reps, only: [:index, :show]
-  resources :issues, only: [:index, :new, :create, :update]
-
+  # get '/reps', to: 'reps#index'
+  # get '/reps/:id', to: 'reps#show'
+  resources :reps,             only: [:index, :show]
+  resources :issues,           only: [:index, :new, :create, :update]
+  resources :office_locations, only: [:index, :show]
+  resources :districts,        only: [:index, :show]
+  resources :states,           only: [:index, :show]
   get '/v_cards/:id', to: 'v_cards#show'
 
   # OSDI STUFF!

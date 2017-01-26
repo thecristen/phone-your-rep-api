@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-
-json.full_code  district.full_code
-json.code       district.code
-json.state_code district.state_code
+json.self district_url(district.full_code)
+json.extract! district,
+              :full_code,
+              :code,
+              :state_code

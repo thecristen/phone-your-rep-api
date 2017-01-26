@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-
-json.state_code state.state_code
-json.name       state.name
-json.abbr       state.abbr
+json.self state_url(state.state_code)
+json.extract! state,
+              :state_code,
+              :name,
+              :abbr

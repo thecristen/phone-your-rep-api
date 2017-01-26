@@ -9,7 +9,7 @@ class RepsController < ApplicationController
     lat     = params[:lat]
     long    = params[:long]
     # return the first result, or a random one
-    @reps = if params
+    @reps = if address || lat || long
               Rep.find_em address: address, lat: lat, long: long
             else
               # Would like to find requesting IP address, geocode it and return the closest rep
@@ -17,7 +17,7 @@ class RepsController < ApplicationController
               # result = request.location
               # @office = OfficeLocation.near(result.postal_code)
               # @reps = @office.rep
-              []
+              Rep.all.includes(:office_locations, :district, :state)
             end
     @self = request.url
   end
@@ -52,13 +52,13 @@ class RepsController < ApplicationController
 
   private
 
-  def rep_params
-    params.require(:rep).permit(:twitter)
-  end
+    def rep_params
+      params.require(:rep).permit(:id, :bioguide_id)
+    end
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_rep
-    @rep = Rep.find_by(bioguide_id: params[:bioguide_id])
-    @pfx = request.protocol + request.host_with_port
-  end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_rep
+      @rep = Rep.find_by(bioguide_id: params[:id])
+      @pfx = request.protocol + request.host_with_port
+    end
 end
