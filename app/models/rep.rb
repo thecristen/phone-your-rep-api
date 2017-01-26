@@ -12,16 +12,12 @@ class Rep < ApplicationRecord
     attr_accessor :address
     # Lat/lon coordinates geocoded from :address.
     attr_accessor :coordinates
-    # Cartesian point object representing coordinates that can be used to find the :district by spatial geometry.
-    attr_accessor :point
-    # Address' State, found by parsing :address for the two-letter abbreviation.
+    # Address' State, which is the parent of the :district.
     attr_accessor :state
-    # Voting district found by a GIS database query to find the geometry that envelopes the :point.
+    # Voting district found by a GIS database query to find the geometry that contains the :coordinates.
     attr_accessor :district
     # Raw Rep records from the database that need to be packaged for JSON response.
     attr_accessor :raw_reps
-    # State abbreviation parsed from address params.
-    attr_accessor :state_abbr
   end # Metaclass ----------------------------------------------------------------------------------------------------
 
   # Instance attribute that holds offices sorted by location after calling the :sort_ofices method.
@@ -32,7 +28,9 @@ class Rep < ApplicationRecord
     init(address, lat, long)
     return [] if coordinates.blank?
     find_district_and_state
-    find_reps
+    self.raw_reps = Rep.yours(state: state, district: district).includes(:office_locations).to_a
+    raw_reps.uniq!
+    build_rep_hashes
   end
 
   def self.init(address, lat, long)
@@ -41,16 +39,12 @@ class Rep < ApplicationRecord
     self.state       = nil
     self.address     = address
     return unless coordinates.blank? && state.blank?
-    search_by_address if address
-  end
-
-  def self.search_by_address
-    find_coordinates
+    find_coordinates_by_address if address
   end
 
   # Geocode address into [lat, lon] coordinates.
   # Collect the lat and lon from the coordinates and create a new RGeo Point object.
-  def self.find_coordinates
+  def self.find_coordinates_by_address
     self.coordinates = Geocoder.coordinates(address)
   end
 
@@ -61,18 +55,6 @@ class Rep < ApplicationRecord
     lon           = coordinates.last
     self.district = DistrictGeom.containing_latlon(lat, lon).includes(:district).take.district
     self.state    = district.state
-  end
-
-  # Query for Reps that belong to either the state or the district.
-  # Add the reps to a :raw_reps array and eliminate any dupes.
-  def self.find_reps
-    self.raw_reps = Rep.yours(state: state, district: district).includes(:office_locations).to_a
-    process_reps
-  end
-
-  def self.process_reps
-    raw_reps.uniq!
-    build_rep_hashes
   end
 
   # Iterate over @raw_reps and assemble their attributes into a hash for JSON delivery.
