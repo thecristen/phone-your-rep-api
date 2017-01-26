@@ -39,17 +39,24 @@ bundle exec rake db:create
 bundle exec rake db:gis:setup
 bundle exec rake db:migrate
 ```
+Migrating is your first test that you have a properly configured database. If you get errors while migrating, you may have PostGIS configuration issues and your database is not recognizing the geospatial datatypes. Read up on the documentation for RGeo and ActiveRecord PostGIS Adapter to troubleshoot.
+
+###Seeding the data
 Many of the offices have coordinates preloaded in the seed data. Any that don't will automatically be geocoded during seeding.
 
-The `geocoder` gem allows you to do some geocoding without an API key. It will probably be enough for development. However, if you want to use your own API key for geocoding, you can configure it in `config/initializers/geocoder.rb`.
+The `geocoder` gem allows you to do some geocoding without an API key. It will probably be enough for development. However, if you want to use your own API key for geocoding, you can configure it in `config/initializers/geocoder.rb`. You will also need to check this file for deployment, as it's configured to access an environment variable for the API key in production.
 
-If you don't want to geocode any of the offices, comment out this line in office_location.rb
+If you don't want to geocode any of the offices at all, comment out this line in office_location.rb
 ```ruby
 after_validation :geocode, if: :needs_geocoding?
 ```
 Then seed the db
 ```
 bundle exec rake db:seed
+```
+When you're done seeding the basic data, you need to load the shapefiles for district and state geometries. This is the final test that your database is properly configured. Run
+```
+ruby lib/shapefiles.rb
 ```
 Then add photo URLs to the reps
 ```
@@ -59,19 +66,19 @@ and generate V-cards for every office location
 ```
 ruby lib/add_v_cards.rb
 ```
-When you're done seeding the basic data, you need to load the shapefiles for districts and states. Run
+and load up the QR code URL data, to access the publicQR code images stored on the S3 server
 ```
-ruby lib/shapefiles.rb
+ruby lib/import_qr_codes.rb
 ```
 Finally
 ```
 rails s
 ```
-If you want to generate the QR codes for the office locations, drop into the console with `rails console` and enter this line
+If you want to generate your own QR codes for the office locations, drop into the console with `rails console` and enter this line
 ```ruby
 OfficeLocation.all.each { |office| office.add_qr_code_img }
 ```
-QR code generation is a pretty long process, and in most cases is not necessary for development. Feel free to skip it.
+QR code generation is a pretty long process, and in most cases is not necessary unless the public images are inaccurate. Feel free to skip it.
 
 This is deployed on Heroku. Deploying a geo-spatially enabled database to Heroku can be a bit of a challenge. Docs for that will come soon.
 
