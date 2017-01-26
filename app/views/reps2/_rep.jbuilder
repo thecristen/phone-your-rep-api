@@ -1,4 +1,5 @@
 
+# frozen_string_literal: true
 json.given_name rep[:first]
 json.family_name rep[:last]
 json.additional_name rep[:middle]
@@ -15,7 +16,6 @@ json.set! 'pyr:nickname', rep[:nickname]
 json.set! 'pyr:contact_form', rep[:contact_form]
 json.postal_addresses rep[:office_locations] do |ol|
   json.partial! 'office_location', ol: ol
-
 end
 json.set! '_links' do
   json._self do

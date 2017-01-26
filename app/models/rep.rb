@@ -41,10 +41,10 @@ class Rep < ApplicationRecord
     self.state       = nil
     self.address     = address
     return unless coordinates.blank? && state.blank?
-    find_by_address if address
+    search_by_address if address
   end
 
-  def self.find_by_address
+  def self.search_by_address
     find_coordinates
   end
 

@@ -40,7 +40,7 @@ def seed_districts
 end
 
 def parse_yaml(file)
-  YAML::load(File.open(Rails.root.join('lib', 'seeds', file)))
+  YAML.load(File.open(Rails.root.join('lib', 'seeds', file)))
 end
 
 @offices = parse_yaml('115-legislators-district-offices-011917.yaml')
@@ -77,14 +77,14 @@ def seed_reps
     r.contact_form  = term['contact_form']
     r.senate_class  = format('0%o', term['class']) if term['class']
     r.office_locations.build(
-                          office_type: 'capitol',
-                          zip:         address_ary.pop,
-                          state:       address_ary.pop,
-                          city:        address_ary.pop,
-                          address:     address_ary.join(' ').gsub(';', ''),
-                          phone:       term['phone'],
-                          fax:         term['fax'],
-                          hours:       term['hours']
+      office_type: 'capitol',
+      zip:         address_ary.pop,
+      state:       address_ary.pop,
+      city:        address_ary.pop,
+      address:     address_ary.join(' ').delete(';'),
+      phone:       term['phone'],
+      fax:         term['fax'],
+      hours:       term['hours']
     )
     r.save
     puts "#{r.official_full} saved in the database."
@@ -116,18 +116,18 @@ def seed_office_locations
     next if office['offices'].blank?
     office['offices'].each do |off|
       rep.office_locations.build(
-                              office_type: 'district',
-                              suite:       off['suite'],
-                              phone:       off['phone'],
-                              address:     off['address'],
-                              building:    off['building'],
-                              city:        off['city'],
-                              state:       off['state'],
-                              zip:         off['zip'],
-                              latitude:    off['latitude'],
-                              longitude:   off['longitude'],
-                              fax:         off['fax'],
-                              hours:       off['hours']
+        office_type: 'district',
+        suite:       off['suite'],
+        phone:       off['phone'],
+        address:     off['address'],
+        building:    off['building'],
+        city:        off['city'],
+        state:       off['state'],
+        zip:         off['zip'],
+        latitude:    off['latitude'],
+        longitude:   off['longitude'],
+        fax:         off['fax'],
+        hours:       off['hours']
       )
       rep.save
       puts "#{rep.official_full}'s office location saved to the database."

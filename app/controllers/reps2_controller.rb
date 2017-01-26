@@ -55,9 +55,9 @@ class Reps2Controller < ApplicationController
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_rep
-      @rep = Rep.find(params[:id])
-      @pfx = request.protocol + request.host_with_port
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_rep
+    @rep = Rep.find(params[:id])
+    @pfx = request.protocol + request.host_with_port
+  end
 end

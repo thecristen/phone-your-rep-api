@@ -11,7 +11,7 @@ class ApplicationController < ActionController::API
 
   private
 
-    def set_prefix
-      @pfx = request.protocol + request.host_with_port
-    end
+  def set_prefix
+    @pfx = request.protocol + request.host_with_port
+  end
 end

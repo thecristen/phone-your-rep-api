@@ -22,59 +22,19 @@ Metrics/BlockLength:
   Exclude:
     - 'db/schema.rb'
 
-Style/HashSyntax:
-  Exclude:
-    - 'config/application.rb'
-    - 'db/schema.rb'
-
-Style/IndentationConsistency:
-  Exclude:
-    - 'app/controllers/reps_controller.rb'
-
-Style/EmptyLinesAroundBlockBody:
-  Exclude:
-    - 'db/schema.rb'
-
 Style/DotPosition:
   EnforcedStyle: trailing
 
 Style/MultilineMethodCallIndentation:
   Enabled: false
 
-Style/EmptyLines:
-  Exclude:
-    - 'config/environments/development.rb'
-    - 'config/environments/production.rb'
+Style/Documentation:
+  Enabled: false
 
-Style/EmptyLinesAroundClassBody:
+Rails/Output:
   Exclude:
-    - 'config/application.rb'
-
-Style/ExtraSpacing:
-  Exclude:
-    - 'db/schema.rb'
-
-Style/SpaceAroundOperators:
-  Exclude:
-    - 'db/schema.rb'
-
-Style/SpaceInsideBrackets:
-  Exclude:
-    - 'config/environments/production.rb'
-
-Style/SpaceInsideHashLiteralBraces:
-  Exclude:
-    - 'db/schema.rb'
-
-Style/StringLiterals:
-  Exclude:
-    - 'bin/spring'
-    - 'config/application.rb'
-    - 'config/environments/production.rb'
-    - 'config/puma.rb'
-    - 'db/schema.rb'
-    - 'test/controllers/reps_controller_test.rb'
-
-Style/NumericLiterals:
-  Exclude:
-    - 'db/schema.rb'
+    - 'db/seeds.rb'
+    - 'lib/export_qr_codes.rb'
+    - 'lib/get_your_rep/get_all_the_reps.rb'
+    - 'lib/import_qr_codes.rb'
+    - 'lib/shapefiles.rb'

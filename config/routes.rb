@@ -14,8 +14,8 @@ Rails.application.routes.draw do
 
   resources :reps, only: [:index]
   # resources :issues, only: [:index, :new, :create, :update]
-  
-  get '/v_cards/:id',  to: 'v_cards#show'
+
+  get '/v_cards/:id', to: 'v_cards#show'
 
   # OSDI STUFF!
   get '/osdi/people' => 'reps2#index'

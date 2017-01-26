@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class VCardsController < ApplicationController
   def show
     @office = OfficeLocation.find_with_rep(params.require(:id)).first
