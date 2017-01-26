@@ -4,18 +4,12 @@ json.self          "#{@pfx}/reps/#{rep.bioguide_id}"
 json.bioguide_id   rep.bioguide_id
 json.official_full rep.official_full
 
-json.state  do
-  json.state_code rep.state.state_code
-  json.name       rep.state.name
-  json.abbr       rep.state.abbr
+json.state do
+  json.partial! 'states/state', state: rep.state
 end
 
-if rep.district
-  json.district do
-    json.full_code  rep.district.full_code
-    json.code       rep.district.code
-    json.state_code rep.district.state_code
-  end
+json.district do
+  json.partial! 'districts/district', district: rep.district if rep.district
 end
 
 json.role         rep.role
