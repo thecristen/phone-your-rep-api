@@ -25,9 +25,7 @@ class RepsController < ApplicationController
   end
 
   # GET /reps/1
-  def show
-    # render inline: MultiJson.dump(@rep), content_type: 'application/json'
-  end
+  def show; end
 
   # POST /reps
   def create
