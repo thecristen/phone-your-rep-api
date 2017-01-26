@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Reps2Controller < ApplicationController
+class OsdiRepsController < ApplicationController
   before_action :set_rep, only: [:show, :update, :destroy]
 
   # GET /reps

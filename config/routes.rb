@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   get '/v_cards/:id', to: 'v_cards#show'
 
   # OSDI STUFF!
-  get '/osdi/people' => 'reps2#index'
-  get '/osdi/people/:id' => 'reps2#show'
-  get '/osdi' => 'reps2#aep'
+  get '/osdi/people' => 'osdi_reps#index'
+  get '/osdi/people/:id' => 'osdi_reps#show'
+  get '/osdi' => 'osdi_reps#aep'
 end
