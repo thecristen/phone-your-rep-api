@@ -24,13 +24,13 @@ Be sure to use Ruby 2.3.3.
 ```
 rbenv install 2.3.3 or rvm install 2.3.3
 ```
-If you're using MacOS, make sure you have PostgreSQL installed, and then install the PostGIS extension. If you're using Linux, it's recommended that you use Vagrant.
+Make sure you have PostgreSQL installed, and then install the PostGIS extension. If you're using MacOS you can try installing with Homebrew. Otherwise it's recommended that you use the Vagrant box.
 ```
 brew install postgres
 brew install postgis
 ```
 
-Mac users can also download the [Heroku PostgreSQL app](https://postgresapp.com/) and forgo the brew Postgres and PostGIS install. This is by far the easiest route.
+Mac users can also download the [Heroku PostgreSQL app](https://postgresapp.com/) instead of running `brew install`. The app comes with the PostGIS extension enabled and everything working out of the box. This is by far the easiest route to get PostGIS on a Mac.
 
 Then
 
@@ -41,13 +41,14 @@ bundle install
 ```
 You can setup and then fully seed the database with one rake task:
 ```
-rake pyr:db_setup
+rails db:pyr:setup
 ```
 If you've already configured the database before, and are just resetting or updating, it's recommended that you just rake and skip ahead to #Usage. It'll take a few, so grab a cold one. If you're on MacOS, you can get an alert when it's finished by running this instead
  ```
- rake pyr:db_setup_alert
+rails db:pyr:setup_alert
  ```
  If you're configuring for the first time and you're getting errors, or you don't want to do a complete reset, or you're some kind of control freak, here are the manual steps:
+ ####Creating the spatial database and migrating
 ```
 rails db:drop # skip this unless you're resetting
 rails db:create
@@ -58,7 +59,7 @@ Migrating is your first test that you have a properly configured database. If yo
 ####Seeding the data
 Many of the offices have coordinates preloaded in the seed data. Any that don't will automatically be geocoded during seeding.
 
-The `geocoder` gem allows you to do some geocoding without an API key. It will probably be enough for development. However, if you want to use your own API key for geocoding, you can configure it in `config/initializers/geocoder.rb`. You will also need to check this file for deployment, as it's configured to access an environment variable for the API key in production.
+The `geocoder` gem allows you to do some geocoding without an API key. It will probably be enough for seeding and development. However, if you want to use your own API key for geocoding, you can configure it in `config/initializers/geocoder.rb`. You will also need to check this file for deployment, as it's configured to access an environment variable for the API key in production.
 
 If you don't want to geocode any of the offices at all, comment out this line in office_location.rb
 ```ruby
