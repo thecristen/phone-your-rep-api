@@ -2,16 +2,28 @@
 require 'csv'
 require_relative '../config/environment.rb'
 
-def find_or_create_zcta(district, zcta_code, zcta)
+def find_or_create_zcta(zcta_code)
+  zcta = Zcta.find_by(zcta: zcta_code)
   if zcta
-    zcta.districts << district
-    puts "Added district #{district.full_code} to ZCTA #{zcta.zcta}"
+    zcta
   else
-    Zcta.create do |z|
-      z.zcta = zcta_code
-      z.districts << district
-    end
-    puts "Created ZCTA #{zcta_code}, and added district #{district.full_code}"
+    z = Zcta.create(zcta: zcta_code)
+    puts "Created new ZCTA #{zcta_code}"
+    z
+  end
+end
+
+def zcta_code(row)
+  zcta5 = row['ZCTA5']
+  case zcta5.size
+  when 4
+    '0' + zcta5
+  when 3
+    '00' + zcta5
+  when 2
+    '000' + zcta5
+  else
+    zcta5
   end
 end
 
@@ -19,12 +31,15 @@ def seed_zctas(file)
   csv_zcta_text = File.read(file)
   csv_zctas = CSV.parse(csv_zcta_text, headers: true, encoding: 'ISO-8859-1')
   csv_zctas.each do |row|
-    state_code = row['State'].size == 1 ? '0' + row['State'] : row['State']
-    dis_cod = row['CongressionalDistrict'].size == 1 ? '0' + row['CongressionalDistrict'] : row['CongressionalDistrict']
-    zcta_code = row['ZCTA'].size == 4 ? '0' + row['ZCTA'] : row['ZCTA']
-    district = District.find_by(full_code: state_code + dis_cod)
-    zcta = Zcta.find_by(zcta: zcta_code)
-    find_or_create_zcta(district, zcta_code, zcta)
+    state_code = row['STATE'].size == 1 ? '0' + row['STATE'] : row['STATE']
+    dis_cod    = row['CD'].size == 1 ? '0' + row['CD'] : row['CD']
+    zcta_code  = zcta_code(row)
+    district   = District.find_by(full_code: state_code + dis_cod)
+    zcta       = find_or_create_zcta(zcta_code)
+    unless district.blank?
+      zcta.districts << district
+      puts "Added district #{district.code} to ZCTA #{zcta_code}"
+    end
   end
 end
 
