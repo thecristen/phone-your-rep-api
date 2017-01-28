@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170126225418) do
+ActiveRecord::Schema.define(version: 20170128014239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +124,23 @@ ActiveRecord::Schema.define(version: 20170126225418) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  create_table "zcta", force: :cascade do |t|
+    t.string   "district_code"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "zcta_districts", force: :cascade do |t|
+    t.integer  "zcta_id"
+    t.integer  "district_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["district_id"], name: "index_zcta_districts_on_district_id", using: :btree
+    t.index ["zcta_id"], name: "index_zcta_districts_on_zcta_id", using: :btree
+  end
+
   add_foreign_key "district_geoms", "districts"
   add_foreign_key "state_geoms", "states"
+  add_foreign_key "zcta_districts", "districts"
+  add_foreign_key "zcta_districts", "zcta", column: "zcta_id"
 end
