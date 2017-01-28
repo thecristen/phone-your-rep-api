@@ -1,0 +1,20 @@
+# frozen_string_literal: true
+json.self api_beta_office_location_url(office_location)
+json.extract! office_location,
+              :id,
+              :bioguide_id,
+              :office_type,
+              :distance,
+              :building,
+              :address,
+              :suite,
+              :city,
+              :state,
+              :zip,
+              :phone,
+              :fax,
+              :hours,
+              :latitude,
+              :longitude,
+              :v_card_link,
+              :qr_code_link
