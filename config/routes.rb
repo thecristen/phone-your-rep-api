@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # namespace :api, defaults: { format: :json }, path: '/api' do
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do # version 1
-      resources :reps,             only: [:index]
+      resources :reps,             only: [:index, :show]
       resources :issues,           only: [:index, :new, :create, :update]
       resources :office_locations, only: [:index, :show]
       resources :districts,        only: [:index, :show]
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     end
 
     namespace :beta do # beta version
-      resources :reps,             only: [:index]
+      resources :reps,             only: [:index, :show]
       resources :issues,           only: [:index, :new, :create, :update]
       resources :office_locations, only: [:index, :show]
       resources :districts,        only: [:index, :show]
