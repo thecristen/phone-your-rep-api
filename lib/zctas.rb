@@ -3,8 +3,7 @@ require 'csv'
 require_relative '../config/environment.rb'
 
 def seed_zctas(file)
-  Zcta.destroy_all
-  csv_zcta_text = File.read(Rails.root.join('lib', 'seeds', 'zcta_cd', file))
+  csv_zcta_text = File.read(file)
   csv_zctas = CSV.parse(csv_zcta_text, headers: true, encoding: 'ISO-8859-1')
   csv_zctas.each do |row|
     state_code = row['State'].size == 1 ? '0' + row['State'] : row['State']
@@ -26,4 +25,7 @@ def seed_zctas(file)
   end
 end
 
-seed_zctas('zc_cd_delim_04.csv')
+Zcta.destroy_all
+
+zcta_files = Dir[Rails.root.join('lib', 'seeds', 'zcta_cd', '*')]
+zcta_files.each { |file| seed_zctas(file) }
