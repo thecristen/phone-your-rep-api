@@ -2,6 +2,7 @@ class ZctasController < ApplicationController
   before_action :set_zcta, only: [:show]
 
   def show
+    return if @zcta.blank?
     if params[:reps] == 'true'
       @reps = Rep.yours(state: @zcta.districts.first.state, district: @zcta.districts).distinct
     else
