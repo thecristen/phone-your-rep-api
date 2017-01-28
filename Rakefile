@@ -17,6 +17,7 @@ task :pyr_db_setup do
   `rails db:migrate`
   `rails db:seed`
   `ruby lib/shapefiles.rb`
+  `ruby lib/zctas.rb`
   `ruby lib/add_photos.rb`
   `ruby lib/add_v_cards.rb`
   `ruby lib/import_qr_codes.rb`

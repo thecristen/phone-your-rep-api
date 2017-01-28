@@ -62,9 +62,13 @@ Then seed the db
 ```
 bundle exec rake db:seed
 ```
-When you're done seeding the basic data, you need to load the shapefiles for district and state geometries. This is the final test that your database is properly configured. Run
+When you're done seeding the basic data, you need to load the shapefiles for district and state geometries. The next line of code is the final test that your database is properly configured. Run
 ```
 ruby lib/shapefiles.rb
+```
+You did it, friend. Now seed the ZCTAs (Zip Code Tabulation Area)
+```
+ruby lib/zctas.rb
 ```
 Then add photo URLs to the reps
 ```
@@ -82,7 +86,7 @@ Finally
 ```
 rails s
 ```
-####Congrats! You've setup a geospatial database! Have a few cold ones, you deserve it.
+####Congrats! You've set up a geospatial database! Have a few cold ones, you deserve it.
 If you want to generate your own QR codes for the office locations, drop into the console with `rails c` and enter this line
 ```ruby
 OfficeLocation.all.each { |office| office.add_qr_code_img }

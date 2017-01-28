@@ -3,7 +3,7 @@ class ZctasController < ApplicationController
 
   def show
     if params[:reps] == 'true'
-      @reps  = Rep.yours(state: @zcta.districts.first.state, district: @zcta.districts).distinct
+      @reps = Rep.yours(state: @zcta.districts.first.state, district: @zcta.districts).distinct
     else
       @districts = @zcta.districts
     end
