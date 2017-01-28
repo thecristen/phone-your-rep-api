@@ -39,9 +39,13 @@ bundle install
 ```
 You can setup and then fully seed the database with one rake task:
 ```
-bundle exec rake pyr_db_setup
+rake pyr:db_setup
 ```
-If you've already configured the database before, and are just resetting or updating, it's recommended that you just rake and skip ahead to #Usage. It might take a few, so grab a cold one. If you're configuring for the first time, and/or you're getting errors, or you don't want to do a complete reset, or you're some kind of control freak, here are the manual steps:
+If you've already configured the database before, and are just resetting or updating, it's recommended that you just rake and skip ahead to #Usage. It'll take a few, so grab a cold one. If you're on MacOS, you can get an alert when it's finished by running this instead
+```
+rake pyr:db_setup_alert
+```
+If you're configuring for the first time and you're getting errors, or you don't want to do a complete reset, or you're some kind of control freak, here are the manual steps:
 ```
 rails db:drop # skip this unless you're resetting
 rails db:create
