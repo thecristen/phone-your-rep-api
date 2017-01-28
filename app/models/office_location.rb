@@ -7,7 +7,7 @@ class OfficeLocation < ApplicationRecord
 
   geocoded_by      :city_state_zip
   after_validation :geocode, if: :needs_geocoding?
-  scope            :find_with_rep, ->(id) { where(id: id).includes(rep: :office_locations) }
+  scope            :find_with_rep, ->(id) { where(id: id).includes(:rep) }
 
   dragonfly_accessor :qr_code
   attr_reader        :distance
