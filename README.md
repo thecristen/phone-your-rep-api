@@ -6,9 +6,11 @@ The companion to [the Phone Your Rep frontend](https://github.com/kylebutts/phon
 
 Data sources:
 
-Congress - https://github.com/TheWalkers/congress-legislators
+Congress - https://github.com/TheWalkers/congress-legislators and https://github.com/unitedstates
 
 State and district shapefiles - https://www.census.gov/geo/maps-data/data/tiger-cart-boundary.html
+
+ZCTA to congressional district relationship file - http://www2.census.gov/geo/docs/maps-data/data/rel/zcta_cd111_rel_10.txt
 
 # Vagrant
 If you are too busy to do the manual installation, you can download a Vagrant BOX which has the requirements below already installed, download it here.
@@ -22,13 +24,13 @@ Be sure to use Ruby 2.3.3.
 ```
 rbenv install 2.3.3 or rvm install 2.3.3
 ```
-
+If you're using MacOS, make sure you have PostgreSQL installed, and then install the PostGIS extension. If you're using Linux, it's recommended that you use Vagrant.
 ```
 brew install postgres
 brew install postgis
 ```
 
-Or download the [Heroku PostgreSQL app](https://postgresapp.com/) and forgo the brew postgres and postgis install. This is by far the easiest route.
+Mac users can also download the [Heroku PostgreSQL app](https://postgresapp.com/) and forgo the brew Postgres and PostGIS install. This is by far the easiest route.
 
 Then
 
@@ -39,9 +41,13 @@ bundle install
 ```
 You can setup and then fully seed the database with one rake task:
 ```
-bundle exec rake pyr_db_setup
+rake pyr:db_setup
 ```
-If you've already configured the database before, and are just resetting or updating, it's recommended that you just rake and skip ahead to #Usage. It might take a few, so grab a cold one. If you're configuring for the first time, and/or you're getting errors, or you don't want to do a complete reset, or you're some kind of control freak, here are the manual steps:
+If you've already configured the database before, and are just resetting or updating, it's recommended that you just rake and skip ahead to #Usage. It'll take a few, so grab a cold one. If you're on MacOS, you can get an alert when it's finished by running this instead
+ ```
+ rake pyr:db_setup_alert
+ ```
+ If you're configuring for the first time and you're getting errors, or you don't want to do a complete reset, or you're some kind of control freak, here are the manual steps:
 ```
 rails db:drop # skip this unless you're resetting
 rails db:create
@@ -60,13 +66,13 @@ after_validation :geocode, if: :needs_geocoding?
 ```
 Then seed the db
 ```
-bundle exec rake db:seed
+rails db:seed
 ```
-When you're done seeding the basic data, you need to load the shapefiles for district and state geometries. The next line of code is the final test that your database is properly configured. Run
+When you're done seeding the basic data, you need to load the shapefiles for district and state geometries. The next command is the final test that your database is properly configured. Run
 ```
 ruby lib/shapefiles.rb
 ```
-You did it, friend. Now seed the ZCTAs (Zip Code Tabulation Area)
+You did it, friend. Now make a sandwich while you seed the ZCTAs (Zip Code Tabulation Area)
 ```
 ruby lib/zctas.rb
 ```
@@ -78,7 +84,7 @@ and generate V-cards for every office location
 ```
 ruby lib/add_v_cards.rb
 ```
-and load up the QR code URL data, to access the publicQR code images stored on the S3 server
+and load up the QR code URL data, to access the public QR code images stored on the Phone Your Rep S3 server
 ```
 ruby lib/import_qr_codes.rb
 ```
@@ -102,7 +108,7 @@ def qr_code_link
     end
   end
 ```
-QR code generation is a pretty long process, and in most cases is not necessary unless the public images are inaccurate. Feel free to skip it.
+QR code generation is a pretty long and expensive process, and in most cases is not necessary unless the public images are inaccurate. Feel free to skip it.
 
 This is deployed on Heroku. Deploying a geo-spatially enabled database to Heroku can be a bit of a challenge. Docs for that will come soon.
 
