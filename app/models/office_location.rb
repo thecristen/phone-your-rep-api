@@ -51,25 +51,6 @@ class OfficeLocation < ApplicationRecord
     @distance = Geocoder::Calculations.distance_between(coordinates, [latitude, longitude]).round(1)
   end
 
-  def to_hash
-    { office_id:    id,
-      type:         office_type,
-      distance:     distance,
-      building:     building,
-      address:      address,
-      suite:        suite,
-      city:         city,
-      state:        state,
-      zip:          zip,
-      phone:        phone,
-      fax:          fax,
-      hours:        hours,
-      latitude:     latitude,
-      longitude:    longitude,
-      v_card_link:  v_card_link,
-      qr_code_link: qr_code_link }
-  end
-
   def v_card_link
     if Rails.env.production?
       "https://phone-your-rep.herokuapp.com/v_cards/#{id}"

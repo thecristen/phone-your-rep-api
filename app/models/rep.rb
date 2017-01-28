@@ -28,9 +28,9 @@ class Rep < ApplicationRecord
     init(address, lat, long)
     return [] if coordinates.blank?
     find_district_and_state
-    self.raw_reps = Rep.yours(state: state, district: district).includes(:office_locations).to_a
-    raw_reps.uniq!
-    build_rep_hashes
+    self.raw_reps = Rep.yours(state: state, district: district).includes(:office_locations)
+    self.raw_reps = raw_reps.distinct
+    raw_reps.each { |rep| rep.sort_offices(coordinates) }
   end
 
   def self.init(address, lat, long)
@@ -57,43 +57,6 @@ class Rep < ApplicationRecord
     self.state    = district.state
   end
 
-  # Iterate over @raw_reps and assemble their attributes into a hash for JSON delivery.
-  def self.build_rep_hashes
-    raw_reps.map do |rep|
-      rep.sort_offices(coordinates)
-      rep.to_hash(state, district)
-    end
-  end
-
-  # Assemble rep into hash, handling office sorting and nil :district
-  def to_hash(state = self.state, district = self.district)
-    { bioguide_id:      bioguide_id,
-      official_full:    official_full,
-      state:            state.abbr,
-      district:         district_code(district),
-      role:             role,
-      party:            party,
-      senate_class:     senate_class,
-      last:             last,
-      first:            first,
-      middle:           middle,
-      nickname:         nickname,
-      suffix:           suffix,
-      contact_form:     contact_form,
-      url:              url,
-      photo:            photo,
-      twitter:          twitter,
-      facebook:         facebook,
-      youtube:          youtube,
-      instagram:        instagram,
-      googleplus:       googleplus,
-      twitter_id:       twitter_id,
-      facebook_id:      facebook_id,
-      youtube_id:       youtube_id,
-      instagram_id:     instagram_id,
-      office_locations: sorted_offices_array }
-  end
-
   # Sort the offices by proximity to the request coordinates, making sure to not miss offices that aren't geocoded.
   def sort_offices(coordinates)
     closest_offices       = office_locations.near(coordinates, 4000)
@@ -102,11 +65,12 @@ class Rep < ApplicationRecord
     sorted_offices.blank? ? [] : sorted_offices.each { |office| office.calculate_distance(coordinates) }
   end
 
-  def district_code(district)
+  def district_code
     district.code unless district_id.blank?
   end
 
   def sorted_offices_array
-    sorted_offices.map(&:to_hash)
+    return sorted_offices if sorted_offices
+    office_locations
   end
 end

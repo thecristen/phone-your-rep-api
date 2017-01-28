@@ -9,7 +9,7 @@ class RepsController < ApplicationController
     lat     = params[:lat]
     long    = params[:long]
     # return the first result, or a random one
-    @reps = if params
+    @reps = if address || lat || long
               Rep.find_em address: address, lat: lat, long: long
             else
               # Would like to find requesting IP address, geocode it and return the closest rep
@@ -17,26 +17,20 @@ class RepsController < ApplicationController
               # result = request.location
               # @office = OfficeLocation.near(result.postal_code)
               # @reps = @office.rep
-              []
+              Rep.all.includes(:office_locations, :district, :state)
             end
-
-    render inline: MultiJson.dump(@reps), content_type: 'application/json'
+    @self = request.url
   end
 
   # GET /reps/1
-  def show
-    render inline: MultiJson.dump(@rep), content_type: 'application/json'
-  end
+  def show; end
 
   # POST /reps
   def create
     @rep = Rep.new(rep_params)
 
     if @rep.save
-      render inline:       MultiJson.dump(@rep),
-             content_type: 'application/json',
-             status:       :created,
-             location:     @rep
+      render json: @rep, status: :created, location: @rep
     else
       render json: @rep.errors, status: :unprocessable_entity
     end
@@ -45,7 +39,7 @@ class RepsController < ApplicationController
   # PATCH/PUT /reps/1
   def update
     if @rep.update(rep_params)
-      render inline: MultiJson.dump(@rep), content_type: 'application/json'
+      render json: @rep
     else
       render json: @rep.errors, status: :unprocessable_entity
     end
@@ -54,18 +48,17 @@ class RepsController < ApplicationController
   # DELETE /reps/1
   def destroy
     @rep.destroy
-
-    head :no_content
   end
 
   private
 
-  def rep_params
-    params.require(:rep).permit(:twitter)
-  end
+    def rep_params
+      params.require(:rep).permit(:id, :bioguide_id)
+    end
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_rep
-    @rep = Rep.find(params[:id])
-  end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_rep
+      @rep = Rep.find_by(bioguide_id: params[:id])
+      @pfx = request.protocol + request.host_with_port
+    end
 end
