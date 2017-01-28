@@ -34,5 +34,5 @@ json.extract! rep,
               :instagram_id
 
 json.set! 'office_locations', rep.sorted_offices_array do |office|
-  json.partial! 'office_locations/office_location', office_location: office
+  json.partial! 'api/beta/office_locations/office_location', office_location: office
 end
